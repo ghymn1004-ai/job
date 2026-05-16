@@ -36,4 +36,4 @@ jobs:
 
       - name: Deploy build files
         run: |
-          scp -i ~/.ssh/iiumai_key -o StrictHostKeyChecking=no -r build/* ${{ secrets.DO_USER }}@${{ secrets.DO_HOST }}:${{ secrets.DO_TARGET }}/  
+          scp -i ~/.ssh/iiumai_key -o StrictHostKeyChecking=no -r dist/* ${{ secrets.DO_USER }}@${{ secrets.DO_HOST }}:${{ secrets.DO_TARGET }}/
