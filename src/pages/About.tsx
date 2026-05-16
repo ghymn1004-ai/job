@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Target, Rocket, Heart, Shield, Globe, Award, Sparkles, Users, Zap, Link as LinkIcon, Star } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Target, Rocket, Heart, Shield, Globe, Award, Sparkles, Users, Zap, Star, Download } from 'lucide-react';
 
 export default function About() {
   const values = [
@@ -70,45 +71,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* Platform Export Guide for Admins/Devs */}
-       <section className="py-12 bg-slate-50 border-y border-slate-100">
-         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-           <div className="bg-white p-8 rounded-[32px] border border-slate-200 shadow-sm">
-             <div className="flex flex-col md:flex-row items-center justify-between gap-10">
-               <div className="flex items-center gap-6">
-                 <div className="w-16 h-16 bg-brand/10 rounded-2xl flex items-center justify-center text-brand">
-                   <Download size={32} />
-                 </div>
-                 <div>
-                   <h3 className="text-xl font-black text-slate-900 mb-2">코드 내보내기 및 GitHub 연동</h3>
-                   <p className="text-slate-500 font-medium leading-relaxed">
-                     현재 개발 중인 이음(iium) 플랫폼의 전체 소스 코드를 <br className="hidden md:block" /> 
-                     GitHub 저장소에 업로드하거나 ZIP 파일로 다운로드할 수 있습니다.
-                   </p>
-                 </div>
-               </div>
-               <div className="flex flex-col gap-3 min-w-[280px]">
-                 <div className="px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl flex items-center gap-3">
-                   <div className="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center text-white text-[10px] font-bold">ZIP</div>
-                   <div className="text-xs">
-                     <p className="font-black text-slate-900">Download as ZIP</p>
-                     <p className="text-slate-500">상단 헤더 오른쪽 [Share] 옆 아이콘</p>
-                   </div>
-                 </div>
-                 <div className="px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl flex items-center gap-3">
-                   <div className="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center text-white">
-                      <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-                   </div>
-                   <div className="text-xs">
-                     <p className="font-black text-slate-900">Export to GitHub</p>
-                     <p className="text-slate-500">왼쪽 하단 [Settings] 메뉴 내 위치</p>
-                   </div>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div>
-       </section>
 
       {/* Vision & Mission */}
       <section className="py-24 max-w-7xl mx-auto px-6">
@@ -269,12 +231,12 @@ export default function About() {
            <div className="absolute top-0 right-0 w-64 h-64 bg-brand/20 blur-3xl -translate-y-1/2 translate-x-1/2" />
            <h2 className="text-3xl md:text-5xl font-black mb-8 tracking-tighter">함께 가치를 연결하시겠습니까?</h2>
            <div className="flex justify-center gap-4">
-              <a href="/jobs" className="px-10 py-5 bg-brand text-white rounded-2xl font-black text-lg hover:bg-brand-hover transition-all">
+              <Link to="/jobs" className="px-10 py-5 bg-brand text-white rounded-2xl font-black text-lg hover:bg-brand-hover transition-all">
                 일자리 찾기
-              </a>
-              <a href="/ai-matching" className="px-10 py-5 bg-white/10 border border-white/20 text-white rounded-2xl font-black text-lg hover:bg-white/20 transition-all">
+              </Link>
+              <Link to="/ai-matching" className="px-10 py-5 bg-white/10 border border-white/20 text-white rounded-2xl font-black text-lg hover:bg-white/20 transition-all">
                 AI 매칭 시작
-              </a>
+              </Link>
            </div>
         </div>
       </section>

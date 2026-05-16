@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, User, BrainCircuit, ArrowRight, ChevronDown, Download, Github, FileBox } from 'lucide-react';
+import { Menu, X, User, BrainCircuit, ArrowRight, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '../../lib/utils';
 import { motion, AnimatePresence } from 'motion/react';
@@ -31,7 +31,6 @@ export const navItems = [
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isExportModalOpen, setIsExportModalOpen] = useState(false);
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
   const location = useLocation();
   const { openInquiry } = useInquiry();
@@ -77,17 +76,6 @@ export default function Navbar() {
               </div>
             ))}
             
-            <div className="h-4 w-[1px] bg-slate-200 mx-2"></div>
-            
-            <button 
-              onClick={() => setIsExportModalOpen(true)}
-              className="p-2 text-slate-400 hover:text-brand transition-colors rounded-xl hover:bg-slate-50 group relative active:scale-95"
-              title="코드 내보내기 도움말"
-            >
-              <Download size={20} />
-              <span className="absolute top-full left-1/2 -translate-x-1/2 mt-2 px-2 py-1 bg-slate-900 text-white text-[10px] rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-xl pointer-events-none z-50">코드 내보내기</span>
-            </button>
-
             <div className="h-4 w-[1px] bg-slate-200 mx-2"></div>
 
             <div className="relative group">
@@ -213,76 +201,6 @@ export default function Navbar() {
           </Link>
         </div>
       </div>
-      {/* Export Help Modal */}
-      <AnimatePresence>
-        {isExportModalOpen && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsExportModalOpen(false)}
-              className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
-            />
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative w-full max-w-lg bg-white rounded-[32px] shadow-2xl p-8 overflow-hidden"
-            >
-              <div className="absolute top-0 right-0 p-4">
-                <button 
-                  onClick={() => setIsExportModalOpen(false)}
-                  className="p-2 text-slate-400 hover:text-slate-600 transition-colors"
-                >
-                  <X size={24} />
-                </button>
-              </div>
-
-              <div className="mb-8">
-                <div className="w-12 h-12 bg-brand/10 rounded-2xl flex items-center justify-center text-brand mb-4">
-                  <Download size={24} />
-                </div>
-                <h2 className="text-2xl font-black text-slate-900 tracking-tight">코드 내보내기 안내</h2>
-                <p className="text-slate-500 font-medium mt-1">프로젝트 소스 코드를 내보내는 방법입니다.</p>
-              </div>
-
-              <div className="space-y-4">
-                <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 flex items-start gap-4">
-                  <div className="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center text-white shrink-0">
-                    <FileBox size={20} />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-slate-900 mb-1">ZIP 파일로 다운로드</h4>
-                    <p className="text-sm text-slate-500 leading-relaxed">
-                      AI Studio 상단 헤더 영역에서 <span className="text-brand font-bold">[Share]</span> 버튼 옆에 있는 <span className="p-1 bg-white border border-slate-200 rounded text-[10px]">ZIP 아이콘</span>을 클릭하여 다운로드할 수 있습니다.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 flex items-start gap-4">
-                  <div className="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center text-white shrink-0">
-                    <Github size={20} />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-slate-900 mb-1">GitHub 저장소로 업로드</h4>
-                    <p className="text-sm text-slate-500 leading-relaxed">
-                      화면 왼쪽 하단의 <span className="text-brand font-bold">톱니바퀴(Settings)</span> 아이콘을 클릭한 후, <span className="font-bold text-slate-700">"Export to GitHub"</span> 메뉴를 선택하세요.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <button 
-                onClick={() => setIsExportModalOpen(false)}
-                className="w-full mt-8 py-4 bg-slate-900 text-white rounded-2xl font-black hover:bg-brand transition-all"
-              >
-                확인했습니다
-              </button>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
     </nav>
   );
 }

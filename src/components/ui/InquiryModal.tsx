@@ -19,69 +19,123 @@ export default function InquiryModal({ isOpen, onClose, initialType = 'corporate
   }, [isOpen, initialType]);
 
   const [formData, setFormData] = useState<any>(() => {
-    const saved = localStorage.getItem('inquiry_form_data');
-    return saved ? JSON.parse(saved) : {
-      name: '',
-      phone: '',
-      email: '',
-      birthDate: '',
-      residence: '',
-      hopeRegion: '',
-      company: '',
-      jobTitle: '',
-      message: '',
-      industry: '',
-      employeeCount: '',
-      companyLocation: '',
-      salaryRange: '',
-      workHours: '',
-      // Expanded fields
-      workTypes: [],
-      desiredJobs: [],
-      // Seeker Pillar 1
-      mainJob: '',
-      totalExp: '',
-      longField: '',
-      coreTasksSe: '',
-      checklistsSe: [],
-      selfIntroSe: '',
-      // Seeker Pillar 2
-      proficiencyChecksSe: [],
-      strengthIntroSe: '',
-      // Seeker Pillar 3
-      attitudeSe: {},
-      adaptIntroSe: '',
-      // Seeker Pillar 4
-      collabChecksSe: [],
-      collabIntroSe: '',
-      // Seeker Pillar 5
-      growthChecksSe: [],
-      growthGoalSe: '',
-      finalIntroSe: '',
-      // Corporate Info
-      openJobs: '',
-      hireCount: '',
-      corpWorkTypes: [],
-      corpSalary: '',
-      corpWorkHours: '',
-      // Corp Pillar 1
-      corpCoreSkills: [],
-      minExp: '',
-      prefInd: '',
-      importance: '',
-      // Corp Pillar 2
-      corpProficiencyLevel: [],
-      veteranCriteria: '',
-      // Corp Pillar 3
-      corpCulture: [],
-      corpImportantAttitude: [],
-      // Corp Pillar 4
-      corpCollabTypes: [],
-      corpCollabDesc: '',
-      // Corp Pillar 5
-      corpGrowthValues: [],
-      corpExpectation: '',
-    };
+    try {
+      const saved = localStorage.getItem('inquiry_form_data');
+      return saved ? JSON.parse(saved) : {
+        name: '',
+        phone: '',
+        email: '',
+        birthDate: '',
+        residence: '',
+        hopeRegion: '',
+        company: '',
+        jobTitle: '',
+        message: '',
+        industry: '',
+        employeeCount: '',
+        companyLocation: '',
+        salaryRange: '',
+        workHours: '',
+        // Expanded fields
+        workTypes: [],
+        desiredJobs: [],
+        // Seeker Pillar 1
+        mainJob: '',
+        totalExp: '',
+        longField: '',
+        coreTasksSe: '',
+        checklistsSe: [],
+        selfIntroSe: '',
+        // Seeker Pillar 2
+        proficiencyChecksSe: [],
+        strengthIntroSe: '',
+        // Seeker Pillar 3
+        attitudeSe: {},
+        adaptIntroSe: '',
+        // Seeker Pillar 4
+        collabChecksSe: [],
+        collabIntroSe: '',
+        // Seeker Pillar 5
+        growthChecksSe: [],
+        growthGoalSe: '',
+        finalIntroSe: '',
+        // Corporate Info
+        openJobs: '',
+        hireCount: '',
+        corpWorkTypes: [],
+        corpSalary: '',
+        corpWorkHours: '',
+        // Corp Pillar 1
+        corpCoreSkills: [],
+        minExp: '',
+        prefInd: '',
+        importance: '',
+        // Corp Pillar 2
+        corpProficiencyLevel: [],
+        veteranCriteria: '',
+        // Corp Pillar 3
+        corpCulture: [],
+        corpImportantAttitude: [],
+        // Corp Pillar 4
+        corpCollabTypes: [],
+        corpCollabDesc: '',
+        // Corp Pillar 5
+        corpGrowthValues: [],
+        corpExpectation: '',
+      };
+    } catch (e) {
+      console.error('Failed to parse inquiry_form_data', e);
+      return {
+        name: '',
+        phone: '',
+        email: '',
+        birthDate: '',
+        residence: '',
+        hopeRegion: '',
+        company: '',
+        jobTitle: '',
+        message: '',
+        industry: '',
+        employeeCount: '',
+        companyLocation: '',
+        salaryRange: '',
+        workHours: '',
+        workTypes: [],
+        desiredJobs: [],
+        mainJob: '',
+        totalExp: '',
+        longField: '',
+        coreTasksSe: '',
+        checklistsSe: [],
+        selfIntroSe: '',
+        proficiencyChecksSe: [],
+        strengthIntroSe: '',
+        attitudeSe: {},
+        adaptIntroSe: '',
+        collabChecksSe: [],
+        collabIntroSe: '',
+        growthChecksSe: [],
+        growthGoalSe: '',
+        finalIntroSe: '',
+        openJobs: '',
+        hireCount: '',
+        corpWorkTypes: [],
+        corpSalary: '',
+        corpWorkHours: '',
+        corpCoreSkills: [],
+        minExp: '',
+        prefInd: '',
+        importance: '',
+        corpProficiencyLevel: [],
+        veteranCriteria: '',
+        corpCulture: [],
+        corpImportantAttitude: [],
+        corpCollabTypes: [],
+        corpCollabDesc: '',
+        corpGrowthValues: [],
+        corpExpectation: '',
+      };
+    }
   });
 
   React.useEffect(() => {
