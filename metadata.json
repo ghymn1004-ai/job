@@ -1,0 +1,6 @@
+{
+  "name": "이음AI JOB",
+  "description": "AI로 사람의 가능성과 기업의 필요를 연결해 시니어의 인생 2막을 함께 만드는 곳",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
