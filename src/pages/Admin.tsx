@@ -173,7 +173,7 @@ export default function Admin() {
          <div className="sm:mx-auto sm:w-full sm:max-w-md">
            <div className="flex justify-center">
              <Link to="/">
-                <img src="/logo_eumjob.png?v=3" alt="이음(iium) Logo" className="h-[144px] object-contain" />
+                <img src="/logo_eumjob.png?v=20260521_v4" alt="이음(iium) Logo" className="h-[155px] object-contain" />
              </Link>
            </div>
            <h2 className="mt-6 text-center text-3xl font-black text-slate-900 tracking-tight leading-none">

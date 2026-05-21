@@ -52,10 +52,10 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-slate-100 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-24">
+        <div className="flex justify-between h-28">
           <div className="flex items-center gap-8">
             <Link to="/" className="flex items-center gap-2 group" onClick={() => handleNavClick('/')}>
-              <img src="/logo_eumjob.png?v=3" alt="이음(iium) Logo" className="h-[84px] w-auto object-contain" />
+              <img src="/logo_eumjob.png?v=20260521_v4" alt="이음(iium) Logo" className="h-[105px] w-auto object-contain" />
               <div className="hidden sm:block border-l border-slate-200 pl-3">
                 <p className="text-[10px] font-black text-brand leading-none mb-0.5 tracking-tighter">시니어 전용</p>
                 <p className="text-[8px] font-bold text-slate-400 leading-none">PREMIUM PLATFORM</p>
@@ -159,8 +159,8 @@ export default function Navbar() {
 
       {/* Mobile Nav */}
       <div className={cn(
-        "md:hidden absolute top-24 left-0 right-0 bg-white border-b border-slate-100 transition-all duration-300 overflow-y-auto",
-        isOpen ? "max-h-[calc(100vh-96px)] opacity-100" : "max-h-0 opacity-0"
+        "md:hidden absolute top-28 left-0 right-0 bg-white border-b border-slate-100 transition-all duration-300 overflow-y-auto",
+        isOpen ? "max-h-[calc(100vh-112px)] opacity-100" : "max-h-0 opacity-0"
       )}>
         <div className="px-4 py-8 space-y-6">
           <div className="space-y-4">
