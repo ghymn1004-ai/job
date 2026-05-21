@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center gap-3 mb-6">
-              <img src="/logo_eumjob.png?v=20260521_v4" alt="이음(iium) Logo" className="h-32 w-auto object-contain" />
+              <img src="/logo_eumjob.png" alt="이음(iium) Logo" className="h-32 w-auto object-contain" />
             </div>
             <p className="text-slate-500 leading-relaxed font-medium">
               시니어 전문가를 위한 <br />
