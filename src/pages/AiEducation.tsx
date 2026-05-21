@@ -1,9 +1,11 @@
 import { motion, AnimatePresence } from 'motion/react';
-import { GraduationCap, Brain, Zap, CheckCircle, Play, BookOpen, UserCheck, Sparkles, ChevronDown, CheckCircle2, Star, Award, Shield, Heart, MessageSquare, Users, Smile, Clock, ListChecks, ThumbsUp, Activity, Target, ArrowRight } from 'lucide-react';
+import { GraduationCap, Brain, Zap, CheckCircle, Play, BookOpen, UserCheck, Sparkles, ChevronDown, CheckCircle2, Star, Award, Shield, Heart, MessageSquare, Users, Smile, Clock, ListChecks, ThumbsUp, Activity, Target, ArrowRight, Calendar, Eye, X } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useInquiry } from '../components/ui/InquiryContext';
 import { cn } from '../lib/utils';
+import { getPosts } from '../data/posts';
+import { Post, CATEGORY_LABELS } from '../types';
 
 interface EducationCardProps {
   key?: React.Key;
@@ -294,13 +296,32 @@ export default function AiEducation() {
   const { openInquiry } = useInquiry();
   const [activeTab, setActiveTab ] = useState<'literacy' | 'utilization' | 'intern'>('literacy');
   const location = useLocation();
+  const [eduPosts, setEduPosts] = useState<Post[]>([]);
+  const [selectedPost, setSelectedPost] = useState<Post | null>(null);
 
   useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const tabParam = params.get('tab');
     const hash = location.hash.replace('#', '');
-    if (hash === 'literacy' || hash === 'utilization' || hash === 'intern') {
-      setActiveTab(hash as any);
+    
+    const targetTab = tabParam || hash;
+    if (targetTab === 'literacy') {
+      setActiveTab('literacy');
+    } else if (targetTab === 'utilization') {
+      setActiveTab('utilization');
+    } else if (targetTab === 'senior' || targetTab === 'intern') {
+      setActiveTab('intern');
     }
-  }, [location.hash]);
+  }, [location.search, location.hash]);
+
+  useEffect(() => {
+    const allPosts = getPosts().filter(p => p.isPublished);
+    let categoryKey: 'literacy' | 'utilization' | 'senior' = 'literacy';
+    if (activeTab === 'utilization') categoryKey = 'utilization';
+    if (activeTab === 'intern') categoryKey = 'senior';
+    
+    setEduPosts(allPosts.filter(p => p.category === categoryKey));
+  }, [activeTab]);
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-20 sm:px-6 lg:px-8">
@@ -536,6 +557,148 @@ export default function AiEducation() {
                </div>
             </section>
           </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Dynamic Educational Columns */}
+      {eduPosts.length > 0 && (
+        <section className="mb-32 mt-12 bg-white rounded-[48px] border border-slate-100 p-12 shadow-xs">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4 border-b border-slate-50 pb-6">
+            <div>
+              <span className="text-brand font-black text-xs uppercase tracking-[0.3em] mb-2 block">RECOMMENDED READINGS</span>
+              <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">"{CATEGORY_LABELS[activeTab === 'intern' ? 'senior' : activeTab]}" 과정 추천 컬럼 & 가이드</h2>
+              <p className="text-slate-400 font-bold text-xs mt-1">해당 교육 주제와 밀접하게 관련하여 실무 및 소통 역량을 심화하는 칼럼입니다.</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {eduPosts.map((post) => (
+              <div 
+                key={post.id}
+                onClick={() => setSelectedPost(post)}
+                className="bg-slate-50/50 hover:bg-white rounded-[32px] overflow-hidden border border-slate-100 shadow-xs hover:shadow-2xl hover:border-brand/40 transition-all cursor-pointer group flex flex-col h-full"
+              >
+                <div className="h-44 bg-slate-100 relative overflow-hidden shrink-0">
+                  <img 
+                    src={post.coverImage} 
+                    alt={post.title} 
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <span className="absolute top-4 left-4 px-3 py-1 bg-white/95 backdrop-blur-xs rounded-lg text-[10px] font-black shadow-xs text-brand z-10">
+                    {CATEGORY_LABELS[post.category]}
+                  </span>
+                </div>
+                <div className="p-6 flex flex-col flex-grow">
+                  <h3 className="text-sm font-black text-slate-900 line-clamp-2 leading-snug group-hover:text-brand transition-colors mb-3">
+                    {post.title}
+                  </h3>
+                  <p className="text-[12px] text-slate-400 font-bold line-clamp-3 leading-relaxed mb-6 flex-grow">
+                    {post.summary}
+                  </p>
+                  <div className="flex items-center justify-between pt-4 border-t border-slate-100 text-[10px] font-black text-slate-400">
+                    <div className="flex items-center gap-1">
+                      <Calendar size={12} />
+                      <span>{post.createdAt}</span>
+                    </div>
+                    <div className="flex items-center gap-1 bg-slate-100 px-2 py-0.5 rounded text-slate-500">
+                      <Eye size={12} />
+                      <span>{post.views}회 조회</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Post Detail Modal inside AiEducation */}
+      <AnimatePresence>
+        {selectedPost && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedPost(null)}
+              className="absolute inset-0 bg-slate-900/40 backdrop-blur-xs"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative w-full max-w-2xl bg-white rounded-[40px] shadow-2xl overflow-hidden max-h-[85vh] flex flex-col z-[110]"
+            >
+              <div className="h-56 bg-slate-100 relative shrink-0">
+                <img 
+                  src={selectedPost.coverImage} 
+                  alt={selectedPost.title}
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent" />
+                <button 
+                  onClick={() => setSelectedPost(null)}
+                  className="absolute top-4 right-4 w-10 h-10 bg-black/50 hover:bg-black/85 transition-colors rounded-full flex items-center justify-center text-white cursor-pointer z-50 hover:scale-105 active:scale-95"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+
+              <div className="p-8 overflow-y-auto flex-grow space-y-6">
+                <div>
+                  <span className="inline-block px-3 py-1 bg-brand/10 text-brand rounded-full text-[10px] font-black mb-3">
+                    {CATEGORY_LABELS[selectedPost.category]}
+                  </span>
+                  <h2 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight leading-snug">
+                    {selectedPost.title}
+                  </h2>
+                  <div className="flex items-center gap-4 text-[11px] font-black text-slate-400 mt-3 pb-4 border-b border-slate-100">
+                    <span>작성자: {selectedPost.author}</span>
+                    <span>•</span>
+                    <span>날짜: {selectedPost.createdAt}</span>
+                    <span>•</span>
+                    <span>조회: {selectedPost.views}회</span>
+                  </div>
+                </div>
+
+                <div className="text-slate-600 font-medium text-sm md:text-[15px] leading-relaxed space-y-4">
+                  {selectedPost.content.split('\n\n').map((paragraph, index) => {
+                    if (paragraph.trim().startsWith('##')) {
+                      return <h3 key={index} className="text-base font-black text-slate-900 mt-6 mb-3">{paragraph.replace('##', '').trim()}</h3>;
+                    }
+                    if (paragraph.trim().startsWith('*') || paragraph.trim().startsWith('-')) {
+                      return (
+                        <ul key={index} className="list-disc pl-5 space-y-1.5 mt-2">
+                          {paragraph.split('\n').map((li, liIdx) => (
+                            <li key={liIdx} className="text-slate-600 font-bold">{li.replace(/^[\s*-]+/, '').trim()}</li>
+                          ))}
+                        </ul>
+                      );
+                    }
+                    if (paragraph.trim().startsWith('>')) {
+                      return (
+                        <div key={index} className="p-4 bg-slate-50 border-l-4 border-brand rounded-r-2xl font-bold italic text-slate-700 text-xs my-4">
+                          {paragraph.replace(/^>\s*/, '').trim()}
+                        </div>
+                      );
+                    }
+                    return <p key={index} className="whitespace-pre-line font-bold text-slate-600 leading-normal">{paragraph.trim()}</p>;
+                  })}
+                </div>
+              </div>
+
+              <div className="p-6 border-t border-slate-50 bg-slate-50/50 flex justify-end shrink-0">
+                <button 
+                  onClick={() => setSelectedPost(null)}
+                  className="px-6 py-3.5 bg-slate-900 text-white rounded-2xl text-[11px] font-black hover:bg-slate-800 transition-all"
+                >
+                  확인 완료
+                </button>
+              </div>
+            </motion.div>
+          </div>
         )}
       </AnimatePresence>
 

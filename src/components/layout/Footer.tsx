@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center gap-3 mb-6">
-              <img src="https://ghymn1004-ai.github.io/seniorjob/images/logo.png" alt="이음(iium) Logo" className="h-14 w-auto object-contain" />
+              <img src="/logo_eumjob.png" alt="이음(iium) Logo" className="h-28 w-auto object-contain" />
             </div>
             <p className="text-slate-500 leading-relaxed font-medium">
               시니어 전문가를 위한 <br />
@@ -43,7 +43,7 @@ export default function Footer() {
                   <User size={14} />
                 </div>
                 <div className="flex flex-col">
-                   <span className="text-[#495057] font-bold">김지숙</span>
+                   <span className="text-[#495057] font-bold">이음AI 지수기</span>
                 </div>
               </div>
               <div className="flex items-center gap-3 group">
@@ -51,15 +51,7 @@ export default function Footer() {
                   <Mail size={14} />
                 </div>
                 <div className="flex flex-col">
-                   <span className="text-[#495057] font-bold">ghymn1004@gmail.com</span>
-                </div>
-              </div>
-              <div className="flex items-center gap-3 group">
-                <div className="w-8 h-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-400 group-hover:text-brand group-hover:border-brand/30 transition-colors">
-                  <Phone size={14} />
-                </div>
-                <div className="flex flex-col">
-                   <span className="text-[#495057] font-bold">010-6245-2675</span>
+                   <span className="text-[#495057] font-bold">iiumai4u@gmail.com</span>
                 </div>
               </div>
             </div>
@@ -67,7 +59,11 @@ export default function Footer() {
         </div>
 
         <div className="pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-400 font-medium">
-          <div>© 2026 이음(iium) All rights reserved.</div>
+          <div className="flex items-center gap-2 flex-wrap">
+            <span>© 2026 이음(iium) All rights reserved.</span>
+            <span className="text-slate-300">|</span>
+            <Link to="/admin" className="hover:text-brand font-black text-slate-400 font-sans tracking-tight text-[11px] hover:underline">관리자 모드</Link>
+          </div>
           <div className="flex gap-6">
             <a href="#" className="hover:text-[#495057]">Blog</a>
             <a href="#" className="hover:text-[#495057]">Instagram</a>

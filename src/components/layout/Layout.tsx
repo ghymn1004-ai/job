@@ -8,7 +8,7 @@ export default function Layout() {
   const location = useLocation();
 
   return (
-    <div className="min-h-screen flex flex-col pt-20 bg-[#fcfcfc] selection:bg-brand/10 selection:text-brand">
+    <div className="min-h-screen flex flex-col pt-24 bg-[#fcfcfc] selection:bg-brand/10 selection:text-brand">
       <Navbar />
       <main className="flex-grow">
         <Outlet />

@@ -11,7 +11,7 @@ export default function Login() {
         className="w-full max-w-md bg-white p-10 md:p-12 rounded-[48px] border border-slate-100 shadow-2xl shadow-slate-200/50"
       >
         <div className="text-center mb-10">
-          <img src="https://ghymn1004-ai.github.io/seniorjob/images/logo.png" alt="이음(iium) Logo" className="h-16 mx-auto mb-6 object-contain" />
+          <img src="/logo_eumjob.png" alt="이음(iium) Logo" className="h-36 mx-auto mb-6 object-contain" />
           <h1 className="text-2xl font-black text-slate-900 tracking-tighter">다시 일하는 설렘, 이음(iium)</h1>
           <p className="text-slate-400 font-bold text-sm mt-2">당신의 가능성을 실전으로 잇습니다.</p>
         </div>
@@ -79,10 +79,15 @@ export default function Login() {
           </button>
         </div>
 
-        <p className="mt-10 text-center text-sm font-bold text-slate-400">
-          아직 회원이 아니신가요? 
-          <a href="#" className="text-brand ml-2 hover:underline">회원가입 하기</a>
-        </p>
+        <div className="mt-10 pt-6 border-t border-slate-50 flex flex-col items-center gap-2">
+          <p className="text-center text-sm font-bold text-slate-400 mb-0">
+            아직 회원이 아니신가요? 
+            <a href="#" className="text-brand ml-2 hover:underline">회원가입 하기</a>
+          </p>
+          <Link to="/admin" className="text-slate-300 hover:text-brand font-black text-[11px] tracking-tight mt-1 hover:underline">
+             관리자 로그인 바로가기
+          </Link>
+        </div>
       </motion.div>
     </div>
   );

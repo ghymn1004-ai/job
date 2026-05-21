@@ -1,9 +1,11 @@
-import { ArrowRight, Search, Briefcase, Users, Brain, GraduationCap, TrendingUp, Star, MessageSquare, ChevronDown, CheckCircle2, Zap, Target, Rocket, Heart, Shield, Building, Sparkles } from 'lucide-react';
+import { ArrowRight, Search, Briefcase, Users, Brain, GraduationCap, TrendingUp, Star, MessageSquare, ChevronDown, CheckCircle2, Zap, Target, Rocket, Heart, Shield, Building, Sparkles, Calendar, Eye, BookOpen, Clock, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Link } from 'react-router-dom';
-import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import { cn } from '../lib/utils';
 import { useInquiry } from '../components/ui/InquiryContext';
+import { getPosts } from '../data/posts';
+import { Post, CATEGORY_LABELS } from '../types';
 
 interface FeatureCardProps {
   key?: React.Key;
@@ -87,11 +89,21 @@ function InteractiveCard({ icon: Icon, title, desc, color, details, path }: Feat
 
 export default function Home() {
   const { openInquiry } = useInquiry();
+  const navigate = useNavigate();
   const [selectedInquiryType, setSelectedInquiryType] = useState<'corporate' | 'individual' | 'education'>('corporate');
   const [homeFormData, setHomeFormData] = useState({
     name: '',
     phone: ''
   });
+  
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [selectedPost, setSelectedPost] = useState<Post | null>(null);
+
+  useEffect(() => {
+    // published 포스트 로드
+    const activePosts = getPosts().filter(p => p.isPublished);
+    setPosts(activePosts);
+  }, []);
 
   const handleHomeSubmit = () => {
     // We could potentionally sync this to InquiryModal's state via context or localStorage
@@ -355,6 +367,129 @@ export default function Home() {
               details={features[3].details}
               path={features[3].path}
             />
+          </div>
+        </div>
+      </section>
+
+      {/* Blog Posts Column Section */}
+      <section className="py-24 max-w-7xl mx-auto px-6 border-t border-slate-100">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+          <div className="relative">
+            <span className="text-brand font-black text-sm uppercase tracking-[0.3em] mb-4 block">iium AI Insights</span>
+            <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tighter leading-tight">이음AI 핵심 교육 칼럼 & 가이드</h2>
+            <p className="text-slate-500 font-bold mt-2 text-sm">성공적인 시니어 인생 2막을 위해 이음AI가 준비한 깊이 있는 지식과 실전 노하우입니다.</p>
+          </div>
+          <div className="flex gap-4">
+            <Link to="/education" className="group flex items-center gap-3 px-8 py-4 bg-slate-50 border border-slate-200 rounded-2xl text-slate-700 font-bold hover:bg-white hover:border-brand/30 hover:shadow-xl transition-all">
+              AI교육 페이지에서 전체 읽기
+              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+        </div>
+
+        {/* Section A: AI 리터러시 & 직무 활용 교육 (4 spaces) */}
+        <div className="mb-20">
+          <div className="flex items-center gap-3 mb-8 border-b border-slate-100 pb-4">
+            <div className="w-2 rounded-full h-6 bg-brand"></div>
+            <div>
+              <h3 className="text-xl font-black text-slate-900 tracking-tight flex items-center gap-2">
+                AI 리터러시 및 직무 활용 교육 연재
+                <span className="text-[10px] font-black text-brand bg-brand/5 px-2 py-0.5 rounded-sm">4개 공간</span>
+              </h3>
+              <p className="text-[12px] text-slate-400 font-bold mt-0.5">디지털 기본기부터 현업 복귀를 위한 AI 실무 업무 생산성 팁을 전해드립니다.</p>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {posts.filter(p => p.category === 'literacy' || p.category === 'utilization').slice(0, 4).map((post) => (
+              <div 
+                key={post.id}
+                onClick={() => setSelectedPost(post)}
+                className="bg-white rounded-[32px] overflow-hidden border border-slate-100 shadow-xs hover:shadow-[0_20px_50px_rgba(0,102,255,0.06)] hover:border-brand/35 transition-all cursor-pointer group flex flex-col h-full"
+              >
+                <div className="h-44 bg-slate-100 relative overflow-hidden shrink-0">
+                  <img 
+                    src={post.coverImage} 
+                    alt={post.title} 
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <span className="absolute top-4 left-4 px-3 py-1 bg-white/90 backdrop-blur-xs rounded-lg text-[10px] font-black shadow-sm text-brand z-10">
+                    {CATEGORY_LABELS[post.category]}
+                  </span>
+                </div>
+                <div className="p-6 flex flex-col flex-grow">
+                  <h3 className="text-sm font-black text-slate-900 line-clamp-2 leading-snug group-hover:text-brand transition-colors mb-3">
+                    {post.title}
+                  </h3>
+                  <p className="text-[12px] text-slate-400 font-bold line-clamp-3 leading-relaxed mb-6 flex-grow">
+                    {post.summary}
+                  </p>
+                  <div className="flex items-center justify-between pt-4 border-t border-slate-100 text-[10px] font-black text-slate-400">
+                    <div className="flex items-center gap-1">
+                      <Calendar size={12} />
+                      <span>{post.createdAt}</span>
+                    </div>
+                    <div className="flex items-center gap-1 bg-slate-50 px-2 py-1 rounded-md text-slate-500">
+                      <Eye size={12} />
+                      <span>{post.views}회</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Section B: 시니어 전문 교육 (4 spaces) */}
+        <div>
+          <div className="flex items-center gap-3 mb-8 border-b border-slate-100 pb-4">
+            <div className="w-2 rounded-full h-6 bg-brand"></div>
+            <div>
+              <h3 className="text-xl font-black text-slate-900 tracking-tight flex items-center gap-2">
+                시니어 인생 2막 교육 연재
+                <span className="text-[10px] font-black text-brand bg-brand/5 px-2 py-0.5 rounded-sm">4개 공간</span>
+              </h3>
+              <p className="text-[12px] text-slate-400 font-bold mt-0.5">인턴십 성공 노하우, 수평 조직 적응 꿀팁 및 품격 있는 세대 통합 소통학을 전합니다.</p>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {posts.filter(p => p.category === 'senior').slice(0, 4).map((post) => (
+              <div 
+                key={post.id}
+                onClick={() => setSelectedPost(post)}
+                className="bg-white rounded-[32px] overflow-hidden border border-slate-100 shadow-xs hover:shadow-[0_20px_50px_rgba(0,102,255,0.06)] hover:border-brand/35 transition-all cursor-pointer group flex flex-col h-full"
+              >
+                <div className="h-44 bg-slate-100 relative overflow-hidden shrink-0">
+                  <img 
+                    src={post.coverImage} 
+                    alt={post.title} 
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <span className="absolute top-4 left-4 px-3 py-1 bg-white/90 backdrop-blur-xs rounded-lg text-[10px] font-black shadow-sm text-brand z-10">
+                    {CATEGORY_LABELS[post.category]}
+                  </span>
+                </div>
+                <div className="p-6 flex flex-col flex-grow">
+                  <h3 className="text-sm font-black text-slate-900 line-clamp-2 leading-snug group-hover:text-brand transition-colors mb-3">
+                    {post.title}
+                  </h3>
+                  <p className="text-[12px] text-slate-400 font-bold line-clamp-3 leading-relaxed mb-6 flex-grow">
+                    {post.summary}
+                  </p>
+                  <div className="flex items-center justify-between pt-4 border-t border-slate-100 text-[10px] font-black text-slate-400">
+                    <div className="flex items-center gap-1">
+                      <Calendar size={12} />
+                      <span>{post.createdAt}</span>
+                    </div>
+                    <div className="flex items-center gap-1 bg-slate-50 px-2 py-1 rounded-md text-slate-500">
+                      <Eye size={12} />
+                      <span>{post.views}회</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -730,6 +865,108 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Blog Post Detail Modal */}
+      <AnimatePresence>
+        {selectedPost && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedPost(null)}
+              className="absolute inset-0 bg-slate-900/40 backdrop-blur-xs"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative w-full max-w-2xl bg-white rounded-[40px] shadow-2xl overflow-hidden max-h-[85vh] flex flex-col z-[110]"
+            >
+              {/* Header Cover */}
+              <div className="h-56 bg-slate-100 relative shrink-0">
+                <img 
+                  src={selectedPost.coverImage} 
+                  alt={selectedPost.title}
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent" />
+                <button 
+                  onClick={() => setSelectedPost(null)}
+                  className="absolute top-4 right-4 w-10 h-10 bg-black/50 hover:bg-black/85 transition-colors rounded-full flex items-center justify-center text-white cursor-pointer z-50 hover:scale-105 active:scale-95"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+
+              {/* Scrollable Content */}
+              <div className="p-8 overflow-y-auto flex-grow space-y-6">
+                <div>
+                  <span className="inline-block px-3 py-1 bg-brand/10 text-brand rounded-full text-[10px] font-black mb-3">
+                    {CATEGORY_LABELS[selectedPost.category]}
+                  </span>
+                  <h2 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight leading-snug">
+                    {selectedPost.title}
+                  </h2>
+                  <div className="flex items-center gap-4 text-[11px] font-black text-slate-400 mt-3 pb-4 border-b border-slate-100">
+                    <span>작성자: {selectedPost.author}</span>
+                    <span>•</span>
+                    <span>날짜: {selectedPost.createdAt}</span>
+                    <span>•</span>
+                    <span>조회: {selectedPost.views}회</span>
+                  </div>
+                </div>
+
+                <div className="text-slate-600 font-medium text-sm md:text-[15px] leading-relaxed space-y-4">
+                  {selectedPost.content.split('\n\n').map((paragraph, index) => {
+                    if (paragraph.trim().startsWith('##')) {
+                      return <h3 key={index} className="text-base font-black text-slate-900 mt-6 mb-3">{paragraph.replace('##', '').trim()}</h3>;
+                    }
+                    if (paragraph.trim().startsWith('*') || paragraph.trim().startsWith('-')) {
+                      return (
+                        <ul key={index} className="list-disc pl-5 space-y-1.5 mt-2">
+                          {paragraph.split('\n').map((li, liIdx) => (
+                            <li key={liIdx} className="text-slate-600 font-bold">{li.replace(/^[\s*-]+/, '').trim()}</li>
+                          ))}
+                        </ul>
+                      );
+                    }
+                    if (paragraph.trim().startsWith('>')) {
+                      return (
+                        <div key={index} className="p-4 bg-slate-50 border-l-4 border-brand rounded-r-2xl font-bold italic text-slate-700 text-xs my-4">
+                          {paragraph.replace(/^>\s*/, '').trim()}
+                        </div>
+                      );
+                    }
+                    return <p key={index} className="whitespace-pre-line font-bold text-slate-600 leading-normal">{paragraph.trim()}</p>;
+                  })}
+                </div>
+              </div>
+
+              {/* Footer Button */}
+              <div className="p-6 border-t border-slate-50 bg-slate-50/50 flex justify-between items-center shrink-0">
+                <button 
+                  onClick={() => {
+                    const query = selectedPost.category;
+                    setSelectedPost(null);
+                    navigate(`/education?tab=${query}`);
+                  }}
+                  className="px-5 py-3.5 bg-brand/10 text-brand rounded-2xl text-[11px] font-black hover:bg-brand/20 transition-all flex items-center gap-2"
+                >
+                  <BookOpen size={13} /> AI교육 과정 보러가기
+                </button>
+                <button 
+                  onClick={() => setSelectedPost(null)}
+                  className="px-6 py-3.5 bg-slate-900 text-white rounded-2xl text-[11px] font-black hover:bg-slate-800 transition-all"
+                >
+                  창 닫기
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

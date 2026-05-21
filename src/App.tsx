@@ -20,6 +20,7 @@ import Login from './pages/Login';
 import RevenueModel from './pages/RevenueModel';
 import StoryCommunity from './pages/StoryCommunity';
 import AiPolicy from './pages/AiPolicy';
+import Admin from './pages/Admin';
 
 import { InquiryProvider } from './components/ui/InquiryContext';
 import { ToastProvider } from './components/ui/Toast';
@@ -55,6 +56,7 @@ export default function App() {
             <Route path="login" element={<Login />} />
             <Route path="mypage" element={<MyPage />} />
           </Route>
+          <Route path="admin" element={<Admin />} />
         </Routes>
       </Router>
     </InquiryProvider>
