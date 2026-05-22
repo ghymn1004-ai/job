@@ -376,7 +376,7 @@ export default function Home() {
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
           <div className="relative">
             <span className="text-brand font-black text-sm uppercase tracking-[0.3em] mb-4 block">iium AI Insights</span>
-            <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tighter leading-tight">이음AI 핵심 교육 칼럼 & 가이드</h2>
+            <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tighter leading-tight">이음AI 전문가 칼럼</h2>
             <p className="text-slate-500 font-bold mt-2 text-sm">성공적인 시니어 인생 2막을 위해 이음AI가 준비한 깊이 있는 지식과 실전 노하우입니다.</p>
           </div>
           <div className="flex gap-4">
@@ -393,7 +393,7 @@ export default function Home() {
             <div className="w-2 rounded-full h-6 bg-brand"></div>
             <div>
               <h3 className="text-xl font-black text-slate-900 tracking-tight flex items-center gap-2">
-                AI 리터러시 및 직무 활용 교육 연재
+                AI 리터러시 및 AI직무 활용에 대한 칼럼
                 <span className="text-[10px] font-black text-brand bg-brand/5 px-2 py-0.5 rounded-sm">4개 공간</span>
               </h3>
               <p className="text-[12px] text-slate-400 font-bold mt-0.5">디지털 기본기부터 현업 복귀를 위한 AI 실무 업무 생산성 팁을 전해드립니다.</p>
@@ -446,7 +446,7 @@ export default function Home() {
             <div className="w-2 rounded-full h-6 bg-brand"></div>
             <div>
               <h3 className="text-xl font-black text-slate-900 tracking-tight flex items-center gap-2">
-                시니어 인생 2막 교육 연재
+                시니어 인생 2막에 대한 칼럼
                 <span className="text-[10px] font-black text-brand bg-brand/5 px-2 py-0.5 rounded-sm">4개 공간</span>
               </h3>
               <p className="text-[12px] text-slate-400 font-bold mt-0.5">인턴십 성공 노하우, 수평 조직 적응 꿀팁 및 품격 있는 세대 통합 소통학을 전합니다.</p>

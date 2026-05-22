@@ -24,6 +24,7 @@ import Admin from './pages/Admin';
 
 import { InquiryProvider } from './components/ui/InquiryContext';
 import { ToastProvider } from './components/ui/Toast';
+import SecurityGuard from './components/SecurityGuard';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -39,6 +40,7 @@ export default function App() {
       <InquiryProvider>
       <Router>
         <ScrollToTop />
+        <SecurityGuard />
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />

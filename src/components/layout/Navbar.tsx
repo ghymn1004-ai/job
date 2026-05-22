@@ -55,7 +55,14 @@ export default function Navbar() {
         <div className="flex justify-between h-28">
           <div className="flex items-center gap-8">
             <Link to="/" className="flex items-center gap-2 group" onClick={() => handleNavClick('/')}>
-              <img src="/logo_eumjob.png" alt="이음(iium) Logo" className="h-[105px] w-auto object-contain" />
+              <img 
+                src="/logo_eumjob.png" 
+                alt="이음(iium) Logo" 
+                className="h-[105px] w-auto object-contain" 
+                onError={(e) => {
+                  e.currentTarget.src = "https://litter.catbox.moe/qke7oz.png";
+                }}
+              />
               <div className="hidden sm:block border-l border-slate-200 pl-3">
                 <p className="text-[10px] font-black text-brand leading-none mb-0.5 tracking-tighter">시니어 전용</p>
                 <p className="text-[8px] font-bold text-slate-400 leading-none">PREMIUM PLATFORM</p>

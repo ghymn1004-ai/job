@@ -8,7 +8,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center gap-3 mb-6">
-              <img src="/logo_eumjob.png" alt="이음(iium) Logo" className="h-32 w-auto object-contain" />
+              <img 
+                src="/logo_eumjob.png" 
+                alt="이음(iium) Logo" 
+                className="h-32 w-auto object-contain" 
+                onError={(e) => {
+                  e.currentTarget.src = "https://litter.catbox.moe/qke7oz.png";
+                }}
+              />
             </div>
             <p className="text-slate-500 leading-relaxed font-medium">
               시니어 전문가를 위한 <br />
@@ -52,6 +59,14 @@ export default function Footer() {
                 </div>
                 <div className="flex flex-col">
                    <span className="text-[#495057] font-bold">iiumai4u@gmail.com</span>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 group">
+                <div className="w-8 h-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-400 group-hover:text-brand group-hover:border-brand/30 transition-colors">
+                  <Phone size={14} />
+                </div>
+                <div className="flex flex-col">
+                   <span className="text-[#495057] font-bold">070-7624-2675</span>
                 </div>
               </div>
             </div>
