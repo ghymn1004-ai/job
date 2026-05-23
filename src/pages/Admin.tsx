@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Plus, Trash2, Edit, LogOut, Download, Upload, CheckCircle2, ChevronDown, Save, Eye, ArrowLeft, RefreshCw, Sparkles, Image as ImageIcon } from 'lucide-react';
 import { Post, PostCategory, CATEGORY_LABELS } from '../types';
 import { getPosts, savePosts, SEED_POSTS } from '../data/posts';
+import BrandLogo from '../components/BrandLogo';
 
 const SAMPLE_IMAGES = [
   { label: 'AI 테크', url: 'https://images.unsplash.com/photo-1531747118685-ca8fa6e08806?auto=format&fit=crop&w=800&q=80' },
@@ -173,7 +174,7 @@ export default function Admin() {
          <div className="sm:mx-auto sm:w-full sm:max-w-md">
            <div className="flex justify-center">
              <Link to="/">
-                <img src="/logo_eumjob.png" alt="이음(iium) Logo" className="h-[155px] object-contain" onError={(e) => { e.currentTarget.src = "https://litter.catbox.moe/qke7oz.png"; }} />
+                <BrandLogo className="h-20 md:h-24 max-w-[200px]" />
              </Link>
            </div>
            <h2 className="mt-6 text-center text-3xl font-black text-slate-900 tracking-tight leading-none">
@@ -300,6 +301,23 @@ export default function Admin() {
             >
               <LogOut size={14} /> 인증 로그아웃
             </button>
+          </div>
+        </div>
+
+        {/* Device Sync & Permanent Display Notification */}
+        <div className="bg-emerald-50/80 border border-emerald-100 rounded-3xl p-6 md:p-8 mb-8 flex flex-col md:flex-row gap-5 items-start md:items-center justify-between shadow-sm">
+          <div className="space-y-1.5">
+            <h4 className="text-emerald-900 font-black text-sm flex items-center gap-1.5">
+              💡 실시간 기기 동기화 및 전체 사용자 영구 반영 안내
+            </h4>
+            <div className="text-slate-600 text-xs leading-relaxed font-bold">
+              <p>현재 작성하신 칼럼 글들은 개인 웹 브라우저의 전용 안전 공간(<span className="text-brand font-black">localStorage</span>)에 기기별로 각각 보관됩니다.</p>
+              <p className="mt-1.5">&#10004; <strong>컴퓨터에서 작성한 글을 모바일에서도 똑같이 관리하려면:</strong> 컴퓨터에서 <span className="text-emerald-700 font-extrabold">[백업 다운로드]</span>를 통해 JSON 파일을 받으신 후, 모바일에서 이음AI 관리자 모드로 접속하여 <span className="text-emerald-700 font-extrabold">[백업 복원 (가져오기)]</span>를 하시면 즉시 완벽한 무선 동기화가 이루어집니다!</p>
+              <p className="mt-1.5">&#10004; <strong>모든 기기와 일반 방문자에게 기본으로 칼럼글을 영구 노출하려면:</strong> 언제든지 다운로드받은 JSON 백업 파일 또는 파일 속 텍스트를 AI 스튜디오 상담창에 저희 쪽으로 첨부해주시면, 사이트 전체 기본 데이터셋인 <span className="font-mono font-black text-brand">SEED_POSTS</span> 파일에 직접 영구 탑재(빌드 반영)해 드립니다.</p>
+            </div>
+          </div>
+          <div className="shrink-0">
+            <span className="px-3.5 py-2 bg-emerald-600 text-white text-[11px] font-black rounded-xl shadow-lg shadow-emerald-600/10">무료 동기화 가이드</span>
           </div>
         </div>
 

@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { User, Lock, ArrowRight, Github, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import BrandLogo from '../components/BrandLogo';
 
 export default function Login() {
   return (
@@ -11,14 +12,7 @@ export default function Login() {
         className="w-full max-w-md bg-white p-10 md:p-12 rounded-[48px] border border-slate-100 shadow-2xl shadow-slate-200/50"
       >
         <div className="text-center mb-10">
-          <img 
-            src="/logo_eumjob.png" 
-            alt="이음(iium) Logo" 
-            className="h-40 mx-auto mb-6 object-contain" 
-            onError={(e) => {
-              e.currentTarget.src = "https://litter.catbox.moe/qke7oz.png";
-            }}
-          />
+          <BrandLogo className="h-20 md:h-24 max-w-[200px] mx-auto mb-6" />
           <h1 className="text-2xl font-black text-slate-900 tracking-tighter">다시 일하는 설렘, 이음(iium)</h1>
           <p className="text-slate-400 font-bold text-sm mt-2">당신의 가능성을 실전으로 잇습니다.</p>
         </div>
