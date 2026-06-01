@@ -2,8 +2,6 @@ import { motion } from 'motion/react';
 import { Filter, UserCheck, Zap, Brain, MessageSquare, Download, Sparkles } from 'lucide-react';
 import { cn } from '../lib/utils';
 import React from 'react';
-import { useInquiry } from '../components/ui/InquiryContext';
-import { useToast } from '../components/ui/Toast';
 
 const talents = [
   { 
@@ -45,31 +43,6 @@ const talents = [
 ];
 
 export default function Talents() {
-  const { openInquiry } = useInquiry();
-  const { showToast } = useToast();
-
-  const handleDownloadReport = () => {
-    showToast('전문가 전체 이력 리서치 보고서를 생성 중입니다...', 'info');
-    
-    setTimeout(() => {
-      try {
-        const content = `[이음 AI JOB] 전문가 리서치 리포트\n\n대상: 시니어 전문가 8,590명\n생성일: ${new Date().toLocaleDateString()}\n\n본 리포트는 기업용 상세 인재 분석 데이터가 포함되어 있습니다.`;
-        const blob = new Blob([content], { type: 'text/plain' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'iium_talent_report.txt';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-        showToast('보고서 다운로드가 완료되었습니다.', 'success');
-      } catch (error) {
-        showToast('다운로드 중 오류가 발생했습니다.', 'error');
-      }
-    }, 1500);
-  };
-
   return (
     <div className="max-w-7xl mx-auto px-4 py-20 sm:px-6 lg:px-8">
       {/* Header */}
@@ -83,22 +56,15 @@ export default function Talents() {
             <Sparkles size={14} />
             Enterprise Talent Network
           </motion.div>
-          <h1 className="text-4xl md:text-5xl font-black mb-6 text-slate-900 tracking-tighter leading-tight">검증된 <span className="text-brand">시니어 전문가</span> <br/>검색하세요</h1>
+          <h1 className="text-4xl md:text-5xl font-black mb-6 text-slate-900 tracking-tighter leading-tight">최고의 <span className="text-brand">인재찾기</span> <br/>검색하세요</h1>
           <p className="text-slate-500 font-bold leading-relaxed">
-            이음AI JOB의 AI매칭 엔진이 기업의 인재상을 분석하여 <br className="hidden md:block" />
-            수십 년간 축적된 지혜와 실무력을 갖춘 '시니어 베테랑'을 실시간 추천합니다.
+            이음JOB의 AI매칭 엔진이 기업의 인재상을 분석하여 교육, 기술, 경영 등 각 분야에서 <br className="hidden md:block" />
+            검증된 전문가를 실시간 추천합니다.
           </p>
         </div>
-        <div className="flex flex-col sm:flex-row gap-4">
-          <button 
-            onClick={() => openInquiry('corporate')}
-            className="px-12 py-5 bg-brand text-white rounded-[24px] font-black text-lg hover:bg-brand-hover transition-all shadow-xl shadow-brand/20 active:scale-95"
-          >
-            📝 지금 바로 신청하기
-          </button>
-          <button className="px-10 py-5 border-2 border-slate-200 rounded-[24px] font-black text-lg text-slate-600 hover:bg-slate-50 transition-all bg-white active:scale-95">
-            🔍 인재 상세 검색 필터
-          </button>
+        <div className="flex gap-4">
+          <button className="px-8 py-5 bg-slate-900 text-white rounded-[20px] font-black text-sm hover:bg-brand transition-all shadow-xl shadow-slate-200 active:scale-95">추천 인재 받기</button>
+          <button className="px-8 py-5 border border-slate-200 rounded-[20px] font-black text-sm text-slate-600 hover:bg-slate-50 transition-all bg-white active:scale-95">상세 설정</button>
         </div>
       </div>
 
@@ -229,10 +195,7 @@ export default function Talents() {
                     <button className="flex-grow md:flex-none px-10 py-5 bg-slate-900 text-white rounded-[20px] font-black text-sm tracking-tight hover:bg-brand transition-all flex items-center justify-center gap-2 shadow-xl shadow-slate-100 active:scale-95">
                       <MessageSquare size={18} /> 인터뷰/채용 제안하기
                     </button>
-                    <button 
-                      onClick={handleDownloadReport}
-                      className="px-10 py-5 border border-slate-200 rounded-[20px] font-black text-sm text-slate-600 hover:border-brand hover:text-brand transition-all active:scale-95 flex items-center justify-center gap-2 bg-white"
-                    >
+                    <button className="px-10 py-5 border border-slate-200 rounded-[20px] font-black text-sm text-slate-600 hover:border-brand hover:text-brand transition-all active:scale-95 flex items-center justify-center gap-2 bg-white">
                        <Download size={18} /> 전체 이력 리서치
                     </button>
                   </div>

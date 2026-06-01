@@ -1,11 +1,9 @@
-import { ArrowRight, Search, Briefcase, Users, Brain, GraduationCap, TrendingUp, Star, MessageSquare, ChevronDown, CheckCircle2, Zap, Target, Rocket, Heart, Shield, Building, Sparkles, Calendar, Eye, BookOpen, Clock, X } from 'lucide-react';
+import { ArrowRight, Search, Briefcase, Users, Brain, GraduationCap, TrendingUp, Star, MessageSquare, ChevronDown, CheckCircle2, Zap, Target, Rocket, Heart, Shield, Building } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Link, useNavigate } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import { cn } from '../lib/utils';
 import { useInquiry } from '../components/ui/InquiryContext';
-import { getPosts } from '../data/posts';
-import { Post, CATEGORY_LABELS } from '../types';
 
 interface FeatureCardProps {
   key?: React.Key;
@@ -89,33 +87,6 @@ function InteractiveCard({ icon: Icon, title, desc, color, details, path }: Feat
 
 export default function Home() {
   const { openInquiry } = useInquiry();
-  const navigate = useNavigate();
-  const [selectedInquiryType, setSelectedInquiryType] = useState<'corporate' | 'individual' | 'education'>('corporate');
-  const [homeFormData, setHomeFormData] = useState({
-    name: '',
-    phone: ''
-  });
-  
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [selectedPost, setSelectedPost] = useState<Post | null>(null);
-
-  useEffect(() => {
-    // published 포스트 로드
-    const activePosts = getPosts().filter(p => p.isPublished);
-    setPosts(activePosts);
-  }, []);
-
-  const handleHomeSubmit = () => {
-    // We could potentionally sync this to InquiryModal's state via context or localStorage
-    const saved = localStorage.getItem('inquiry_form_data');
-    const existingData = saved ? JSON.parse(saved) : {};
-    localStorage.setItem('inquiry_form_data', JSON.stringify({
-      ...existingData,
-      name: homeFormData.name || existingData.name,
-      phone: homeFormData.phone || existingData.phone
-    }));
-    openInquiry(selectedInquiryType);
-  };
   const features = [
     { 
       icon: Search, 
@@ -162,15 +133,15 @@ export default function Home() {
     { 
       icon: GraduationCap, 
       title: 'AI직무교육', 
-      desc: '직무 리터러시부터 실무 활용까지, 현장에서 인정받는 역량 강화 과정', 
+      desc: '기술 교육을 넘어, 다시 자신감을 갖고 전문가로 인정받는 과정', 
       color: 'bg-amber-50 text-amber-600',
       path: '/education',
       details: [
-        'AI 리터러시 (8주): 직무용 AI 기초 및 소통 역량',
-        'AI 직무활용 (4주): 실무 성과 중심의 AI 도구 마스터',
-        '시니어 인턴 과정: 기업 조직 적응 및 협업 태도 훈련',
-        '현직 전문가의 1:1 직무 피드백 및 코칭',
-        '교육 수료 즉시 기업 프리미엄 매칭 연결'
+        '시니어 인턴 과정을 통한 실무 현장 체험',
+        '조직문화 이해 및 긍정적 커뮤니케이션 훈련',
+        '실무에 바로 쓰이는 날카로운 AI 활용법',
+        '배움이 곧 역할이 되는 직무별 맞춤 다듬기',
+        '다시 현장에서 빛나기 위한 자신감 회복 세션'
       ]
     },
   ];
@@ -185,21 +156,20 @@ export default function Home() {
         </div>
         
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-20 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              className="relative z-10"
             >
               <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-brand/10 border border-brand/20 rounded-full text-brand text-xs font-black mb-8 uppercase tracking-widest">
                 <Zap size={14} className="fill-brand" />
                 Premium Senior Job Platform
               </div>
-              <h1 className="text-5xl md:text-[68px] font-black leading-[1.1] mb-8 text-white tracking-tighter break-keep">
-                시니어의 무한한 경험, <br /> 이음(iium)이 <br /> 세상과 다시 연결합니다. <br/><span className="text-brand text-2xl md:text-3xl block mt-6 opacity-90">AI로 여는 새로운 인생 2막</span>
+              <h1 className="text-5xl md:text-7xl font-black leading-[1.1] mb-8 text-white tracking-tight">
+                AI가 <br /> 사람의 가능성과 기업의 필요를 연결<br/><span className="text-brand text-2xl md:text-4xl block mt-4">시니어의 인생 2막을 함께 만드는 곳</span>
               </h1>
               <p className="text-slate-400 text-lg md:text-xl mb-12 max-w-lg leading-relaxed font-medium">
-                이음(iium)은 단순한 구인 사이트가 아닙니다. <br className="hidden md:block" />
+                이음JOB은 단순한 구인 사이트가 아닙니다. <br className="hidden md:block" />
                 하고 싶은 일을 먼저 찾고, 기업과 연결한 후, <br className="hidden md:block" />
                 그 자리에 딱 맞도록 당신을 날카롭게 다듬어 드립니다.
               </p>
@@ -207,16 +177,28 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row flex-wrap gap-4 mb-8">
                 <button 
                   onClick={() => openInquiry('individual')}
-                  className="px-10 py-5 bg-brand text-white rounded-[16px] font-black text-xl hover:bg-brand-hover transition-all flex items-center justify-center gap-2 shadow-xl shadow-brand/20 min-w-[200px]"
+                  className="px-8 py-5 bg-brand text-white rounded-[16px] font-black text-lg hover:bg-brand-hover transition-all flex items-center justify-center gap-2 shadow-xl shadow-brand/20"
                 >
-                  👤 일자리찾기 신청
+                  👤 일자리찾기
                 </button>
                 <button 
                   onClick={() => openInquiry('corporate')}
-                  className="px-10 py-5 bg-slate-800 border border-slate-700 text-white rounded-[16px] font-black text-xl hover:bg-slate-700 transition-all flex items-center justify-center gap-2 min-w-[200px]"
+                  className="px-8 py-5 bg-slate-800 border border-slate-700 text-white rounded-[16px] font-black text-lg hover:bg-slate-700 transition-all flex items-center justify-center gap-2"
                 >
-                  🏢 인재찾기 신청
+                  🏢 인재찾기
                 </button>
+                <button 
+                  onClick={() => openInquiry('education')}
+                  className="px-8 py-5 bg-indigo-600 text-white rounded-[16px] font-black text-lg hover:bg-indigo-700 transition-all flex items-center justify-center gap-2"
+                >
+                  🎓 AI직무교육
+                </button>
+                <Link 
+                  to="/ai-matching" 
+                  className="px-8 py-5 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-[16px] font-black text-lg hover:bg-white/20 transition-all flex items-center justify-center gap-2"
+                >
+                  ⚡ AI매칭
+                </Link>
               </div>
 
               <div className="flex items-center gap-6 mt-12 pt-12 border-t border-white/10">
@@ -234,53 +216,53 @@ export default function Home() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, scale: 0.9, x: 20 }}
-              animate={{ opacity: 1, scale: 1, x: 0 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2 }}
               className="hidden lg:block relative"
             >
-              <div className="relative z-10 bg-white/5 backdrop-blur-3xl border border-white/10 rounded-[40px] p-8 shadow-2xl max-w-[420px] ml-auto group">
+              <div className="relative z-10 bg-white/5 backdrop-blur-3xl border border-white/10 rounded-[48px] p-10 shadow-2xl overflow-hidden group">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-brand/20 blur-3xl -translate-y-1/2 translate-x-1/2" />
                 
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-10 h-10 bg-brand rounded-xl flex items-center justify-center text-white shadow-lg shadow-brand/20">
-                    <Brain size={20} />
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="w-12 h-12 bg-brand rounded-2xl flex items-center justify-center text-white shadow-lg shadow-brand/20">
+                    <Brain size={24} />
                   </div>
                   <div>
-                     <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">AI Matching Analysis</p>
-                     <p className="text-white text-sm font-bold">실시간 인재 정밀 매칭</p>
+                     <p className="text-xs font-black text-slate-500 uppercase tracking-widest">AI Matching Analysis</p>
+                     <p className="text-white font-bold">실시간 인재 정밀 매칭</p>
                   </div>
                 </div>
 
-                <div className="space-y-5">
+                <div className="space-y-6">
                   {[
                     { label: '금융 전략 컨설팅', match: '98%', color: 'w-[98%]' },
                     { label: 'AI 리터러시 교육', match: '94%', color: 'w-[94%]' },
                     { label: '공공기관 자문', match: '89%', color: 'w-[89%]' },
                   ].map((item, idx) => (
-                    <div key={idx} className="space-y-1.5">
-                      <div className="flex justify-between text-xs">
-                        <span className="text-slate-400 font-medium">{item.label}</span>
+                    <div key={idx} className="space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-slate-300 font-medium">{item.label}</span>
                         <span className="text-brand font-black">{item.match}</span>
                       </div>
-                      <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
+                      <div className="h-2 bg-white/10 rounded-full overflow-hidden">
                         <motion.div 
                           initial={{ width: 0 }}
                           whileInView={{ width: item.match }}
-                          className="h-full bg-brand rounded-full shadow-[0_0_8px_rgba(255,107,0,0.5)]"
+                          className="h-full bg-brand rounded-full"
                         />
                       </div>
                     </div>
                   ))}
                 </div>
 
-                <div className="mt-8 pt-6 border-t border-white/10">
+                <div className="mt-10 pt-8 border-t border-white/10">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest">Successful Matching</p>
-                      <p className="text-2xl font-black text-white">92.4%</p>
+                      <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Successful Matching</p>
+                      <p className="text-3xl font-black text-white">92.4%</p>
                     </div>
-                    <Link to="/revenue" className="text-[10px] font-bold text-brand hover:underline">상세 분석 결과 보기 →</Link>
+                    <Link to="/revenue" className="text-xs font-bold text-brand hover:underline">서비스 정책 확인 →</Link>
                   </div>
                 </div>
               </div>
@@ -317,7 +299,7 @@ export default function Home() {
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
           <div className="relative">
             <span className="text-brand font-black text-sm uppercase tracking-[0.3em] mb-4 block">Our Services</span>
-            <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tighter leading-tight">시니어의 지혜를 <br /><span className="text-brand">새로운 가치</span>로 잇는 서비스</h2>
+            <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tighter leading-tight">시니어를 위한 <br /><span className="text-brand">핵심 역량</span> 서비스</h2>
           </div>
           <div className="flex gap-4">
              <Link to="/ai-matching" className="group flex items-center gap-3 px-8 py-4 bg-slate-50 border border-slate-200 rounded-2xl text-slate-700 font-bold hover:bg-white hover:border-brand/30 hover:shadow-xl transition-all">
@@ -371,129 +353,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Blog Posts Column Section */}
-      <section className="py-24 max-w-7xl mx-auto px-6 border-t border-slate-100">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-          <div className="relative">
-            <span className="text-brand font-black text-sm uppercase tracking-[0.3em] mb-4 block">iium AI Insights</span>
-            <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tighter leading-tight">이음AI 전문가 칼럼</h2>
-            <p className="text-slate-500 font-bold mt-2 text-sm">성공적인 시니어 인생 2막을 위해 이음AI가 준비한 깊이 있는 지식과 실전 노하우입니다.</p>
-          </div>
-          <div className="flex gap-4">
-            <Link to="/education" className="group flex items-center gap-3 px-8 py-4 bg-slate-50 border border-slate-200 rounded-2xl text-slate-700 font-bold hover:bg-white hover:border-brand/30 hover:shadow-xl transition-all">
-              AI교육 페이지에서 전체 읽기
-              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-        </div>
-
-        {/* Section A: AI 리터러시 & 직무 활용 교육 (4 spaces) */}
-        <div className="mb-20">
-          <div className="flex items-center gap-3 mb-8 border-b border-slate-100 pb-4">
-            <div className="w-2 rounded-full h-6 bg-brand"></div>
-            <div>
-              <h3 className="text-xl font-black text-slate-900 tracking-tight flex items-center gap-2">
-                AI 리터러시 및 AI직무 활용에 대한 칼럼
-                <span className="text-[10px] font-black text-brand bg-brand/5 px-2 py-0.5 rounded-sm">4개 공간</span>
-              </h3>
-              <p className="text-[12px] text-slate-400 font-bold mt-0.5">디지털 기본기부터 현업 복귀를 위한 AI 실무 업무 생산성 팁을 전해드립니다.</p>
-            </div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {posts.filter(p => p.category === 'literacy' || p.category === 'utilization').slice(0, 4).map((post) => (
-              <div 
-                key={post.id}
-                onClick={() => setSelectedPost(post)}
-                className="bg-white rounded-[32px] overflow-hidden border border-slate-100 shadow-xs hover:shadow-[0_20px_50px_rgba(0,102,255,0.06)] hover:border-brand/35 transition-all cursor-pointer group flex flex-col h-full"
-              >
-                <div className="h-44 bg-slate-100 relative overflow-hidden shrink-0">
-                  <img 
-                    src={post.coverImage} 
-                    alt={post.title} 
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <span className="absolute top-4 left-4 px-3 py-1 bg-white/90 backdrop-blur-xs rounded-lg text-[10px] font-black shadow-sm text-brand z-10">
-                    {CATEGORY_LABELS[post.category]}
-                  </span>
-                </div>
-                <div className="p-6 flex flex-col flex-grow">
-                  <h3 className="text-sm font-black text-slate-900 line-clamp-2 leading-snug group-hover:text-brand transition-colors mb-3">
-                    {post.title}
-                  </h3>
-                  <p className="text-[12px] text-slate-400 font-bold line-clamp-3 leading-relaxed mb-6 flex-grow">
-                    {post.summary}
-                  </p>
-                  <div className="flex items-center justify-between pt-4 border-t border-slate-100 text-[10px] font-black text-slate-400">
-                    <div className="flex items-center gap-1">
-                      <Calendar size={12} />
-                      <span>{post.createdAt}</span>
-                    </div>
-                    <div className="flex items-center gap-1 bg-slate-50 px-2 py-1 rounded-md text-slate-500">
-                      <Eye size={12} />
-                      <span>{post.views}회</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Section B: 시니어 전문 교육 (4 spaces) */}
-        <div>
-          <div className="flex items-center gap-3 mb-8 border-b border-slate-100 pb-4">
-            <div className="w-2 rounded-full h-6 bg-brand"></div>
-            <div>
-              <h3 className="text-xl font-black text-slate-900 tracking-tight flex items-center gap-2">
-                시니어 인생 2막에 대한 칼럼
-                <span className="text-[10px] font-black text-brand bg-brand/5 px-2 py-0.5 rounded-sm">4개 공간</span>
-              </h3>
-              <p className="text-[12px] text-slate-400 font-bold mt-0.5">인턴십 성공 노하우, 수평 조직 적응 꿀팁 및 품격 있는 세대 통합 소통학을 전합니다.</p>
-            </div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {posts.filter(p => p.category === 'senior').slice(0, 4).map((post) => (
-              <div 
-                key={post.id}
-                onClick={() => setSelectedPost(post)}
-                className="bg-white rounded-[32px] overflow-hidden border border-slate-100 shadow-xs hover:shadow-[0_20px_50px_rgba(0,102,255,0.06)] hover:border-brand/35 transition-all cursor-pointer group flex flex-col h-full"
-              >
-                <div className="h-44 bg-slate-100 relative overflow-hidden shrink-0">
-                  <img 
-                    src={post.coverImage} 
-                    alt={post.title} 
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <span className="absolute top-4 left-4 px-3 py-1 bg-white/90 backdrop-blur-xs rounded-lg text-[10px] font-black shadow-sm text-brand z-10">
-                    {CATEGORY_LABELS[post.category]}
-                  </span>
-                </div>
-                <div className="p-6 flex flex-col flex-grow">
-                  <h3 className="text-sm font-black text-slate-900 line-clamp-2 leading-snug group-hover:text-brand transition-colors mb-3">
-                    {post.title}
-                  </h3>
-                  <p className="text-[12px] text-slate-400 font-bold line-clamp-3 leading-relaxed mb-6 flex-grow">
-                    {post.summary}
-                  </p>
-                  <div className="flex items-center justify-between pt-4 border-t border-slate-100 text-[10px] font-black text-slate-400">
-                    <div className="flex items-center gap-1">
-                      <Calendar size={12} />
-                      <span>{post.createdAt}</span>
-                    </div>
-                    <div className="flex items-center gap-1 bg-slate-50 px-2 py-1 rounded-md text-slate-500">
-                      <Eye size={12} />
-                      <span>{post.views}회</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* About Section - Brand Philosophy */}
       <section className="py-24 bg-slate-900 text-white overflow-hidden relative">
         <div className="absolute inset-0 opacity-10 pointer-events-none">
@@ -502,38 +361,37 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <div>
-              <span className="text-brand font-black text-sm uppercase tracking-[0.4em] mb-6 block">iium Philosophy</span>
-              <h2 className="text-4xl md:text-6xl font-black mb-8 tracking-tighter leading-[1.1] break-keep">
-                시니어의 가능성을 <br /> 
-                다시 잇는 <br /> 
-                <span className="text-brand">이음(iium) AI 교육 철학</span>
+              <span className="text-brand font-black text-sm uppercase tracking-[0.4em] mb-6 block">Vision & Mission</span>
+              <h2 className="text-4xl md:text-6xl font-black mb-8 tracking-tighter leading-[1.1]">
+                하고 싶은 일을 찾아 <br />
+                <span className="text-brand">다시 태어나는 가치</span>
               </h2>
               <p className="text-slate-400 text-lg font-medium leading-relaxed mb-10">
-                ‘iium’은 단순히 이름이 아닙니다. 대한민국 시니어의 지혜와 경험을 AI 기술과 이어주는 철학입니다. <br className="hidden md:block" />
-                우리는 당신의 평생 경력을 존중하며, 시니어 전문가로서 다시 세상의 중심에 서도록 돕습니다.
+                우리는 당신의 열망을 기업의 실무 역량으로 날카롭게 다듬어 <br className="hidden md:block" />
+                단순한 연결을 넘어 세상이 당신을 다시 전문가로 인정하게 만듭니다.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-12">
                 <div className="space-y-4">
                   <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-brand">
-                    <Sparkles size={24} />
+                    <Target size={24} />
                   </div>
-                  <h4 className="text-xl font-bold">Inspire</h4>
+                  <h4 className="text-xl font-bold">배움과 일의 연결</h4>
                   <p className="text-slate-500 text-sm leading-relaxed">
-                    가능성을 깨우다. 우리는 사람 안에 남아 있는 가능성을 발견하고 "나는 아직 할 수 있다"는 자신감을 깨웁니다.
+                    실질적인 교육 없이 이루어지는 연결은 오래가지 않습니다. 우리는 교육을 통해 가치를 높입니다.
                   </p>
                 </div>
                 <div className="space-y-4">
                   <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-brand">
-                    <Zap size={24} />
+                    <TrendingUp size={24} />
                   </div>
-                  <h4 className="text-xl font-bold">Integrate</h4>
+                  <h4 className="text-xl font-bold">지속 가능한 연결</h4>
                   <p className="text-slate-500 text-sm leading-relaxed">
-                    경험과 미래를 연결하다. 시니어의 삶의 경험과 새로운 AI 기술을 연결하여 시니어의 무기를 실전에 맞게 다듬습니다.
+                    단순 채용이 아닌, 사람과 사람의 지속 가능한 파트너십을 전문 AI 매칭으로 완성합니다.
                   </p>
                 </div>
               </div>
               <Link to="/about" className="inline-flex items-center gap-2 group text-brand font-black uppercase tracking-widest text-sm">
-                iium 철학 더보기 <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
+                회사 소개 더보기 <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
               </Link>
             </div>
             <div className="relative">
@@ -577,7 +435,7 @@ export default function Home() {
                  </h2>
                  <p className="text-slate-500 font-bold leading-relaxed mb-10 max-w-md">
                    지금 바로 간단한 정보만 남겨주세요. 
-                   이음AI JOB의 AI 매칭 전문가가 24시간 이내에 최적의 솔루션을 제안해 드립니다.
+                   이음JOB의 AI 매칭 전문가가 24시간 이내에 최적의 솔루션을 제안해 드립니다.
                  </p>
                  
                  <div className="space-y-6">
@@ -608,59 +466,38 @@ export default function Home() {
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">기업/성함</label>
-                        <input 
-                          type="text"
-                          placeholder="회사명 혹은 성함"
-                          value={homeFormData.name}
-                          onChange={(e) => setHomeFormData({ ...homeFormData, name: e.target.value })}
-                          className="w-full bg-slate-50 rounded-xl p-4 border border-slate-100 text-slate-700 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-brand/20 transition-all"
-                        />
+                        <div className="bg-slate-50 rounded-xl p-4 border border-slate-100 text-slate-400 text-sm font-medium">회사명 혹은 성함 입력</div>
                       </div>
                       <div className="space-y-2">
                         <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">연락처</label>
-                        <input 
-                          type="tel"
-                          placeholder="010-0000-0000"
-                          value={homeFormData.phone}
-                          onChange={(e) => setHomeFormData({ ...homeFormData, phone: e.target.value })}
-                          className="w-full bg-slate-50 rounded-xl p-4 border border-slate-100 text-slate-700 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-brand/20 transition-all"
-                        />
+                        <div className="bg-slate-50 rounded-xl p-4 border border-slate-100 text-slate-400 text-sm font-medium">010-0000-0000</div>
                       </div>
                     </div>
                     <div className="space-y-2">
                       <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">신청 유형</label>
                       <div className="flex flex-wrap gap-2">
                         <button 
-                          onClick={() => setSelectedInquiryType('corporate')}
-                          className={cn(
-                            "px-4 py-2 border-2 rounded-lg text-[10px] font-black transition-all",
-                            selectedInquiryType === 'corporate' ? "border-brand text-brand bg-brand/5 shadow-[0_0_15px_rgba(25,189,126,0.2)]" : "border-slate-100 text-slate-400 hover:border-brand/30 hover:text-brand"
-                          )}
+                          onClick={() => openInquiry('corporate')}
+                          className="px-4 py-2 border-2 border-brand text-brand rounded-lg text-[10px] font-black hover:bg-brand/5"
                         >
                           인재찾기
                         </button>
                         <button 
-                          onClick={() => setSelectedInquiryType('individual')}
-                          className={cn(
-                            "px-4 py-2 border-2 rounded-lg text-[10px] font-black transition-all",
-                            selectedInquiryType === 'individual' ? "border-brand text-brand bg-brand/5 shadow-[0_0_15px_rgba(25,189,126,0.2)]" : "border-slate-100 text-slate-400 hover:border-brand/30 hover:text-brand"
-                          )}
+                          onClick={() => openInquiry('individual')}
+                          className="px-4 py-2 border-2 border-slate-100 text-slate-400 rounded-lg text-[10px] font-bold hover:border-brand/30 hover:text-brand"
                         >
                           일자리찾기
                         </button>
                         <button 
-                          onClick={() => setSelectedInquiryType('education')}
-                          className={cn(
-                            "px-4 py-2 border-2 rounded-lg text-[10px] font-black transition-all",
-                            selectedInquiryType === 'education' ? "border-brand text-brand bg-brand/5 shadow-[0_0_15px_rgba(25,189,126,0.2)]" : "border-slate-100 text-slate-400 hover:border-brand/30 hover:text-brand"
-                          )}
+                          onClick={() => openInquiry('education')}
+                          className="px-4 py-2 border-2 border-slate-100 text-slate-400 rounded-lg text-[10px] font-bold hover:border-brand/30 hover:text-brand"
                         >
                           AI직무교육
                         </button>
                       </div>
                     </div>
                     <button 
-                      onClick={handleHomeSubmit}
+                      onClick={openInquiry}
                       className="w-full py-5 bg-brand text-white rounded-[20px] font-black text-lg shadow-xl shadow-brand/20 hover:bg-brand-hover transition-all flex items-center justify-center gap-2"
                     >
                       지금 바로 신청하기
@@ -763,7 +600,7 @@ export default function Home() {
                 <span className="text-indigo-600">생생한 성공 스토리</span>
               </h2>
               <p className="text-slate-500 font-bold leading-relaxed mb-10 max-w-md">
-                이음AI JOB을 통해 제2의 커리어를 시작한 시니어 전문가들과 
+                이음JOB을 통해 제2의 커리어를 시작한 시니어 전문가들과 
                 최고의 인재를 만난 기업들의 활발한 소통 공간입니다.
               </p>
               
@@ -847,126 +684,43 @@ export default function Home() {
              <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-indigo-600 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2" />
           </div>
           <div className="relative z-10">
-            <h2 className="text-4xl md:text-6xl font-black mb-10 tracking-tighter leading-tight">
-              “AI와 함께, <br /> 다시 세상의 주역이 되세요.”
+            <h2 className="text-4xl md:text-6xl font-black mb-8 tracking-tighter leading-tight">
+              하고 싶은 일을 찾아 <br />
+              세상의 인정을 다시 받으세요
             </h2>
             <p className="text-slate-300 text-lg md:text-xl mb-12 font-medium max-w-2xl mx-auto leading-relaxed">
-              시니어의 경험은 기업의 가장 큰 자산입니다. <br className="hidden md:block" />
-              우리는 기술을 넘어, 당신의 가치가 다시 인정받도록 잇겠습니다.
+              이음JOB은 당신의 꿈을 찾고, 실무 역량으로 날카롭게 다듬어 <br className="hidden md:block" />
+              세상이 다시 당신을 전문가로 부르게 만들겠습니다.
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <div className="flex flex-wrap justify-center gap-4">
+              <button 
+                onClick={() => openInquiry('individual')}
+                className="px-10 py-5 bg-brand text-white rounded-[20px] font-black text-lg hover:scale-105 transition-all shadow-2xl active:scale-95 flex items-center gap-2"
+              >
+                ⚡ AI매칭 무료상담
+              </button>
+              <button 
+                onClick={() => openInquiry('individual')}
+                className="px-10 py-5 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-[20px] font-black text-lg hover:bg-white/20 transition-all flex items-center gap-2 active:scale-95"
+              >
+                👤 일자리찾기
+              </button>
+              <button 
+                onClick={() => openInquiry('corporate')}
+                className="px-10 py-5 bg-slate-800 border border-slate-700 text-white rounded-[20px] font-black text-lg hover:bg-slate-700 transition-all flex items-center justify-center gap-2"
+              >
+                🏢 인재찾기
+              </button>
               <button 
                 onClick={() => openInquiry('education')}
-                className="px-12 py-6 bg-brand text-white rounded-[24px] font-black text-xl hover:scale-105 transition-all shadow-2xl active:scale-95 flex items-center gap-2"
+                className="px-10 py-5 bg-indigo-600 text-white rounded-[20px] font-black text-lg hover:bg-indigo-700 transition-all flex items-center gap-2 active:scale-95 shadow-xl shadow-indigo-900/20"
               >
-                인생 2막 교육 시작하기
+                🎓 AI직무교육
               </button>
             </div>
           </div>
         </div>
       </section>
-
-      {/* Blog Post Detail Modal */}
-      <AnimatePresence>
-        {selectedPost && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setSelectedPost(null)}
-              className="absolute inset-0 bg-slate-900/40 backdrop-blur-xs"
-            />
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative w-full max-w-2xl bg-white rounded-[40px] shadow-2xl overflow-hidden max-h-[85vh] flex flex-col z-[110]"
-            >
-              {/* Header Cover */}
-              <div className="h-56 bg-slate-100 relative shrink-0">
-                <img 
-                  src={selectedPost.coverImage} 
-                  alt={selectedPost.title}
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent" />
-                <button 
-                  onClick={() => setSelectedPost(null)}
-                  className="absolute top-4 right-4 w-10 h-10 bg-black/50 hover:bg-black/85 transition-colors rounded-full flex items-center justify-center text-white cursor-pointer z-50 hover:scale-105 active:scale-95"
-                >
-                  <X size={20} />
-                </button>
-              </div>
-
-              {/* Scrollable Content */}
-              <div className="p-8 overflow-y-auto flex-grow space-y-6">
-                <div>
-                  <span className="inline-block px-3 py-1 bg-brand/10 text-brand rounded-full text-[10px] font-black mb-3">
-                    {CATEGORY_LABELS[selectedPost.category]}
-                  </span>
-                  <h2 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight leading-snug">
-                    {selectedPost.title}
-                  </h2>
-                  <div className="flex items-center gap-4 text-[11px] font-black text-slate-400 mt-3 pb-4 border-b border-slate-100">
-                    <span>작성자: {selectedPost.author}</span>
-                    <span>•</span>
-                    <span>날짜: {selectedPost.createdAt}</span>
-                    <span>•</span>
-                    <span>조회: {selectedPost.views}회</span>
-                  </div>
-                </div>
-
-                <div className="text-slate-600 font-medium text-sm md:text-[15px] leading-relaxed space-y-4">
-                  {selectedPost.content.split('\n\n').map((paragraph, index) => {
-                    if (paragraph.trim().startsWith('##')) {
-                      return <h3 key={index} className="text-base font-black text-slate-900 mt-6 mb-3">{paragraph.replace('##', '').trim()}</h3>;
-                    }
-                    if (paragraph.trim().startsWith('*') || paragraph.trim().startsWith('-')) {
-                      return (
-                        <ul key={index} className="list-disc pl-5 space-y-1.5 mt-2">
-                          {paragraph.split('\n').map((li, liIdx) => (
-                            <li key={liIdx} className="text-slate-600 font-bold">{li.replace(/^[\s*-]+/, '').trim()}</li>
-                          ))}
-                        </ul>
-                      );
-                    }
-                    if (paragraph.trim().startsWith('>')) {
-                      return (
-                        <div key={index} className="p-4 bg-slate-50 border-l-4 border-brand rounded-r-2xl font-bold italic text-slate-700 text-xs my-4">
-                          {paragraph.replace(/^>\s*/, '').trim()}
-                        </div>
-                      );
-                    }
-                    return <p key={index} className="whitespace-pre-line font-bold text-slate-600 leading-normal">{paragraph.trim()}</p>;
-                  })}
-                </div>
-              </div>
-
-              {/* Footer Button */}
-              <div className="p-6 border-t border-slate-50 bg-slate-50/50 flex justify-between items-center shrink-0">
-                <button 
-                  onClick={() => {
-                    const query = selectedPost.category;
-                    setSelectedPost(null);
-                    navigate(`/education?tab=${query}`);
-                  }}
-                  className="px-5 py-3.5 bg-brand/10 text-brand rounded-2xl text-[11px] font-black hover:bg-brand/20 transition-all flex items-center gap-2"
-                >
-                  <BookOpen size={13} /> AI교육 과정 보러가기
-                </button>
-                <button 
-                  onClick={() => setSelectedPost(null)}
-                  className="px-6 py-3.5 bg-slate-900 text-white rounded-2xl text-[11px] font-black hover:bg-slate-800 transition-all"
-                >
-                  창 닫기
-                </button>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }

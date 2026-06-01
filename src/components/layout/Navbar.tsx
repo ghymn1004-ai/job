@@ -2,36 +2,34 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, User, BrainCircuit, ArrowRight, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '../../lib/utils';
-import { motion, AnimatePresence } from 'motion/react';
 
 import { useInquiry } from '../ui/InquiryContext';
-import BrandLogo from '../BrandLogo';
 
 export const navItems = [
   { 
     name: '일자리찾기', 
-    path: '/jobs'
+    path: '/jobs',
+    subItems: ['내가 원하는 일', 'AI가 추천하는 일']
   },
   { 
     name: '인재찾기', 
-    path: '/talents'
+    path: '/talents',
+    subItems: ['회사가 원하는 인재', 'AI가 추천하는 인재']
   },
   { 
     name: 'AI매칭', 
-    path: '/ai-matching'
+    path: '/ai-matching',
+    subItems: ['직무적합도(경력, 자격증)', '조직적응도(성향, 태도 등)', '업무스타일(파트, 재택 등)']
   },
   { 
-    name: 'AI교육', 
+    name: 'AI직무교육', 
     path: '/education',
-    subItems: [
-      { name: 'AI리터러시', query: 'literacy' },
-      { name: 'AI직무활용', query: 'utilization' },
-      { name: '시니어교육', query: 'senior' }
-    ]
+    subItems: ['AI리터러시', 'AI활용교육', '시니어인턴교육']
   },
   { 
     name: '회사소개', 
-    path: '/about'
+    path: '/about',
+    subItems: ['이음JOB 소개', '철학 및 가치', '운영 전략', '파트너 기업']
   },
 ];
 
@@ -53,55 +51,49 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-slate-100 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-28">
+        <div className="flex justify-between h-16">
           <div className="flex items-center gap-8">
-            <Link to="/" className="flex items-center gap-2 group" onClick={() => handleNavClick('/')}>
-              <BrandLogo className="h-7 sm:h-8 md:h-10 w-auto" />
-              <div className="hidden sm:block border-l border-slate-200 pl-3">
-                <p className="text-[10px] font-black text-brand leading-none mb-0.5 tracking-tighter">시니어 전용</p>
-                <p className="text-[8px] font-bold text-slate-400 leading-none">PREMIUM PLATFORM</p>
-              </div>
+            <Link to="/" className="flex items-center group" onClick={() => handleNavClick('/')}>
+              <img src="https://ghymn1004-ai.github.io/seniorjob/images/logo.png" alt="이음JOB Logo" className="h-[52px] w-auto object-contain" />
             </Link>
           </div>
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center space-x-1 lg:space-x-4">
-            {navItems.map((item) => {
-              const hasSub = 'subItems' in item && item.subItems;
-              return (
-                <div key={item.path} className="relative group/nav py-5">
-                  <Link
-                    to={item.path}
-                    className={cn(
-                      "text-[14px] font-bold transition-all px-3 py-2 flex items-center gap-1 rounded-lg",
-                      location.pathname === item.path 
-                        ? "text-brand bg-brand/5" 
-                        : "text-slate-700 hover:text-brand hover:bg-slate-50"
-                    )}
-                  >
-                    {item.name}
-                    {hasSub && <ChevronDown size={13} className="text-slate-400 group-hover/nav:text-brand transition-colors ml-0.5" />}
-                  </Link>
-
-                  {hasSub && (
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-36 bg-white border border-slate-100 rounded-xl shadow-xl opacity-0 invisible group-hover/nav:opacity-100 group-hover/nav:visible transition-all duration-200 py-1.5 z-50 overflow-hidden outline outline-1 outline-slate-50 before:absolute before:inset-x-0 before:h-4 before:-top-4 before:content-['']">
-                      {item.subItems!.map((sub) => (
-                        <Link
-                          key={sub.query}
-                          to={`${item.path}?tab=${sub.query}`}
-                          className="block px-4 py-2 text-xs font-black text-slate-600 hover:bg-slate-50 hover:text-brand transition-colors text-center"
-                        >
-                          {sub.name}
-                        </Link>
-                      ))}
-                    </div>
+            {navItems.map((item) => (
+              <div key={item.path} className="relative group/nav py-5">
+                <Link
+                  to={item.path}
+                  className={cn(
+                    "text-[14px] font-bold transition-all px-3 py-2 flex items-center gap-1 rounded-lg",
+                    location.pathname === item.path 
+                      ? "text-brand bg-brand/5" 
+                      : "text-slate-700 hover:text-brand hover:bg-slate-50"
                   )}
+                >
+                  {item.name}
+                  <ChevronDown size={14} className="opacity-40 group-hover/nav:opacity-100 transition-opacity" />
+                </Link>
+                
+                {/* Dropdown Menu */}
+                <div className="absolute top-full left-1/2 -translate-x-1/2 w-48 bg-white border border-slate-100 rounded-2xl shadow-2xl opacity-0 invisible group-hover/nav:opacity-100 group-hover/nav:visible transition-all py-3 z-[60] outline outline-1 outline-slate-100 pointer-events-none group-hover/nav:pointer-events-auto mt-[-5px]">
+                  <div className="space-y-0.5">
+                    {item.subItems.map((sub) => (
+                      <Link
+                        key={sub}
+                        to={item.path}
+                        className="block w-full text-left px-5 py-2.5 text-[13px] font-bold text-slate-500 hover:text-brand hover:bg-slate-50 transition-colors"
+                      >
+                        {sub}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
-              );
-            })}
+              </div>
+            ))}
             
             <div className="h-4 w-[1px] bg-slate-200 mx-2"></div>
- 
+            
             <div className="relative group">
               <button
                 className="px-4 py-2 bg-brand text-white rounded-lg text-sm font-bold hover:bg-brand-hover transition-all active:scale-95 shadow-lg shadow-brand/10 flex items-center gap-1.5"
@@ -109,7 +101,7 @@ export default function Navbar() {
                 JOB 문의하기
                 <ChevronDown size={14} />
               </button>
-              <div className="absolute top-full right-0 mt-2 w-44 bg-white border border-slate-100 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all py-2 z-50 overflow-hidden outline outline-1 outline-slate-100 before:absolute before:inset-x-0 before:h-4 before:-top-4 before:content-['']">
+              <div className="absolute top-full right-0 mt-2 w-44 bg-white border border-slate-100 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all py-2 z-50 overflow-hidden outline outline-1 outline-slate-100">
                 <button 
                   onClick={() => openInquiry('individual')}
                   className="w-full text-left px-5 py-3 text-[13px] font-bold text-slate-700 hover:bg-slate-50 hover:text-brand transition-colors flex items-center justify-between"
@@ -132,14 +124,14 @@ export default function Navbar() {
                   onClick={() => openInquiry('education')}
                   className="w-full text-left px-5 py-3 text-[13px] font-bold text-slate-700 hover:bg-slate-50 hover:text-brand transition-colors flex items-center justify-between border-t border-slate-50"
                 >
-                  AI교육 <ArrowRight size={12} className="opacity-0 group-hover:opacity-100" />
+                  AI직무교육 <ArrowRight size={12} className="opacity-0 group-hover:opacity-100" />
                 </button>
               </div>
             </div>
             
             <Link
-              to="/login"
-              className="px-4 py-2 text-slate-700 hover:text-brand font-bold text-sm transition-all flex items-center gap-1.5 border border-slate-100 rounded-xl hover:border-brand/20 hover:bg-brand/5 active:scale-95"
+              to="/mypage"
+              className="text-slate-700 hover:text-brand font-bold text-sm transition-colors flex items-center gap-1.5"
             >
               <User size={16} />
               로그인
@@ -160,52 +152,50 @@ export default function Navbar() {
 
       {/* Mobile Nav */}
       <div className={cn(
-        "md:hidden absolute top-28 left-0 right-0 bg-white border-b border-slate-100 transition-all duration-300 overflow-y-auto",
-        isOpen ? "max-h-[calc(100vh-112px)] opacity-100" : "max-h-0 opacity-0"
+        "md:hidden absolute top-16 left-0 right-0 bg-white border-b border-slate-100 transition-all duration-300 overflow-y-auto",
+        isOpen ? "max-h-[calc(100vh-64px)] opacity-100" : "max-h-0 opacity-0"
       )}>
         <div className="px-4 py-8 space-y-6">
           <div className="space-y-4">
-            {navItems.map((item) => {
-              const hasSub = 'subItems' in item && item.subItems;
-              return (
-                <div key={item.path} className="border-b border-slate-50 pb-2">
-                  <div className="flex items-center justify-between">
+            {navItems.map((item) => (
+              <div key={item.path} className="border-b border-slate-50 pb-2">
+                <div className="flex items-center justify-between">
+                  <Link
+                    to={item.path}
+                    onClick={() => setIsOpen(false)}
+                    className={cn(
+                      "block text-xl font-black py-2",
+                      location.pathname === item.path ? "text-brand" : "text-slate-900"
+                    )}
+                  >
+                    {item.name}
+                  </Link>
+                  <button 
+                    onClick={() => toggleExpand(item.name)}
+                    className="p-2 text-slate-400"
+                  >
+                    <ChevronDown size={20} className={cn("transition-transform duration-300", expandedItem === item.name && "rotate-180")} />
+                  </button>
+                </div>
+                
+                {/* Mobile Submenu Items */}
+                <div className={cn(
+                  "overflow-hidden transition-all duration-300 grid grid-cols-2 gap-2",
+                  expandedItem === item.name ? "max-h-96 mt-2 pb-4 opacity-100" : "max-h-0 opacity-0"
+                )}>
+                  {item.subItems.map((sub) => (
                     <Link
+                      key={sub}
                       to={item.path}
                       onClick={() => setIsOpen(false)}
-                      className={cn(
-                        "block text-xl font-black py-2",
-                        location.pathname === item.path ? "text-brand" : "text-slate-900"
-                      )}
+                      className="px-4 py-2.5 text-[13px] font-bold text-slate-500 bg-slate-50 rounded-xl hover:text-brand hover:bg-brand/5"
                     >
-                      {item.name}
+                      {sub}
                     </Link>
-                    {hasSub && (
-                      <button 
-                        onClick={() => toggleExpand(item.name)}
-                        className="p-2 text-slate-500 hover:text-brand"
-                      >
-                        <ChevronDown size={20} className={cn("transition-transform duration-200", expandedItem === item.name && "rotate-180")} />
-                      </button>
-                    )}
-                  </div>
-                  {hasSub && (expandedItem === item.name || location.pathname === item.path) && (
-                    <div className="mt-2 pl-4 space-y-2 border-l-2 border-brand/20 mb-2 bg-slate-50/50 p-2 rounded-xl">
-                      {item.subItems!.map((sub) => (
-                        <Link
-                          key={sub.query}
-                          to={`${item.path}?tab=${sub.query}`}
-                          onClick={() => setIsOpen(false)}
-                          className="block py-2 text-sm font-black text-slate-600 hover:text-brand"
-                        >
-                          • {sub.name}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
+                  ))}
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
 
           <div className="pt-4 space-y-4">
@@ -241,12 +231,12 @@ export default function Navbar() {
           </div>
 
           <Link
-            to="/login"
+            to="/mypage"
             onClick={() => setIsOpen(false)}
-            className="flex items-center gap-2 w-full justify-center px-4 py-5 bg-slate-900 text-white rounded-3xl text-lg font-black shadow-2xl shadow-slate-300 active:scale-[0.98] transition-all"
+            className="flex items-center gap-2 w-full justify-center px-4 py-5 bg-slate-900 text-white rounded-3xl text-lg font-black shadow-2xl shadow-slate-300"
           >
             <User size={20} />
-            로그인하기
+            로그인 / 마이페이지
           </Link>
         </div>
       </div>

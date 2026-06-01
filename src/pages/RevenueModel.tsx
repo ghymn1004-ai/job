@@ -151,7 +151,7 @@ export default function RevenueModel() {
             Pricing Policy
           </motion.div>
           <h1 className="text-4xl md:text-5xl font-black mb-6 text-slate-900 tracking-tighter leading-tight">
-            <span className="text-brand">이음AI JOB</span> 서비스 이용료
+            <span className="text-brand">이음JOB</span> 서비스 이용료
             <span className="block text-sm font-bold text-slate-400 mt-2 not-italic">Powered by 이음AI Lab</span>
           </h1>
           <p className="text-slate-500 max-w-2xl mx-auto font-bold leading-relaxed">
@@ -298,7 +298,7 @@ export default function RevenueModel() {
         <section className="bg-[#000a12] rounded-[56px] p-16 text-center text-white shadow-2xl relative overflow-hidden group">
           <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand/20 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
           <h2 className="text-3xl md:text-5xl font-black mb-8 tracking-tighter leading-tight relative z-10">
-            <span className="text-brand">이음AI JOB</span> AI 에코시스템에 합류하세요
+            <span className="text-brand">이음JOB</span> AI 에코시스템에 합류하세요
           </h2>
           <p className="text-slate-400 mb-12 max-w-xl mx-auto font-bold leading-relaxed relative z-10">
             신뢰할 수 있는 매칭 알고리즘과 투명한 수익 체계로 <br/>

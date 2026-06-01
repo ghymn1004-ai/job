@@ -16,15 +16,10 @@ import MatchingData from './pages/MatchingData';
 import SuccessStories from './pages/SuccessStories';
 import Community from './pages/Community';
 import MyPage from './pages/MyPage';
-import Login from './pages/Login';
 import RevenueModel from './pages/RevenueModel';
 import StoryCommunity from './pages/StoryCommunity';
-import AiPolicy from './pages/AiPolicy';
-import Admin from './pages/Admin';
 
 import { InquiryProvider } from './components/ui/InquiryContext';
-import { ToastProvider } from './components/ui/Toast';
-import SecurityGuard from './components/SecurityGuard';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -36,11 +31,9 @@ function ScrollToTop() {
 
 export default function App() {
   return (
-    <ToastProvider>
-      <InquiryProvider>
+    <InquiryProvider>
       <Router>
         <ScrollToTop />
-        <SecurityGuard />
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
@@ -49,19 +42,15 @@ export default function App() {
             <Route path="talents" element={<Talents />} />
             <Route path="about" element={<About />} />
             <Route path="education" element={<AiEducation />} />
-            <Route path="ai-policy" element={<AiPolicy />} />
             <Route path="revenue" element={<RevenueModel />} />
             <Route path="stories-community" element={<StoryCommunity />} />
             <Route path="data" element={<MatchingData />} />
             <Route path="stories" element={<SuccessStories />} />
             <Route path="community" element={<Community />} />
-            <Route path="login" element={<Login />} />
             <Route path="mypage" element={<MyPage />} />
           </Route>
-          <Route path="admin" element={<Admin />} />
         </Routes>
       </Router>
     </InquiryProvider>
-  </ToastProvider>
   );
 }

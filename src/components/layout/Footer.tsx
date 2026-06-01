@@ -1,6 +1,4 @@
-import { Mail, Phone, MapPin, User, ShieldCheck } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import BrandLogo from '../BrandLogo';
+import { Mail, Phone, MapPin, User } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -9,7 +7,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center gap-3 mb-6">
-              <BrandLogo className="h-8 md:h-10 w-auto" />
+              <img src="https://ghymn1004-ai.github.io/seniorjob/images/logo.png" alt="이음JOB Logo" className="h-14 w-auto object-contain" />
             </div>
             <p className="text-slate-500 leading-relaxed font-medium">
               시니어 전문가를 위한 <br />
@@ -20,7 +18,6 @@ export default function Footer() {
           <div className="col-span-1">
             <h4 className="text-[#343a40] font-bold mb-4 text-[13px]">고객지원</h4>
             <ul className="space-y-2 text-slate-500 font-medium">
-              <li><Link to="/ai-policy" className="hover:text-brand transition-colors flex items-center gap-1.5"><ShieldCheck size={14} className="text-brand" /> 매칭 운영정책</Link></li>
               <li><a href="#" className="hover:text-brand transition-colors">공지사항</a></li>
               <li><a href="#" className="hover:text-brand transition-colors">자주 묻는 질문</a></li>
               <li><a href="#" className="hover:text-brand transition-colors">서비스 이용 가이드</a></li>
@@ -44,7 +41,7 @@ export default function Footer() {
                   <User size={14} />
                 </div>
                 <div className="flex flex-col">
-                   <span className="text-[#495057] font-bold">이음AI 지수기</span>
+                   <span className="text-[#495057] font-bold">김지숙</span>
                 </div>
               </div>
               <div className="flex items-center gap-3 group">
@@ -52,7 +49,7 @@ export default function Footer() {
                   <Mail size={14} />
                 </div>
                 <div className="flex flex-col">
-                   <span className="text-[#495057] font-bold">iiumai4u@gmail.com</span>
+                   <span className="text-[#495057] font-bold">ghymn1004@gmail.com</span>
                 </div>
               </div>
               <div className="flex items-center gap-3 group">
@@ -60,7 +57,7 @@ export default function Footer() {
                   <Phone size={14} />
                 </div>
                 <div className="flex flex-col">
-                   <span className="text-[#495057] font-bold">070-7624-2675</span>
+                   <span className="text-[#495057] font-bold">010-6245-2675</span>
                 </div>
               </div>
             </div>
@@ -68,11 +65,7 @@ export default function Footer() {
         </div>
 
         <div className="pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-400 font-medium">
-          <div className="flex items-center gap-2 flex-wrap">
-            <span>© 2026 이음(iium) All rights reserved.</span>
-            <span className="text-slate-300">|</span>
-            <Link to="/admin" className="hover:text-brand font-black text-slate-400 font-sans tracking-tight text-[11px] hover:underline">관리자 모드</Link>
-          </div>
+          <div>© 2026 이음AI Lab All rights reserved.</div>
           <div className="flex gap-6">
             <a href="#" className="hover:text-[#495057]">Blog</a>
             <a href="#" className="hover:text-[#495057]">Instagram</a>
