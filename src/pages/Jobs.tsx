@@ -1,9 +1,17 @@
 import { motion } from 'motion/react';
 import { Search, Filter, MapPin, Clock, Star, Brain, ArrowRight, Sparkles, Briefcase, CheckCircle } from 'lucide-react';
 import { cn } from '../lib/utils';
+import { useInquiry } from '../components/ui/InquiryContext';
+import { useToast } from '../components/ui/Toast';
 
 export default function Jobs() {
-  const categories = ['전체', '추천 일자리', '지역별 채용', '직무별 채용', '시니어 우대 채용', 'AI추천 채용', '재택/유연근무', '단기 프로젝트', '정규직 채용', '합격 후기'];
+  const { openInquiry } = useInquiry();
+  const { showToast } = useToast();
+  const categories = ['전체', '정규직 채용', '합격 후기'];
+
+  const handleSaveInterest = (jobTitle: string) => {
+    showToast(`"${jobTitle}" 공고가 관심 목록에 저장되었습니다.`);
+  };
 
   const jobList = [
     {
@@ -54,8 +62,8 @@ export default function Jobs() {
       <div className="bg-[#000a12] rounded-[40px] p-12 text-white mb-16 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-brand/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
         <div className="relative z-10 max-w-2xl">
-          <h1 className="text-4xl font-black mb-6 tracking-tighter">나에게 맞는 <span className="text-brand">일자리찾기</span></h1>
-          <p className="text-slate-400 mb-8 font-medium leading-relaxed">이음JOB의 AI가 당신의 축적된 경력을 정밀 분석하여 <br/>교육기관, 에듀테크, 공공기관 등 최적의 커리어를 AI매칭합니다.</p>
+          <h1 className="text-4xl font-black mb-6 tracking-tighter">시니어 전용 <span className="text-brand">일자리찾기</span></h1>
+          <p className="text-slate-400 mb-8 font-medium leading-relaxed">이음AI JOB의 AI가 시니어분들의 축적된 경력을 정밀 분석하여 <br/>교육기관, 에듀테크, 공공기관 등 지혜가 필요한 최적의 커리어를 매칭합니다.</p>
           
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-grow relative">
@@ -67,8 +75,13 @@ export default function Jobs() {
               />
             </div>
             <button className="px-8 py-5 bg-brand text-white rounded-[20px] font-black hover:bg-brand-hover transition-all flex items-center justify-center gap-2 active:scale-[0.98] shadow-xl shadow-brand/20">
-              <Filter size={20} />
               검색 필터
+            </button>
+            <button 
+              onClick={() => openInquiry('individual')}
+              className="px-10 py-5 bg-white text-slate-900 rounded-[20px] font-black hover:bg-brand hover:text-white transition-all flex items-center justify-center gap-2 active:scale-[0.98] border-2 border-brand"
+            >
+              📝 신청하기
             </button>
           </div>
         </div>
@@ -163,7 +176,10 @@ export default function Jobs() {
                   <button className="flex-grow py-5 bg-slate-900 text-white rounded-[20px] font-black text-sm hover:bg-brand transition-all active:scale-95 shadow-xl shadow-slate-100">
                     필수 역량 및 공고 상세 확인
                   </button>
-                  <button className="px-8 border border-slate-200 rounded-[20px] hover:border-brand hover:text-brand text-slate-400 transition-all font-black text-sm active:scale-95 bg-white">
+                  <button 
+                    onClick={() => handleSaveInterest(job.title)}
+                    className="px-8 border border-slate-200 rounded-[20px] hover:border-brand hover:text-brand text-slate-400 transition-all font-black text-sm active:scale-95 bg-white"
+                  >
                     관심등록
                   </button>
                 </div>

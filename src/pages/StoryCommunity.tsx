@@ -86,7 +86,7 @@ export default function StoryCommunity() {
                 </motion.div>
                 <h2 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900 tracking-tight">AI가 연결한 <span className="text-blue-600">진짜 변화</span></h2>
                 <p className="text-slate-500 max-w-2xl mx-auto font-medium">
-                  이음JOB을 통해 새로운 시작을 경험한 선배님들의 <br/>
+                  이음AI JOB을 통해 새로운 시작을 경험한 선배님들의 <br/>
                   생생한 후기가 매일 업데이트됩니다.
                 </p>
               </div>

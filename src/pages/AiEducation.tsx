@@ -1,18 +1,23 @@
 import { motion, AnimatePresence } from 'motion/react';
-import { GraduationCap, Brain, Zap, CheckCircle, Play, BookOpen, UserCheck, Sparkles, ChevronDown, CheckCircle2, Star, Award, Shield } from 'lucide-react';
-import React, { useState } from 'react';
+import { GraduationCap, Brain, Zap, CheckCircle, Play, BookOpen, UserCheck, Sparkles, ChevronDown, CheckCircle2, Star, Award, Shield, Heart, MessageSquare, Users, Smile, Clock, ListChecks, ThumbsUp, Activity, Target, ArrowRight, Calendar, Eye, X } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useInquiry } from '../components/ui/InquiryContext';
 import { cn } from '../lib/utils';
+import { getPosts } from '../data/posts';
+import { Post, CATEGORY_LABELS } from '../types';
 
 interface EducationCardProps {
   key?: React.Key;
   tag: string;
   title: string;
   duration: string;
+  method: string;
   students: string;
   details: string[];
 }
 
-function InteractiveEducationCard({ tag, title, duration, students, details }: EducationCardProps) {
+function InteractiveEducationCard({ tag, title, duration, method, students, details }: EducationCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
@@ -38,9 +43,15 @@ function InteractiveEducationCard({ tag, title, duration, students, details }: E
             <ChevronDown size={20} />
           </motion.div>
         </div>
-        <div className="flex justify-between items-center text-sm font-bold text-gray-500 mb-8">
-           <span>교육 기간: {duration}</span>
-           <span className="text-purple-600">{students} 수강 중</span>
+        
+        <div className="space-y-2 mb-8">
+          <div className="flex justify-between items-center text-[11px] font-black text-gray-400 uppercase tracking-widest">
+             <span>교육 기간: {duration}</span>
+             <span className="text-purple-600">{students} 수강 중</span>
+          </div>
+          <div className="px-3 py-1 bg-slate-50 border border-slate-100 rounded-lg text-[10px] font-black text-slate-500 w-fit">
+            방식: {method}
+          </div>
         </div>
 
         <AnimatePresence initial={false}>
@@ -71,262 +82,782 @@ function InteractiveEducationCard({ tag, title, duration, students, details }: E
             e.stopPropagation();
             setIsExpanded(!isExpanded);
           }}
-          className="w-full py-4 bg-gray-950 text-white rounded-2xl font-bold hover:bg-purple-600 transition-colors active:scale-95 transition-all"
+          className={cn(
+            "w-full py-4 rounded-2xl font-black text-sm transition-all active:scale-95",
+            isExpanded ? "bg-slate-100 text-slate-900" : "bg-slate-900 text-white hover:bg-brand shadow-xl shadow-slate-200"
+          )}
         >
-          {isExpanded ? '강의 상세 계획서 보기' : '커리큘럼 확인하기'}
+          {isExpanded ? '상세 정보 닫기' : '커리큘럼 및 상세내용 보기'}
         </button>
       </div>
     </motion.div>
   );
 }
 
-export default function AiEducation() {
-  const steps = [
-    { title: '나를 다시 발견하기', desc: 'AI 분석으로 성향과 경험을 입체적으로 진단', icon: Brain },
-    { title: '하고 싶은 일 매칭', desc: '기업 문화와 소통 방식이 맞는 최적의 곳 연결', icon: Sparkles },
-    { title: '실무 역량 다듬기', desc: '현장에서 다시 빛나도록 필요한 역할 보강 교육', icon: BookOpen },
-    { title: '자신감 있게 투입', desc: '세상이 다시 인정한 전문가로 현장에 복귀', icon: CheckCircle },
-  ];
+const CourseSection = ({ tab, levels }: { tab: string, levels: any[] }) => {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {levels.filter(lvl => lvl.tab === tab).map((lvl, i) => (
+        <InteractiveEducationCard
+          key={lvl.level}
+          tag={lvl.tag}
+          title={lvl.title}
+          duration={lvl.tab === 'literacy' ? '8주' : '4주'}
+          method={lvl.method}
+          students={lvl.level === 'LEVEL 3' ? '1,240명' : (lvl.level === 'LEVEL 4' ? '850명' : '420명')}
+          details={lvl.details}
+        />
+      ))}
+    </div>
+  );
+};
 
-  const courses: EducationCardProps[] = [
-    { 
-      tag: 'Track 01', 
-      title: '매칭 기업 전용 : AI 교육 콘텐츠 개발 트랙', 
-      duration: '4주 집중', 
-      students: '450+',
-      details: [
-        '해당 기업 맞춤형 AI 학습 교재 제작 기술',
-        '기업 표준 AI 기반 평가지표 자동 생성 실습',
-        '채용 예정 기업의 DX 전략 및 툴 적응 트레이닝',
-        '현장 투입 즉시 활용 가능한 실무 대시보드 설계'
-      ]
-    },
-    { 
-      tag: 'Track 02', 
-      title: '매칭 기업 전용 : AI 실무 매니징 과정', 
-      duration: '2주 집중', 
-      students: '620+',
-      details: [
-        '매칭된 조직의 전용 AI 비서 및 업무 자동화 구축',
-        '실제 업무 데이터 기반 고객 관리 자동화 실습',
-        '해당 기업의 표준 협업 툴(Slack, Notion 등) 숙달',
-        '현장 리더십 및 조직 문화 사전 적응 세션'
-      ]
-    },
-    { 
-      tag: 'Track 03', 
-      title: '매칭 기업 전용 : 시니어 AI 리터러시 강사', 
-      duration: '4주 집중', 
-      students: '1,100+',
-      details: [
-        '파견 예정 기관 맞춤형 AI 교수법 및 소통 전략',
-        '실전 출강 환경과 동일한 AI 서비스 시뮬레이션',
-        '기관별 전용 교육 커리큘럼 사전 분석 및 교수안 제작',
-        '현장 실무 역량 최종 검증 및 우수 수료자 즉시 투입'
-      ]
-    },
-  ];
+const steps = [
+  { title: '두려움 해소', desc: 'AI를 도구로 인식하고 거부감을 없애는 첫 단계', icon: Brain },
+  { title: '자신감 회복', desc: '반복 실습을 통해 디지털 도구 사용의 자신감 획득', icon: Sparkles },
+  { title: '실무 역량 강화', desc: '실행 가능한 AI 활용 능력을 직무에 맞게 훈련', icon: Zap },
+  { title: '직무 매칭', desc: '검증된 역량을 기반으로 최적의 일자리 연결', icon: UserCheck },
+];
+
+const curriculumLevels = [
+  {
+    level: 'LEVEL 1',
+    tab: 'literacy',
+    method: 'VOD 전용',
+    title: '직무 AI 리터러시 기초',
+    subtitle: '“AI를 업무 도구로 이해하기”',
+    target: 'AI를 처음 접하는 시니어, 직무 복귀를 준비하는 분',
+    details: [
+      'AI 기초 원리 및 직무 변화 이해',
+      '직무용 ChatGPT 프롬프트 엔지니어링 입문',
+      '업무 효율을 위한 AI 정보 검색 및 분석',
+      '디지털 협업 도구 기초 (슬랙, 노션 등)',
+      '직업 윤리 및 AI 보안 가이드'
+    ],
+    icon: '🌱',
+    color: 'bg-emerald-50 text-emerald-600',
+    tag: '8주과정'
+  },
+  {
+    level: 'LEVEL 2',
+    tab: 'literacy',
+    method: 'VOD 전용',
+    title: '직무 AI 리터러시 심화',
+    subtitle: '“데이터로 소통하고 협업하기”',
+    target: 'AI를 통해 실질적인 업무 효율을 높이고 싶은 분',
+    details: [
+      'AI 기반 비즈니스 문서 작성 (보고서, 기획서)',
+      '데이터 분석 AI 및 시각화 도구 활용',
+      'AI 협업 에티켓 및 세대 간 디지털 소통',
+      'AI 이미지 및 미디어 제작 기초 (기업 홍보/운영)',
+      '직무별 AI 활용 사례 연구 및 실습'
+    ],
+    icon: '🛠️',
+    color: 'bg-blue-50 text-blue-600',
+    tag: '8주과정'
+  },
+  {
+    level: 'LEVEL 3',
+    tab: 'utilization',
+    method: '온라인/줌(Zoom) 실무',
+    title: '실전 AI 직무 활용',
+    subtitle: '“AI와 함께 성과를 창출하는 인재”',
+    target: '현업 복귀를 위해 직무 전문성을 AI로 극대화하려는 분',
+    details: [
+      '직무 자동화: AI 활용 반복 업무 최소화',
+      '상담/서비스: AI 챗봇 및 고객 데이터 분석 실무',
+      '운영/관리: AI 기반 일정 및 프로젝트 매니지먼트',
+      '콘텐츠 특화: 직무별 마케팅 및 브랜드 운영 실습',
+      'AI 비서 연동 및 업무 대시보드 구축'
+    ],
+    icon: '💼',
+    color: 'bg-indigo-50 text-indigo-600',
+    tag: '4주과정'
+  },
+  {
+    level: 'LEVEL 4',
+    tab: 'utilization',
+    method: '온라인/줌(Zoom) 실무',
+    title: 'AI 협력 프로젝트 실무',
+    subtitle: '“조직 내 AI 협업 가속화”',
+    target: '조직 내 협업과 디지털 소통 능력을 실전 프로젝트로 검증하려는 분',
+    details: [
+      'AI 기반 실시간 협업 시스템 구축 및 운영',
+      '디지털 워크스테이션 설계 (노션, 먼데이닷컴 연동)',
+      'AI 윤리 및 사내 보안 가이드라인 준수 실습',
+      '부서 간 데이터 공유 및 AI 자동 보고 체계',
+      '팀 단위 AI 문제 해결 시뮬레이션 프로젝트'
+    ],
+    icon: '🤝',
+    color: 'bg-rose-50 text-rose-600',
+    tag: '4주과정'
+  },
+  {
+    level: 'LEVEL 5',
+    tab: 'utilization',
+    method: '병행',
+    title: 'AI 전문 직무 마스터',
+    subtitle: '“기업이 즉시 투입 가능한 전문가”',
+    target: 'AI 기반 전문 직무로의 완벽한 전환 및 현업 투입을 준비하는 분',
+    details: [
+      'AI 행정지원 사내 전문가 (PMO 보조)',
+      'AI 고객 경험(CX) 및 소통 관리 시스템 운영',
+      'AI 콘텐츠 전략 및 브랜드 커뮤니티 관리',
+      'AI 교육보조(디지털 튜터) 자격 과정',
+      '기업 매칭용 실무 포트폴리오 최종 완성'
+    ],
+    icon: '🚀',
+    color: 'bg-amber-50 text-amber-600',
+    tag: '4주과정'
+  }
+];
+
+const seniorInternSections = [
+  {
+    title: '업무 태도 교육',
+    subtitle: '“신뢰받는 태도 만들기”',
+    icon: Clock,
+    details: [
+      '출근 태도: 시간 약속, 일정 관리, 결근/지각 대응',
+      '업무 책임감: 성실한 처리, 보고 누락 방지, 확인 습관',
+      '업무 우선순위: 중요한 일 구분, 팀 일정 존중',
+      '조직 매너: 인사 습관, 기본 예절, 정중한 표현'
+    ]
+  },
+  {
+    title: '조직 적응 교육',
+    subtitle: '“과거 방식보다 현재 조직 이해하기”',
+    icon: Users,
+    details: [
+      '조직문화 이해: 수평적 문화와 세대 차이 이해',
+      '경험 공유 매너: “내가 예전엔…” 줄이기, 현재 방식 존중',
+      '지시와 협업: 질문하는 법, 피드백 수용 방식',
+      '조직 내 거리감: 사생활 존중, 친절과 거리의 균형'
+    ]
+  },
+  {
+    title: '세대 간 소통 교육',
+    subtitle: '“젊은 세대와 자연스럽게 협업하기”',
+    icon: MessageSquare,
+    details: [
+      '경청 훈련: 판단보다 이해 중심의 듣기 훈련',
+      '표현 방식: 부드러운 말투, 감정적 표현 조절',
+      '디지털 소통: 메신저/단체방 예절, 짧고 명확한 전달',
+      '갈등 대응: 감정 조절 및 비난보다 해결 중심 소통'
+    ]
+  },
+  {
+    title: '협업 태도 교육',
+    subtitle: '“혼자 잘하는 것보다 함께 잘하기”',
+    icon: Heart,
+    details: [
+      '팀워크 이해: 역할 존중 및 도움 요청/주기',
+      '보고·공유: 중간 공유 및 문제 발생 시 즉각 보고',
+      '피드백 수용: 방어적 반응 줄이기, 수정 요청 수용',
+      '상생 협업: 함께 성과를 내는 팀 플레이어 자세'
+    ]
+  },
+  {
+    title: '서비스 마인드 교육',
+    subtitle: '“존중받고 싶다면 먼저 존중하기”',
+    icon: Smile,
+    details: [
+      '고객 응대: 친절한 말투와 표정 관리 기본 예절',
+      '공감 능력: 상대 입장에서 생각하기 및 불편함 읽기',
+      '문제 상황 대응: 차분한 해결, 책임 회피하지 않기',
+      '프로페셔널리즘: 서비스 전문가로서의 품위 유지'
+    ]
+  },
+  {
+    title: '자기관리 교육',
+    subtitle: '“오래 일할 수 있는 사람 되기”',
+    icon: Activity,
+    details: [
+      '감정 관리: 스트레스 조절 및 부정적 반응 줄이기',
+      '건강 관리: 체력 유지 및 업무 리듬 만들기',
+      '워라밸: 지속 가능한 근무를 위한 균형 잡기',
+      '자아 존중: 자신의 가치를 믿고 자부심 갖기'
+    ]
+  },
+  {
+    title: '시니어 강점 재발견',
+    subtitle: '“나이의 약점보다 경험의 가치 보기”',
+    icon: Target,
+    details: [
+      '시니어만의 무기: 책임감, 끈기, 풍부한 공감 능력',
+      '위기 대응: 인생 경험을 통한 유연한 상황 대처',
+      '안정감: 조직에 신뢰를 주는 묵직한 태도',
+      '인간관계 노하우: 갈등 중재 및 관계 유지 경험'
+    ]
+  }
+];
+
+export default function AiEducation() {
+  const { openInquiry } = useInquiry();
+  const [activeTab, setActiveTab ] = useState<'literacy' | 'utilization' | 'intern'>('literacy');
+  const location = useLocation();
+  const [eduPosts, setEduPosts] = useState<Post[]>([]);
+  const [selectedPost, setSelectedPost] = useState<Post | null>(null);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const tabParam = params.get('tab');
+    const hash = location.hash.replace('#', '');
+    
+    const targetTab = tabParam || hash;
+    if (targetTab === 'literacy') {
+      setActiveTab('literacy');
+    } else if (targetTab === 'utilization') {
+      setActiveTab('utilization');
+    } else if (targetTab === 'senior' || targetTab === 'intern') {
+      setActiveTab('intern');
+    }
+  }, [location.search, location.hash]);
+
+  useEffect(() => {
+    const allPosts = getPosts().filter(p => p.isPublished);
+    let categoryKey: 'literacy' | 'utilization' | 'senior' = 'literacy';
+    if (activeTab === 'utilization') categoryKey = 'utilization';
+    if (activeTab === 'intern') categoryKey = 'senior';
+    
+    setEduPosts(allPosts.filter(p => p.category === categoryKey));
+  }, [activeTab]);
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-20 sm:px-6 lg:px-8">
       {/* Hero */}
-      <section className="bg-[#000a12] rounded-[60px] p-12 md:p-20 text-white mb-24 relative overflow-hidden shadow-2xl shadow-brand/20">
-        <div className="absolute top-0 right-0 w-2/3 h-full bg-linear-to-l from-white/10 to-transparent" />
+      <section className="bg-slate-900 rounded-[60px] p-12 md:p-20 text-white mb-12 relative overflow-hidden shadow-2xl">
+        <div className="absolute top-0 right-0 w-2/3 h-full bg-linear-to-l from-white/5 to-transparent" />
         <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-brand/10 blur-3xl rounded-full" />
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 items-center gap-12">
-          <div>
-            <span className="inline-block px-4 py-1 bg-brand/20 border border-brand/30 rounded-full text-xs font-black mb-6 tracking-widest uppercase text-brand">E-UM AI Lab AI직무교육</span>
-            <h1 className="text-4xl md:text-5xl font-black mb-8 leading-[1.05] tracking-tighter">"기술보다 중요한 건 <br /> <span className="text-brand">당신의 역할 회복입니다.</span>"</h1>
-            <p className="text-slate-400 text-lg mb-12 max-w-md font-bold leading-relaxed">
-              이음JOB의 교육은 단순히 코딩이나 스펙을 가르치지 않습니다. <br className="hidden md:block" />
-              현장에서 다시 자신감을 갖고 전문가로 인정받을 수 있도록 <br className="hidden md:block" />
-              당신의 가치를 날카롭게 다듬는 과정입니다.
-            </p>
-            <div className="flex gap-4">
-              <button className="px-10 py-5 bg-brand text-white rounded-[20px] font-black text-lg hover:bg-brand-hover hover:scale-105 transition-all shadow-xl shadow-brand/20">
-                AI직무교육 신청하기
-              </button>
-              <button className="w-16 h-16 flex items-center justify-center rounded-[20px] bg-white/10 border border-white/20 hover:bg-white/20 transition-all group">
-                <Play className="fill-white group-hover:scale-110 transition-transform" size={24} />
-              </button>
-            </div>
-          </div>
-          <div className="hidden lg:grid grid-cols-2 gap-4">
-            {[1, 2, 3, 4].map((i) => (
-              <motion.div 
-                key={i} 
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: i * 0.1 }}
-                className="bg-white/5 backdrop-blur-md p-8 rounded-[32px] border border-white/10"
-              >
-                <div className="w-12 h-12 bg-white/10 rounded-2xl mb-6 flex items-center justify-center">
-                  <Star className="text-brand" size={20} />
-                </div>
-                <div className="h-5 w-3/4 bg-white/10 rounded-lg mb-3" />
-                <div className="h-3 w-1/2 bg-white/5 rounded-lg" />
-              </motion.div>
-            ))}
+        <div className="relative z-10 text-center max-w-4xl mx-auto">
+          <span className="inline-block px-4 py-1 bg-brand/20 border border-brand/30 rounded-full text-xs font-black mb-6 tracking-[0.3em] uppercase text-brand">iium AI Career Education</span>
+          <h1 className="text-4xl md:text-6xl font-black mb-8 leading-tight tracking-tighter">
+            {activeTab === 'intern' 
+              ? <>다시 일하는 사람의 <br /><span className="text-brand">태도를 준비하는 과정</span></>
+              : <>사람의 가능성을 다시 잇는 <br /><span className="text-brand">이음(iium) AI 교육</span></>
+            }
+          </h1>
+          <p className="text-slate-400 text-lg md:text-xl mb-12 font-bold leading-relaxed">
+            {activeTab === 'intern'
+              ? "이음(iium)의 시니어 인턴 교육은 기술교육이 아닙니다. 기업이 진짜 원하는 조직 적응력과 소통 능력을 다시 정비하는 과정입니다."
+              : "이음(iium)의 AI 교육은 단순한 지식 전달이 아닙니다. 사람의 가능성을 발견하고, 경험을 미래 기술과 연결하여 의미 있는 성장을 만듭니다."
+            }
+          </p>
+          <div className="flex justify-center gap-4">
+             <button 
+               onClick={() => openInquiry('education')}
+               className="px-10 py-5 bg-brand text-white rounded-[24px] font-black text-lg hover:bg-brand-hover hover:scale-105 transition-all shadow-xl shadow-brand/20"
+             >
+                {activeTab === 'intern' ? '시니어 인턴 교육 신청' : 'AI 교육 과정 신청'}
+             </button>
           </div>
         </div>
       </section>
 
-      {/* Benefits */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
-        {[
-          { title: '매칭-교육 연계 시스템', desc: 'AI 매칭 성공 후 필요한 역량만 핀포인트로 교육', icon: Brain, bg: 'bg-indigo-50', color: 'text-indigo-600' },
-          { title: '기업 실무 검증 완료', desc: '해당 기업 환경에서 실습 과제를 수행하여 검증 완료', icon: Zap, bg: 'bg-amber-50', color: 'text-amber-600' },
-          { title: '즉시 투입 파견 모델', desc: '교육 수료와 동시에 검증된 인재를 현장에 파견', icon: UserCheck, bg: 'bg-green-50', color: 'text-brand' },
-        ].map((item, i) => (
-          <div key={i} className="p-12 rounded-[40px] bg-white border border-slate-100 hover:shadow-2xl hover:border-brand/30 transition-all group">
-            <div className={cn("w-16 h-16 rounded-[20px] flex items-center justify-center mb-10 group-hover:scale-110 transition-transform", item.bg, item.color)}>
-              <item.icon size={32} />
-            </div>
-            <h3 className="text-2xl font-black mb-6 text-slate-900 tracking-tight">{item.title}</h3>
-            <p className="text-slate-500 font-bold leading-relaxed">{item.desc}</p>
-          </div>
-        ))}
+      {/* Tabs */}
+      <div className="flex flex-wrap justify-center gap-4 mb-20 bg-slate-100 p-2 rounded-[32px] max-w-2xl mx-auto font-black">
+        <button 
+          onClick={() => setActiveTab('literacy')}
+          className={cn(
+            "flex-grow px-8 py-4 rounded-3xl transition-all",
+            activeTab === 'literacy' ? "bg-white text-brand shadow-md" : "text-slate-500 hover:text-slate-800"
+          )}
+        >
+          AI 리터러시 (8주)
+        </button>
+        <button 
+          onClick={() => setActiveTab('utilization')}
+          className={cn(
+            "flex-grow px-8 py-4 rounded-3xl transition-all",
+            activeTab === 'utilization' ? "bg-white text-brand shadow-md" : "text-slate-500 hover:text-slate-800"
+          )}
+        >
+          AI 직무활용 (4주)
+        </button>
+        <button 
+          onClick={() => setActiveTab('intern')}
+          className={cn(
+            "flex-grow px-8 py-4 rounded-3xl transition-all",
+            activeTab === 'intern' ? "bg-white text-brand shadow-md" : "text-slate-500 hover:text-slate-800"
+          )}
+        >
+          시니어인턴교육 (4주)
+        </button>
       </div>
 
-      {/* Modules */}
-      <section className="mb-24">
-         <div className="text-center mb-16">
-            <span className="text-brand font-black text-sm uppercase tracking-[0.3em] mb-4 block">Detailed Modules</span>
-            <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tighter">단계별 교육 커리큘럼</h2>
-         </div>
-         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            {[
-              {
-                title: '시니어 인턴 과정 (현장 적응)',
-                modules: ['조직문화의 이해 및 보고 방법', '협업 툴 활용 및 업무 흐름 파악', 'AI 리터러시 및 실무 체험'],
-                icon: '🏢'
-              },
-              {
-                title: '소통 및 태도 과정 (신뢰 형성)',
-                modules: ['젊은 세대와의 공감 대화법', '감정 조절 및 경청 훈련', '책임감 및 일정 관리 노하우'],
-                icon: '💬'
-              },
-              {
-                title: 'AI 활용 실무 과정 (AI 업무보조)',
-                modules: ['ChatGPT 활용 문서 및 자료 정리', '고객 응대 및 일정 관리 자동화', 'AI 기반 아이디어 도출 및 요약'],
-                icon: '🤖'
-              },
-              {
-                title: '역할 기반 직무교육',
-                modules: ['상담 및 행정 지원 전문가', '커뮤니티 운영 및 고객 관리', 'AI 리터러시 교육 보조 및 콘텐츠 검수'],
-                icon: '💼'
-              }
-            ].map((phase, i) => (
-              <div key={i} className="bg-white p-10 rounded-[40px] border border-slate-100 shadow-sm hover:shadow-xl transition-all group">
-                 <div className="flex items-center gap-4 mb-8">
-                    <span className="text-4xl">{phase.icon}</span>
-                    <h3 className="text-xl font-black text-slate-900 tracking-tight">{phase.title}</h3>
-                 </div>
-                 <ul className="space-y-4">
-                    {phase.modules.map((m, j) => (
-                      <li key={j} className="flex items-center gap-3 text-slate-500 font-bold text-sm">
-                         <div className="w-1.5 h-1.5 bg-brand rounded-full" />
-                         {m}
-                      </li>
+      <AnimatePresence mode="wait">
+        {activeTab !== 'intern' ? (
+          <motion.div 
+            key="ai-education"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+          >
+            {/* iium Education Philosophy */}
+            <section className="mb-32">
+               <div className="text-center mb-16">
+                  <h2 className="text-2xl md:text-4xl font-black text-slate-900 mb-4 tracking-tight">
+                    {activeTab === 'literacy' ? 'AI 리터러시 (8주) 핵심 철학' : 'AI 직무활용 (4주) 실전 철학'}
+                  </h2>
+                  <p className="text-brand font-black text-xl italic mb-4">“가능성을 발견하고, 경험을 연결하며, 사람을 이어 의미 있는 성장을 만든다”</p>
+                  <p className="text-slate-400 text-sm font-bold">Inspire · Integrate · Unite · Meaning</p>
+               </div>
+               <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+                  {[
+                    { title: '실무 기초', icon: Star },
+                    { title: '실무 연결', icon: Zap },
+                    { title: '자신감 회복', icon: Heart },
+                    { title: '소통 능력', icon: MessageSquare },
+                    { title: '기능 교육 탈피', icon: Shield },
+                  ].map((item, i) => (
+                    <div key={i} className="bg-slate-50 p-8 rounded-[32px] text-center border border-slate-100 hover:bg-white hover:shadow-xl transition-all group">
+                      <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center mx-auto mb-4 text-brand shadow-sm group-hover:scale-110 transition-transform">
+                        <item.icon size={24} />
+                      </div>
+                      <p className="font-black text-slate-800 tracking-tight">{item.title}</p>
+                    </div>
+                  ))}
+               </div>
+            </section>
+
+            {/* Curriculum Levels Filtering */}
+            <section className="mb-32">
+                <div className="flex justify-between items-end mb-16">
+                  <div>
+                    <span className="text-brand font-black text-sm uppercase tracking-[0.3em] mb-4 block">Education Levels</span>
+                    <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tighter">이음(iium) AI 교육체계</h2>
+                  </div>
+                  <p className="text-slate-400 font-bold hidden md:block">
+                    {activeTab === 'literacy' ? '직무 기초부터 데이터 분석까지 실전 리터러시' : '현업 복기 및 직무 성과 창출을 위한 핵심 활용 기술'}
+                  </p>
+               </div>
+               
+               <CourseSection tab={activeTab} levels={curriculumLevels} />
+            </section>
+
+            {activeTab === 'utilization' && (
+              <motion.section 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                className="mb-32 p-12 bg-indigo-900 rounded-[60px] text-white relative overflow-hidden"
+              >
+                <div className="absolute top-0 right-0 w-64 h-64 bg-brand/20 blur-3xl rounded-full translate-x-1/3 -translate-y-1/3" />
+                <div className="relative z-10">
+                  <div className="text-center mb-16">
+                    <h3 className="text-3xl font-black mb-4">활용교육 수료 후: AI 매칭 연결</h3>
+                    <p className="text-indigo-200 font-bold">교육으로 끝내지 않습니다. 검증된 실무 역량을 바탕으로 최종 연결까지 책임집니다.</p>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {[
+                      { step: 'STEP 3', title: 'AI Match 추천', desc: '직무 적합도 90% 이상의 기업을 AI 스코어링을 통해 최우선 매칭합니다.', icon: Award },
+                      { step: 'STEP 4', title: '인터뷰 및 검증', desc: '온라인 및 기업 인터뷰를 통해 실무 역량과 조직 적합성을 현장에서 검증합니다.', icon: Users },
+                      { step: 'STEP 5', title: '최종 연결 및 안착', desc: '채용 확정 후 시니어 인턴 과정을 통해 초기 조직 적응을 집중 지원합니다.', icon: Star }
+                    ].map((s, i) => (
+                      <div key={i} className="p-8 bg-white/5 border border-white/10 rounded-3xl backdrop-blur-sm">
+                        <span className="text-xs font-black text-brand mb-2 block">{s.step}</span>
+                        <h4 className="text-xl font-black mb-4 flex items-center gap-2">
+                           <s.icon size={20} className="text-brand" />
+                           {s.title}
+                        </h4>
+                        <p className="text-sm font-bold text-indigo-100/70 leading-relaxed">{s.desc}</p>
+                      </div>
                     ))}
-                 </ul>
+                  </div>
+                </div>
+              </motion.section>
+            )}
+          </motion.div>
+        ) : (
+          <motion.div 
+            key="intern-education"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+          >
+            {/* Intern Philosophy */}
+            <section className="mb-32 text-center">
+               <h2 className="text-2xl md:text-4xl font-black text-slate-900 mb-6 tracking-tight">시니어 인턴 교육 핵심 목표</h2>
+               <p className="text-brand font-black text-xl italic mb-10">“경험 많은 사람이 아니라, 함께 일하고 싶은 사람이 되는 것”</p>
+               <div className="flex flex-wrap justify-center gap-6">
+                  {['함께 일할 수 있는 태도', '소통 능력', '조직 적응력', '책임감', '배려와 협업'].map((item, i) => (
+                    <span key={i} className="px-6 py-3 bg-white border border-brand/20 text-brand font-black rounded-2xl shadow-sm">
+                      {item}
+                    </span>
+                  ))}
+               </div>
+            </section>
+
+            {/* Intern Modules */}
+            <section className="mb-32 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+               {seniorInternSections.map((sec, i) => (
+                 <div key={i} className="bg-white p-10 rounded-[48px] border border-slate-100 shadow-sm hover:shadow-xl transition-all group">
+                    <div className="w-14 h-14 bg-slate-50 text-brand rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+                       <sec.icon size={28} />
+                    </div>
+                    <h3 className="text-xl font-black text-slate-900 mb-2 tracking-tight">{sec.title}</h3>
+                    <p className="text-brand font-bold text-xs mb-6 italic">{sec.subtitle}</p>
+                    <ul className="space-y-3">
+                       {sec.details.map((detail, j) => (
+                          <li key={j} className="flex items-start gap-3">
+                             <div className="mt-1.5 w-1.5 h-1.5 bg-brand/30 rounded-full flex-shrink-0" />
+                             <span className="text-slate-500 font-bold text-sm leading-relaxed">{detail}</span>
+                          </li>
+                       ))}
+                    </ul>
+                 </div>
+               ))}
+               <div className="bg-slate-900 p-10 rounded-[48px] text-white flex flex-col justify-center relative overflow-hidden">
+                  <div className="absolute top-0 right-0 p-8 opacity-20">
+                     <Target size={80} />
+                  </div>
+                  <h3 className="text-2xl font-black mb-6 relative z-10">기업이 원하는 <br />시니어 인재상</h3>
+                  <ul className="space-y-3 relative z-10">
+                     {['함께 일하기 편한 사람', '책임감 있는 사람', '감정 기복이 적은 사람', '배우려는 태도의 사람', '조직 분위기를 돕는 사람'].map((p, i) => (
+                        <li key={i} className="flex items-center gap-2 text-sm font-bold text-slate-300">
+                           <CheckCircle2 size={14} className="text-brand" /> {p}
+                        </li>
+                     ))}
+                  </ul>
+               </div>
+            </section>
+
+            {/* Before / After */}
+            <section className="mb-32 py-16 bg-slate-50 rounded-[64px] border border-slate-100 px-6">
+               <div className="max-w-4xl mx-auto">
+                  <h2 className="text-center text-3xl font-black text-slate-900 mb-12">교육 수료 후의 변화</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                     <div className="space-y-6">
+                        <p className="text-xs font-black text-slate-400 uppercase tracking-widest text-center">Before</p>
+                        <div className="bg-white p-6 rounded-3xl shadow-sm border-l-4 border-slate-300">
+                           <p className="font-bold text-slate-400 italic">“내 방식이 항상 맞다”</p>
+                        </div>
+                        <div className="bg-white p-6 rounded-3xl shadow-sm border-l-4 border-slate-300">
+                           <p className="font-bold text-slate-400 italic">“요즘 애들은 이해할 수 없다”</p>
+                        </div>
+                        <div className="bg-white p-6 rounded-3xl shadow-sm border-l-4 border-slate-300">
+                           <p className="font-bold text-slate-400 italic">“나는 원래 이렇게 일했다”</p>
+                        </div>
+                     </div>
+                     <div className="hidden md:flex justify-center">
+                        <ArrowRight size={40} className="text-brand animate-pulse" />
+                     </div>
+                     <div className="space-y-6">
+                        <p className="text-xs font-black text-brand uppercase tracking-widest text-center">After</p>
+                        <div className="bg-brand/5 p-6 rounded-3xl shadow-sm border-l-4 border-brand">
+                           <p className="font-bold text-slate-900 italic">“함께 일하는 방법을 완벽히 이해한다”</p>
+                        </div>
+                        <div className="bg-brand/5 p-6 rounded-3xl shadow-sm border-l-4 border-brand">
+                           <p className="font-bold text-slate-900 italic">“조직문화에 맞춰 유연하게 협업한다”</p>
+                        </div>
+                        <div className="bg-brand/5 p-6 rounded-3xl shadow-sm border-l-4 border-brand">
+                           <p className="font-bold text-slate-900 italic">“배우며 성장하는 성숙한 전문가가 된다”</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </section>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Dynamic Educational Columns */}
+      {eduPosts.length > 0 && (
+        <section className="mb-32 mt-12 bg-white rounded-[48px] border border-slate-100 p-12 shadow-xs">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4 border-b border-slate-50 pb-6">
+            <div>
+              <span className="text-brand font-black text-xs uppercase tracking-[0.3em] mb-2 block">RECOMMENDED READINGS</span>
+              <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">"{CATEGORY_LABELS[activeTab === 'intern' ? 'senior' : activeTab]}" 과정 추천 컬럼 & 가이드</h2>
+              <p className="text-slate-400 font-bold text-xs mt-1">해당 교육 주제와 밀접하게 관련하여 실무 및 소통 역량을 심화하는 칼럼입니다.</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {eduPosts.map((post) => (
+              <div 
+                key={post.id}
+                onClick={() => setSelectedPost(post)}
+                className="bg-slate-50/50 hover:bg-white rounded-[32px] overflow-hidden border border-slate-100 shadow-xs hover:shadow-2xl hover:border-brand/40 transition-all cursor-pointer group flex flex-col h-full"
+              >
+                <div className="h-44 bg-slate-100 relative overflow-hidden shrink-0">
+                  <img 
+                    src={post.coverImage} 
+                    alt={post.title} 
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <span className="absolute top-4 left-4 px-3 py-1 bg-white/95 backdrop-blur-xs rounded-lg text-[10px] font-black shadow-xs text-brand z-10">
+                    {CATEGORY_LABELS[post.category]}
+                  </span>
+                </div>
+                <div className="p-6 flex flex-col flex-grow">
+                  <h3 className="text-sm font-black text-slate-900 line-clamp-2 leading-snug group-hover:text-brand transition-colors mb-3">
+                    {post.title}
+                  </h3>
+                  <p className="text-[12px] text-slate-400 font-bold line-clamp-3 leading-relaxed mb-6 flex-grow">
+                    {post.summary}
+                  </p>
+                  <div className="flex items-center justify-between pt-4 border-t border-slate-100 text-[10px] font-black text-slate-400">
+                    <div className="flex items-center gap-1">
+                      <Calendar size={12} />
+                      <span>{post.createdAt}</span>
+                    </div>
+                    <div className="flex items-center gap-1 bg-slate-100 px-2 py-0.5 rounded text-slate-500">
+                      <Eye size={12} />
+                      <span>{post.views}회 조회</span>
+                    </div>
+                  </div>
+                </div>
               </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Post Detail Modal inside AiEducation */}
+      <AnimatePresence>
+        {selectedPost && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedPost(null)}
+              className="absolute inset-0 bg-slate-900/40 backdrop-blur-xs"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative w-full max-w-2xl bg-white rounded-[40px] shadow-2xl overflow-hidden max-h-[85vh] flex flex-col z-[110]"
+            >
+              <div className="h-56 bg-slate-100 relative shrink-0">
+                <img 
+                  src={selectedPost.coverImage} 
+                  alt={selectedPost.title}
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent" />
+                <button 
+                  onClick={() => setSelectedPost(null)}
+                  className="absolute top-4 right-4 w-10 h-10 bg-black/50 hover:bg-black/85 transition-colors rounded-full flex items-center justify-center text-white cursor-pointer z-50 hover:scale-105 active:scale-95"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+
+              <div className="p-8 overflow-y-auto flex-grow space-y-6">
+                <div>
+                  <span className="inline-block px-3 py-1 bg-brand/10 text-brand rounded-full text-[10px] font-black mb-3">
+                    {CATEGORY_LABELS[selectedPost.category]}
+                  </span>
+                  <h2 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight leading-snug">
+                    {selectedPost.title}
+                  </h2>
+                  <div className="flex items-center gap-4 text-[11px] font-black text-slate-400 mt-3 pb-4 border-b border-slate-100">
+                    <span>작성자: {selectedPost.author}</span>
+                    <span>•</span>
+                    <span>날짜: {selectedPost.createdAt}</span>
+                    <span>•</span>
+                    <span>조회: {selectedPost.views}회</span>
+                  </div>
+                </div>
+
+                <div className="text-slate-600 font-medium text-sm md:text-[15px] leading-relaxed space-y-4">
+                  {selectedPost.content.split('\n\n').map((paragraph, index) => {
+                    if (paragraph.trim().startsWith('##')) {
+                      return <h3 key={index} className="text-base font-black text-slate-900 mt-6 mb-3">{paragraph.replace('##', '').trim()}</h3>;
+                    }
+                    if (paragraph.trim().startsWith('*') || paragraph.trim().startsWith('-')) {
+                      return (
+                        <ul key={index} className="list-disc pl-5 space-y-1.5 mt-2">
+                          {paragraph.split('\n').map((li, liIdx) => (
+                            <li key={liIdx} className="text-slate-600 font-bold">{li.replace(/^[\s*-]+/, '').trim()}</li>
+                          ))}
+                        </ul>
+                      );
+                    }
+                    if (paragraph.trim().startsWith('>')) {
+                      return (
+                        <div key={index} className="p-4 bg-slate-50 border-l-4 border-brand rounded-r-2xl font-bold italic text-slate-700 text-xs my-4">
+                          {paragraph.replace(/^>\s*/, '').trim()}
+                        </div>
+                      );
+                    }
+                    return <p key={index} className="whitespace-pre-line font-bold text-slate-600 leading-normal">{paragraph.trim()}</p>;
+                  })}
+                </div>
+              </div>
+
+              <div className="p-6 border-t border-slate-50 bg-slate-50/50 flex justify-end shrink-0">
+                <button 
+                  onClick={() => setSelectedPost(null)}
+                  className="px-6 py-3.5 bg-slate-900 text-white rounded-2xl text-[11px] font-black hover:bg-slate-800 transition-all"
+                >
+                  확인 완료
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Differentiation (Shared for both) */}
+      <section className="mb-32 py-24 bg-slate-900 rounded-[80px] text-white relative overflow-hidden">
+         <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10" />
+         <div className="max-w-5xl mx-auto px-6 relative z-10">
+            <div className="text-center mb-20">
+               <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tighter">이음(iium)만의 차별화 포인트</h2>
+               <p className="text-slate-400 font-bold">기존의 단순 기술 교육과는 철학부터 다릅니다.</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+               {[
+                 { 
+                   title: '“속도”보다 “적응”', 
+                   desc: '빠르게 배우는 것이 목표가 아닙니다. 두려움을 해소하고 실제 업무에 연결될 때까지 자신감을 회복하는 데 집중합니다.',
+                   points: ['두려움 해소', '자신감 회복', '반복 실습', '업무 연결']
+                 },
+                 { 
+                   title: '“기술”보다 “역할”', 
+                   desc: 'AI 시대에도 시니어만의 강점(공감, 책임감, 신뢰)은 더욱 중요합니다. 기술을 통해 그 강점을 더 빛나게 만듭니다.',
+                   points: ['공감 능력', '책임감', '신뢰 형성', '관계 유지']
+                 },
+                 { 
+                   title: '교육 후 바로 “연결”', 
+                   desc: '단순히 가르치고 끝내지 않습니다. 교육부터 평가, 그리고 실제 기업 연결까지 원스톱 프로세스를 제공합니다.',
+                   points: ['실습/평가', 'AI 매칭', '기업 연계', '사후 관리']
+                 },
+               ].map((item, i) => (
+                 <div key={i} className="space-y-8">
+                    <div className="border-l-4 border-brand pl-6">
+                       <h3 className="text-2xl font-black mb-4">{item.title}</h3>
+                       <p className="text-slate-400 text-sm font-bold leading-relaxed">{item.desc}</p>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                       {item.points.map((p, j) => (
+                         <span key={j} className="text-[10px] font-black px-3 py-1.5 bg-white/5 rounded-lg border border-white/10 uppercase tracking-widest text-brand">
+                           {p}
+                         </span>
+                       ))}
+                    </div>
+                 </div>
+               ))}
+            </div>
+         </div>
+      </section>
+
+      {/* Education Delivery */}
+      <section className="mb-32">
+         <div className="text-center mb-16">
+            <h2 className="text-3xl font-black text-slate-900 tracking-tight">교육 운영 방식 및 결과물</h2>
+         </div>
+         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div className="bg-slate-50 p-12 rounded-[48px] border border-slate-100">
+               <h3 className="text-xl font-black mb-10 flex items-center gap-3">
+                  <Play size={20} className="text-brand" /> 교육 방식
+               </h3>
+               <div className="space-y-6">
+                  {[
+                    { label: 'VOD 전용', value: '기초 이론 및 리터러시 기본 과정' },
+                    { label: '온라인/줌(Zoom) 실무', value: '실전 프롬프트 및 도구 활용 라이브' },
+                    { label: '병행 과정', value: '이론(VOD) + 실전(줌) + 1:1 코칭 결합' },
+                    { label: '역량 평가', value: 'AI 자동 분석 및 맞춤형 피드백' },
+                    { label: '직무 코칭', value: '전문가 1:1 피드백 및 직무 설계' },
+                    { label: '최종 연결', value: '이음(iium) 엔진을 통한 기업 매칭' },
+                  ].map((row, i) => (
+                    <div key={i} className="flex items-center justify-between py-4 border-bottom border-slate-200">
+                       <span className="text-slate-400 font-black text-sm uppercase tracking-widest">{row.label}</span>
+                       <span className="text-slate-900 font-bold">{row.value}</span>
+                    </div>
+                  ))}
+               </div>
+            </div>
+            <div className="bg-brand/5 p-12 rounded-[48px] border border-brand/10">
+               <h3 className="text-xl font-black mb-10 flex items-center gap-3">
+                  <CheckCircle size={20} className="text-brand" /> 수료 후 결과물
+               </h3>
+               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  {[
+                    'AI 직무 역량 리포트',
+                    '디지털 활용 공식 인증',
+                    '실습 포트폴리오 완본',
+                    'AI 성향 분석 상용 데이터',
+                    '기업 추천 우선순위 데이터',
+                    '시니어 전문가 네트워크 참여'
+                  ].map((res, i) => (
+                    <div key={i} className="p-6 bg-white rounded-3xl border border-slate-100 shadow-sm flex items-center gap-4">
+                       <div className="w-8 h-8 rounded-full bg-brand/10 flex items-center justify-center text-brand flex-shrink-0">
+                          <CheckCircle2 size={16} />
+                       </div>
+                       <span className="text-sm font-bold text-slate-800 leading-tight">{res}</span>
+                    </div>
+                  ))}
+               </div>
+            </div>
+         </div>
+      </section>
+
+      {/* Target and Final CTA (Shared) */}
+      <section className="mb-32">
+         <div className="text-center mb-16">
+            <h2 className="text-3xl font-black text-slate-900 tracking-tight">대상별 추천 학습 경로</h2>
+         </div>
+         <div className="overflow-x-auto">
+            <table className="w-full border-collapse bg-white rounded-3xl overflow-hidden shadow-xl">
+               <thead>
+                  <tr className="bg-slate-900 text-white">
+                     <th className="px-8 py-6 text-left font-black">수강 대상</th>
+                     <th className="px-8 py-6 text-left font-black">추천 핵심 과정</th>
+                  </tr>
+               </thead>
+               <tbody className="divide-y divide-slate-100">
+                  {[
+                    { target: '은퇴 후 재취업을 희망하는 분', course: 'AI 기초 이해 + 행정지원 실무 (Level 1, 3, 5)' },
+                    { target: '경력이 단절되어 다시 시작하려는 분', course: 'AI 활용 실생활 + 고객응대 실무 (Level 2, 3)' },
+                    { target: '강사/교사 출신으로 교육을 전달하고 싶은 분', course: 'AI 교육보조 및 실전 인턴 과정 (Level 5)' },
+                    { target: '상담 및 서비스 경험이 풍부한 분', course: 'AI 고객상담 및 조직 적응 훈련 (Level 3, 5)' },
+                    { target: '사무직 출신으로 디지털 전환이 필요한 분', course: 'AI 문서 자동화 및 협업 태도 교육 (Level 3, 4)' },
+                    { target: '자영업/홍보 경험을 살리고 싶은 분', course: 'AI 콘텐츠 제작 및 서비스 마인드 (Level 2, 3, 5)' },
+                  ].map((row, i) => (
+                    <tr key={i} className="hover:bg-slate-50 transition-colors">
+                       <td className="px-8 py-6 font-black text-slate-800 tracking-tight">{row.target}</td>
+                       <td className="px-8 py-6 font-bold text-brand">{row.course}</td>
+                    </tr>
+                  ))}
+               </tbody>
+            </table>
+         </div>
+      </section>
+
+      {/* Recommended Names Strategy */}
+      <section className="mb-32 p-12 bg-white rounded-[48px] border border-slate-100 shadow-sm text-center">
+         <h2 className="text-2xl font-black mb-8 tracking-tight">시니어를 위한 새로운 가치 선언</h2>
+         <div className="flex flex-wrap justify-center gap-3">
+            {['시니어 리스타트 인턴', '인생2막 직무적응', '조직적응 아카데미', '시니어 협업 과정', '이음 시니어 인턴십', '리워크(Re:Work)'].map((name, i) => (
+               <span key={i} className="px-5 py-2 bg-slate-50 text-slate-600 rounded-full text-xs font-black border border-slate-200">
+                  {name}
+               </span>
             ))}
          </div>
       </section>
 
-      {/* Certification Details */}
-      <section className="bg-slate-900 rounded-[64px] p-12 md:p-24 mb-24 relative overflow-hidden group">
-         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand/10 rounded-full blur-[100px] translate-x-1/3 -translate-y-1/3" />
-         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center relative z-10">
-            <div>
-               <h2 className="text-3xl md:text-5xl font-black text-white mb-8 tracking-tighter leading-tight">
-                  이음AI Lab <br /> <span className="text-brand">공식 인증 수료증</span>
-               </h2>
-               <p className="text-slate-400 font-bold mb-10 leading-relaxed">
-                  본 교육 과정을 성공적으로 수료하신 분들께는 이음AI Lab이 보증하는 
-                  블록체인 기반의 디지털 수료증과 인증 배지를 부여합니다. 
-                  이 인증은 시니어 전문가로서의 AI 실효 능력을 기업들에 증명하는 강력한 수단이 됩니다.
-               </p>
-               <div className="flex gap-4">
-                  <div className="flex flex-col items-center gap-2 p-6 bg-white/5 rounded-3xl border border-white/10">
-                     <Award className="text-brand" size={32} />
-                     <span className="text-[10px] font-black text-white uppercase tracking-widest">Global Standard</span>
-                  </div>
-                  <div className="flex flex-col items-center gap-2 p-6 bg-white/5 rounded-3xl border border-white/10">
-                     <Shield className="text-brand" size={32} />
-                     <span className="text-[10px] font-black text-white uppercase tracking-widest">Verified Badge</span>
-                  </div>
-               </div>
-            </div>
-            <div className="relative">
-               <div className="bg-white/10 backdrop-blur-md p-2 rounded-[32px] border border-white/20 transform rotate-2 hover:rotate-0 transition-transform">
-                  <div className="bg-white rounded-[24px] p-12">
-                     <div className="flex justify-between items-start mb-12">
-                        <img src="https://ghymn1004-ai.github.io/seniorjob/images/logo.png" className="h-10 opacity-30" />
-                        <span className="text-[10px] font-black text-slate-300 uppercase tracking-widest">Serial No. 2026-AI-0128</span>
-                     </div>
-                     <h4 className="text-3xl font-black text-slate-900 mb-8 tracking-tighter">CERTIFICATE OF COMPLETION</h4>
-                     <div className="space-y-4 mb-12">
-                        <p className="text-sm font-bold text-slate-400">Awarded to</p>
-                        <p className="text-4xl font-black text-slate-900 border-b-2 border-slate-100 pb-2">CHUL-SU PARK</p>
-                     </div>
-                     <p className="text-xs text-slate-400 font-bold leading-relaxed">
-                        Successfully completed the "AI Master Class for Senior Leaders" <br />
-                        and demonstrated exceptional mastery in generative AI and DX strategy.
-                     </p>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </section>
-
-      {/* Curriculum Path */}
-      <section className="mb-24">
-        <h2 className="text-3xl md:text-5xl font-black mb-16 text-center text-slate-900 tracking-tighter shadow-sm pb-4">AI 커리어 패스 리포트</h2>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
-          {steps.map((step, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="relative p-10 bg-white border border-slate-100 shadow-sm rounded-[32px] group hover:border-brand/50 hover:shadow-2xl transition-all text-center"
-            >
-              <div className="text-[72px] font-black text-slate-50 absolute top-4 left-1/2 -translate-x-1/2 -z-10 group-hover:text-green-50 transition-colors pointer-events-none italic">
-                0{i + 1}
-              </div>
-              <div className="w-14 h-14 bg-green-50 text-brand rounded-full flex items-center justify-center mx-auto mb-8 shadow-inner">
-                <step.icon size={24} />
-              </div>
-              <h4 className="text-xl font-bold mb-4 text-slate-900 tracking-tight">{step.title}</h4>
-              <p className="text-slate-500 text-sm font-bold leading-relaxed">{step.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* Hot Courses */}
-      <section>
-        <div className="flex justify-between items-end mb-16">
-          <div>
-            <h2 className="text-3xl md:text-5xl font-black mb-6 text-slate-900 tracking-tighter">추천 교육 과정</h2>
-            <p className="text-slate-500 font-bold">아이콘을 클릭하여 상세 커리큘럼을 직접 확인해 보세요.</p>
-          </div>
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {courses.map((course, i) => (
-            <InteractiveEducationCard 
-              key={i} 
-              tag={course.tag}
-              title={course.title}
-              duration={course.duration}
-              students={course.students}
-              details={course.details}
-            />
-          ))}
-        </div>
+      {/* CTA Final */}
+      <section className="text-center py-24 bg-linear-to-b from-white to-slate-50 rounded-[80px] border border-slate-100 shadow-sm relative overflow-hidden">
+         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand/50 to-indigo-500/50" />
+         <h2 className="text-4xl md:text-6xl font-black mb-10 tracking-tighter leading-tight">
+            “AI와 함께, <br />
+            <span className="text-brand">다시 세상의 주역</span>이 되세요.”
+          </h2>
+         <p className="text-xl font-bold text-slate-500 mb-12 max-w-2xl mx-auto italic leading-relaxed">
+           시니어의 경험은 기업의 가장 큰 자산입니다. <br />
+           우리는 기술을 넘어, 당신의 가치가 다시 인정받도록 잇겠습니다.
+         </p>
+         <button 
+           onClick={() => openInquiry('education')}
+           className="px-16 py-7 bg-brand text-white rounded-[32px] font-black text-2xl hover:bg-brand-hover hover:scale-105 transition-all shadow-2xl shadow-brand/40"
+         >
+            인생 2막 교육 시작하기
+         </button>
       </section>
     </div>
   );

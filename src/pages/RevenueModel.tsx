@@ -80,6 +80,10 @@ function InteractivePricingCard({ title, price, desc, features, color, details }
 
 export default function RevenueModel() {
   const { openInquiry } = useInquiry();
+  const [selectedProduct, setSelectedProduct] = useState({ name: '경력 재설계 컨설팅(개인)', price: 70000 });
+  const [selectedMethod, setSelectedMethod] = useState('kakaopay');
+  const [paymentStatus, setPaymentStatus] = useState<'idle' | 'processing' | 'success'>('idle');
+
   const matchingModels: PricingCardProps[] = [
     {
       title: '인재찾기 (기업용 DB 매칭)',
@@ -151,7 +155,7 @@ export default function RevenueModel() {
             Pricing Policy
           </motion.div>
           <h1 className="text-4xl md:text-5xl font-black mb-6 text-slate-900 tracking-tighter leading-tight">
-            <span className="text-brand">이음JOB</span> 서비스 이용료
+            <span className="text-brand">이음AI JOB</span> 서비스 이용료
             <span className="block text-sm font-bold text-slate-400 mt-2 not-italic">Powered by 이음AI Lab</span>
           </h1>
           <p className="text-slate-500 max-w-2xl mx-auto font-bold leading-relaxed">
@@ -202,6 +206,172 @@ export default function RevenueModel() {
           <p className="mt-8 text-center text-sm text-slate-400 font-bold italic">
             * 모든 교육 과정 수료 시 AI 매칭 엔진의 우선 순위 알고리즘이 적용됩니다.
           </p>
+        </div>
+
+        {/* 간편 결제 편의 시스템 (Easy & Simple Payment Solutions) - Requirement 4 */}
+        <div className="mb-24">
+          <div className="flex items-center gap-3 mb-10">
+            <div className="h-8 w-1 bg-brand rounded-full" />
+            <h2 className="text-2xl font-black text-slate-900 tracking-tight">이음AI JOB 간편 결제 편의 플랫폼</h2>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+            {/* Left Side: Benefit Descriptions */}
+            <div className="lg:col-span-6 bg-white p-10 rounded-[32px] border border-slate-100 shadow-sm flex flex-col justify-between">
+              <div>
+                <span className="inline-block px-3 py-1 bg-brand/10 text-brand rounded-full text-[10px] font-black mb-4 uppercase tracking-widest">
+                  Easy Payment Policy
+                </span>
+                <h3 className="text-2xl font-black text-slate-900 tracking-tight mb-4">
+                  "시니어와 기업 모두를 배려하는 가장 손쉬운 지불 솔루션"
+                </h3>
+                <p className="text-slate-500 font-bold text-xs leading-relaxed mb-6">
+                  일자리 찾기 컨설팅을 받는 시니어님들부터 채용 전용 매칭 DB를 구독하는 기업 담당자까지, 번거로운 본인인증서나 설치 프로그램 없이 단 10초 만에 가장 직관적으로 결제를 완주할 수 있도록 이중 편익 시스템을 탑재했습니다.
+                </p>
+
+                <div className="space-y-4">
+                  {[
+                    {
+                      label: '국내 대표 3대 간편결제 시스템',
+                      desc: '카카오페이(KakaoPay), 토스페이(Toss), 네이버페이(NaverPay) 제휴로 번거로운 실물 카드 없이 모바일 앱 QR 스캔 한 번으로 안전 승인을 유치합니다.'
+                    },
+                    {
+                      label: '무통장 가상계좌 발급 및 알림톡 가동',
+                      desc: '지불 수단에 어려움을 느끼시는 어르신들을 위해 가상계좌 신청 즉시 실시간 문자/알림톡을 전달하며, 은행 입금 성공 시 영수증/수강증이 일괄 자동 발행됩니다.'
+                    },
+                    {
+                      label: '기업 맞춤형 조달 전자세금계산서 청구',
+                      desc: '인사담당자용 대규모 결제 시 사업자 정보만 제출하면 청구용/영수용 국세청 정규 세금계산서가 발행되어, 품의 및 증빙 처리가 대폭 수월해집니다.'
+                    },
+                    {
+                      label: '안전성 기반 카드 등록 정기 결제 (SaaS형)',
+                      desc: '매달 연장되는 기업 매칭 제안 멤버십의 경우, 최초 안전 승인 등록 후 클릭 없이 자동 정산되어 채용 흐름이 결코 도중에 끊어지거나 지연되지 않습니다.'
+                    }
+                  ].map((item, idx) => (
+                    <div key={idx} className="flex gap-3 items-start">
+                      <div className="w-5 h-5 bg-brand/10 rounded-full flex items-center justify-center shrink-0 text-brand text-[10px] font-black mt-0.5">
+                        ✓
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-black text-slate-900">{item.label}</h4>
+                        <p className="text-[11px] font-bold text-slate-400 mt-0.5 leading-normal">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Right Side: Simple Sandbox Checkout Simulator */}
+            <div className="lg:col-span-6 bg-slate-900 text-white p-10 rounded-[32px] flex flex-col justify-between relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-brand/10 blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+              
+              <div>
+                <h3 className="text-xl font-black mb-1 text-brand flex items-center gap-2">
+                  🛡️ 실전 간편결제 가상 샌드박스
+                </h3>
+                <p className="text-[10px] text-slate-400 font-bold mb-6">
+                  결제 승인 절차를 직접 안전하게 실습하고 편의성을 가늠해 볼 수 있는 체험존입니다.
+                </p>
+
+                {/* Step 1: Select Product */}
+                <div className="space-y-2 mb-4">
+                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-wider">1. 결제 상품 선택</label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {[
+                      { name: '경력 재설계 컨설팅(개인)', price: 70000, label: '70,000원' },
+                      { name: 'AI 자소서 정밀 첨삭(개인)', price: 29000, label: '29,000원' },
+                      { name: '기업 인재찾기 구독(월간)', price: 290000, label: '290,000원' },
+                      { name: 'AI직무교육 수강료(개인)', price: 199000, label: '199,000원' },
+                    ].map((prod) => (
+                      <button
+                        key={prod.name}
+                        onClick={() => {
+                          setSelectedProduct(prod);
+                          setPaymentStatus('idle');
+                        }}
+                        className={cn(
+                          "p-3.5 rounded-xl border text-left text-xs font-bold transition-all flex flex-col justify-between cursor-pointer",
+                          selectedProduct.name === prod.name 
+                            ? "bg-brand/20 border-brand text-brand" 
+                            : "bg-slate-800/55 border-slate-800 text-slate-300 hover:border-slate-700"
+                        )}
+                      >
+                        <span className="text-[10px] text-slate-400 truncate w-full">{prod.name}</span>
+                        <span className="font-extrabold text-[13px] mt-1 text-white">{prod.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Step 2: Select Method */}
+                <div className="space-y-2 mb-6">
+                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-wider">2. 간편 지불 수단 선택</label>
+                  <div className="grid grid-cols-4 gap-2">
+                    {[
+                      { id: 'kakaopay', name: '카카오페이', bg: 'hover:bg-amber-400/10 hover:border-amber-400/20', active: "bg-amber-400 text-slate-900 border-amber-400 shadow-lg shadow-amber-400/10" },
+                      { id: 'tosspay', name: '토스페이', bg: 'hover:bg-blue-500/10 hover:border-blue-500/20', active: 'bg-blue-500 text-white border-blue-500' },
+                      { id: 'naverpay', name: '네이버페이', bg: 'hover:bg-emerald-500/10 hover:border-emerald-500/20', active: 'bg-emerald-500 text-white border-emerald-500' },
+                      { id: 'card', name: '신용/체크카드', bg: 'hover:bg-slate-700/30 hover:border-slate-700/50', active: 'bg-slate-700 text-white border-slate-600' },
+                    ].map((meth) => (
+                      <button
+                        key={meth.id}
+                        onClick={() => {
+                          setSelectedMethod(meth.id);
+                          setPaymentStatus('idle');
+                        }}
+                        className={cn(
+                          "py-3 rounded-lg border text-center text-[11px] font-extrabold transition-all cursor-pointer",
+                          selectedMethod === meth.id ? meth.active : `bg-slate-800/40 border-slate-800 text-slate-400 ${meth.bg}`
+                        )}
+                      >
+                        {meth.name}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Checkout Status Box */}
+              <div className="bg-slate-950/60 border border-slate-800 rounded-2xl p-6 mb-4">
+                <div className="flex justify-between items-center mb-4">
+                  <span className="text-xs text-slate-400 font-bold">최종 승인 청구액</span>
+                  <span className="text-xl font-black text-brand">{selectedProduct.price.toLocaleString()}원</span>
+                </div>
+
+                {paymentStatus === 'idle' && (
+                  <button
+                    onClick={() => {
+                      setPaymentStatus('processing');
+                      setTimeout(() => {
+                        setPaymentStatus('success');
+                      }, 1200);
+                    }}
+                    className="w-full py-4 bg-brand text-white rounded-xl font-black text-xs hover:bg-brand-hover active:scale-95 transition-all flex items-center justify-center gap-1 cursor-pointer"
+                  >
+                    🚀 {selectedMethod === 'card' ? '보안 신용카드 결제 요청' : `${selectedMethod === 'kakaopay' ? '카카오페이' : selectedMethod === 'tosspay' ? '토스페이' : '네이버페이'} 간편승인`}
+                  </button>
+                )}
+
+                {paymentStatus === 'processing' && (
+                  <div className="w-full py-4 bg-slate-850 rounded-xl font-black text-xs text-brand flex items-center justify-center gap-2">
+                    <span className="animate-spin text-lg">⏳</span> PG 게이트웨이 보안 대기 중...
+                  </div>
+                )}
+
+                {paymentStatus === 'success' && (
+                  <div className="space-y-3">
+                    <div className="w-full py-3.5 bg-brand text-white rounded-xl font-black text-xs text-center">
+                      ✓ 가상 지불 완료 (테스트 합격)
+                    </div>
+                    <p className="text-[10px] text-slate-500 font-bold leading-relaxed text-center">
+                      실시간 영수증 정보가 발송되었으며, DB 용량 소모 없이 <span className="text-brand">즉각 정산 완료</span> 처리되었습니다. (본 시뮬레이션은 금전 이동이 없는 모형 샌드박스입니다)
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Enterprise & Custom Section */}
@@ -298,7 +468,7 @@ export default function RevenueModel() {
         <section className="bg-[#000a12] rounded-[56px] p-16 text-center text-white shadow-2xl relative overflow-hidden group">
           <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand/20 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
           <h2 className="text-3xl md:text-5xl font-black mb-8 tracking-tighter leading-tight relative z-10">
-            <span className="text-brand">이음JOB</span> AI 에코시스템에 합류하세요
+            <span className="text-brand">이음AI JOB</span> AI 에코시스템에 합류하세요
           </h2>
           <p className="text-slate-400 mb-12 max-w-xl mx-auto font-bold leading-relaxed relative z-10">
             신뢰할 수 있는 매칭 알고리즘과 투명한 수익 체계로 <br/>

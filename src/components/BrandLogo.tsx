@@ -12,11 +12,11 @@ export default function BrandLogo({ className = '', imgClassName = '' }: BrandLo
     return (
       <div className={className}>
         <img
-          src="https://ghymn1004-ai.github.io/job/images/logo.png"
+          src="/logo_eumjob.png"
           alt="이음JOB 로고"
           className={`w-full h-full object-contain ${imgClassName}`}
           onError={() => {
-            console.warn("GitHub Pages logo failed to load (403 or missing). Falling back to vector SVG Brand Logo.");
+            console.warn("Local logo_eumjob.png failed to load. Falling back to vector SVG Brand Logo.");
             setHasError(true);
           }}
         />
