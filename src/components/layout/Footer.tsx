@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center gap-3 mb-6">
-              <BrandLogo className="h-8 md:h-10 w-auto" />
+              <BrandLogo className="h-8 md:h-10 w-auto" to="/" />
             </div>
             <p className="text-slate-500 leading-relaxed font-medium">
               시니어 전문가를 위한 <br />

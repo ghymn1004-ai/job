@@ -252,14 +252,17 @@ export default function Admin() {
 
         {/* Dashboard Header */}
         <div className="bg-white rounded-3xl p-8 border border-slate-100 shadow-sm mb-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="px-2 py-0.5 bg-brand-light text-brand rounded font-black text-[9px] uppercase tracking-wider">Control Panel</span>
-              <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
-              <span className="text-[10px] font-black text-emerald-500">SYSTEM ONLINE</span>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
+            <BrandLogo className="h-12 w-auto shrink-0 max-w-[120px] bg-slate-50 p-2 rounded-xl border border-slate-100 shadow-xs" to="/" />
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 bg-brand-light text-brand rounded font-black text-[9px] uppercase tracking-wider">Control Panel</span>
+                <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
+                <span className="text-[10px] font-black text-emerald-500">SYSTEM ONLINE</span>
+              </div>
+              <h1 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight mt-1">블로그 콘텐츠 관리 시스템</h1>
+              <p className="text-slate-400 text-xs font-bold mt-1">이음지수기 관리자 계정으로 로그인되어 직접 실시간 포스팅 및 수정이 가능합니다.</p>
             </div>
-            <h1 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight mt-1">블로그 콘텐츠 관리 시스템</h1>
-            <p className="text-slate-400 text-xs font-bold mt-1">이음지수기 관리자 계정으로 로그인되어 직접 실시간 포스팅 및 수정이 가능합니다.</p>
           </div>
 
           <div className="flex flex-wrap gap-2.5">

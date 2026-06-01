@@ -217,6 +217,18 @@ export default function Home() {
   const [sec2TroubleOpen, setSec2TroubleOpen] = useState(false);
   const [sec3TroubleOpen, setSec3TroubleOpen] = useState(false);
 
+  // High-definition fullscreen/centered video theater modal
+  const [activeVideoModal, setActiveVideoModal] = useState<{
+    id: string;
+    type: string;
+    embedUrl: string;
+    watchUrl: string;
+    title: string;
+    source: string;
+    description: string;
+    tags: string[];
+  } | null>(null);
+
   const [rotationSeed, setRotationSeed] = useState<number>(() => {
     const today = new Date();
     return today.getDate() + today.getMonth();
@@ -657,66 +669,51 @@ export default function Home() {
                   </div>
 
                   {/* Video Player */}
-                  <div className="aspect-video w-full rounded-2xl overflow-hidden bg-slate-900 border border-slate-150 shadow-inner relative group/player">
-                    {!sec1PlayInline ? (
-                      <div className="relative w-full h-full flex flex-col justify-between p-4 bg-gradient-to-t from-slate-950 via-slate-900/60 to-slate-950/20">
-                        {/* Background Graphic Pattern instead of broken empty box */}
-                        <div className="absolute inset-0 z-0 bg-slate-950 flex items-center justify-center overflow-hidden">
-                          <div className="absolute inset-0 bg-gradient-to-br from-emerald-950/40 via-slate-900 to-indigo-950/40" />
-                          <div className="w-24 h-24 bg-emerald-500/10 rounded-full blur-2xl animate-pulse" />
-                          <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-4 space-y-2 opacity-90">
-                            <span className="text-[9px] font-black text-emerald-400 bg-emerald-950/70 border border-emerald-800/40 px-2 py-0.5 rounded-sm">
-                              {SECTION_1_VIDEOS[sec1VideoIdx].source} • 추천 강의
-                            </span>
-                            <p className="text-white text-[11px] font-extrabold px-3 leading-snug line-clamp-2">
-                              {SECTION_1_VIDEOS[sec1VideoIdx].title}
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Pulsing glassy center Play button */}
-                        <button 
-                          onClick={() => setSec1PlayInline(true)}
-                          className="absolute inset-0 m-auto w-12 h-12 bg-red-650 hover:bg-red-600 active:scale-95 text-white rounded-full flex items-center justify-center shadow-lg shadow-red-600/30 transition-all z-10 border border-red-500 cursor-pointer hover:scale-110"
-                          title="화면에서 바로 재생하기"
-                        >
-                          <span className="ml-0.5 text-base text-white">▶</span>
-                        </button>
-
-                        <div className="z-10 flex justify-between items-center text-[8px] font-black text-slate-400">
-                          <span className="flex items-center gap-1">
-                            <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-ping" />
-                            공식 추천
+                  <div 
+                    onClick={() => setActiveVideoModal(SECTION_1_VIDEOS[sec1VideoIdx])}
+                    className="aspect-video w-full rounded-2xl overflow-hidden bg-slate-900 border border-slate-150 shadow-inner relative group/player cursor-pointer hover:border-emerald-500/30 transition-all"
+                  >
+                    <div className="relative w-full h-full flex flex-col justify-between p-4 bg-gradient-to-t from-slate-950 via-slate-900/60 to-slate-950/20">
+                      {/* Background Graphic Pattern instead of broken empty box */}
+                      <div className="absolute inset-0 z-0 bg-slate-950 flex items-center justify-center overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-br from-emerald-950/40 via-slate-900 to-indigo-950/40" />
+                        <div className="w-24 h-24 bg-emerald-500/10 rounded-full blur-2xl animate-pulse" />
+                        <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-4 space-y-2 opacity-90">
+                          <span className="text-[9px] font-black text-emerald-400 bg-emerald-950/70 border border-emerald-800/40 px-2 py-0.5 rounded-sm">
+                            {SECTION_1_VIDEOS[sec1VideoIdx].source} • 추천 강의
                           </span>
-                          <span>고화질 지원</span>
+                          <p className="text-white text-[11px] font-extrabold px-3 leading-snug line-clamp-2">
+                            {SECTION_1_VIDEOS[sec1VideoIdx].title}
+                          </p>
                         </div>
+                      </div>
 
-                        <div className="z-10 flex gap-1 justify-end mt-auto">
-                          <button
-                            onClick={() => setSec1PlayInline(true)}
-                            className="px-2 py-0.5 bg-white/10 hover:bg-white/20 text-white rounded text-[8px] font-black transition-all border border-white/15 backdrop-blur-xs cursor-pointer"
-                          >
-                            이 화면에서 감상 시도 📟
-                          </button>
-                        </div>
+                      {/* Pulsing glassy center Play button */}
+                      <button 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setActiveVideoModal(SECTION_1_VIDEOS[sec1VideoIdx]);
+                        }}
+                        className="absolute inset-0 m-auto w-12 h-12 bg-red-600 hover:bg-red-500 active:scale-95 text-white rounded-full flex items-center justify-center shadow-lg shadow-red-600/30 transition-all z-10 border border-red-400 cursor-pointer hover:scale-110"
+                        title="고화질로 시청하기"
+                      >
+                        <span className="ml-0.5 text-base text-white">▶</span>
+                      </button>
+
+                      <div className="z-10 flex justify-between items-center text-[8px] font-black text-slate-400">
+                        <span className="flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-ping" />
+                          공식 추천
+                        </span>
+                        <span>고화질 지원</span>
                       </div>
-                    ) : (
-                      <div className="relative w-full h-full">
-                        <iframe 
-                          src={SECTION_1_VIDEOS[sec1VideoIdx].embedUrl} 
-                          title={SECTION_1_VIDEOS[sec1VideoIdx].title}
-                          className="w-full h-full border-none"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                        />
-                        <button 
-                          onClick={() => setSec1PlayInline(false)}
-                          className="absolute top-2 right-2 px-2 py-1 bg-slate-900/90 hover:bg-slate-900 text-white rounded text-[8px] font-black tracking-wider transition-all border border-slate-700/50 z-20 cursor-pointer"
-                        >
-                          ✖ 안내 화면으로
-                        </button>
+
+                      <div className="z-10 flex gap-1 justify-end mt-auto">
+                        <span className="px-2 py-0.5 bg-red-600 text-white rounded text-[8px] font-black transition-all border border-red-500 shadow-md">
+                          고화질 학습 극장 보기 📺
+                        </span>
                       </div>
-                    )}
+                    </div>
                   </div>
 
                   <div>
@@ -901,66 +898,51 @@ export default function Home() {
                   </div>
 
                   {/* Video Player */}
-                  <div className="aspect-video w-full rounded-2xl overflow-hidden bg-slate-900 border border-slate-150 shadow-inner relative group/player">
-                    {!sec2PlayInline ? (
-                      <div className="relative w-full h-full flex flex-col justify-between p-4 bg-gradient-to-t from-slate-950 via-slate-900/60 to-slate-950/20">
-                        {/* Background Graphic Pattern instead of broken empty box */}
-                        <div className="absolute inset-0 z-0 bg-slate-950 flex items-center justify-center overflow-hidden">
-                          <div className="absolute inset-0 bg-gradient-to-br from-indigo-950/40 via-slate-900 to-emerald-950/40" />
-                          <div className="w-24 h-24 bg-indigo-500/10 rounded-full blur-2xl animate-pulse" />
-                          <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-4 space-y-2 opacity-90">
-                            <span className="text-[9px] font-black text-indigo-400 bg-indigo-950/70 border border-indigo-800/40 px-2 py-0.5 rounded-sm">
-                              {SECTION_2_VIDEOS[sec2VideoIdx].source} • 추천 강연
-                            </span>
-                            <p className="text-white text-[11px] font-extrabold px-3 leading-snug line-clamp-2">
-                              {SECTION_2_VIDEOS[sec2VideoIdx].title}
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Pulsing glassy center Play button */}
-                        <button 
-                          onClick={() => setSec2PlayInline(true)}
-                          className="absolute inset-0 m-auto w-12 h-12 bg-red-650 hover:bg-red-600 active:scale-95 text-white rounded-full flex items-center justify-center shadow-lg shadow-red-600/30 transition-all z-10 border border-red-500 cursor-pointer hover:scale-110"
-                          title="화면에서 바로 재생하기"
-                        >
-                          <span className="ml-0.5 text-base text-white">▶</span>
-                        </button>
-
-                        <div className="z-10 flex justify-between items-center text-[8px] font-black text-slate-400">
-                          <span className="flex items-center gap-1">
-                            <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-ping" />
-                            공식 추천
+                  <div 
+                    onClick={() => setActiveVideoModal(SECTION_2_VIDEOS[sec2VideoIdx])}
+                    className="aspect-video w-full rounded-2xl overflow-hidden bg-slate-900 border border-slate-150 shadow-inner relative group/player cursor-pointer hover:border-indigo-500/30 transition-all"
+                  >
+                    <div className="relative w-full h-full flex flex-col justify-between p-4 bg-gradient-to-t from-slate-950 via-slate-900/60 to-slate-950/20">
+                      {/* Background Graphic Pattern instead of broken empty box */}
+                      <div className="absolute inset-0 z-0 bg-slate-950 flex items-center justify-center overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-br from-indigo-950/40 via-slate-900 to-emerald-950/40" />
+                        <div className="w-24 h-24 bg-indigo-500/10 rounded-full blur-2xl animate-pulse" />
+                        <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-4 space-y-2 opacity-90">
+                          <span className="text-[9px] font-black text-indigo-400 bg-indigo-950/70 border border-indigo-800/40 px-2 py-0.5 rounded-sm">
+                            {SECTION_2_VIDEOS[sec2VideoIdx].source} • 추천 강연
                           </span>
-                          <span>고화질 지원</span>
+                          <p className="text-white text-[11px] font-extrabold px-3 leading-snug line-clamp-2">
+                            {SECTION_2_VIDEOS[sec2VideoIdx].title}
+                          </p>
                         </div>
+                      </div>
 
-                        <div className="z-10 flex gap-1 justify-end mt-auto">
-                          <button
-                            onClick={() => setSec2PlayInline(true)}
-                            className="px-2 py-0.5 bg-white/10 hover:bg-white/20 text-white rounded text-[8px] font-black transition-all border border-white/15 backdrop-blur-xs cursor-pointer"
-                          >
-                            이 화면에서 감상 시도 📟
-                          </button>
-                        </div>
+                      {/* Pulsing glassy center Play button */}
+                      <button 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setActiveVideoModal(SECTION_2_VIDEOS[sec2VideoIdx]);
+                        }}
+                        className="absolute inset-0 m-auto w-12 h-12 bg-red-600 hover:bg-red-500 active:scale-95 text-white rounded-full flex items-center justify-center shadow-lg shadow-red-600/30 transition-all z-10 border border-red-400 cursor-pointer hover:scale-110"
+                        title="고화질로 시청하기"
+                      >
+                        <span className="ml-0.5 text-base text-white">▶</span>
+                      </button>
+
+                      <div className="z-10 flex justify-between items-center text-[8px] font-black text-slate-400">
+                        <span className="flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-ping" />
+                          공식 추천
+                        </span>
+                        <span>고화질 지원</span>
                       </div>
-                    ) : (
-                      <div className="relative w-full h-full">
-                        <iframe 
-                          src={SECTION_2_VIDEOS[sec2VideoIdx].embedUrl} 
-                          title={SECTION_2_VIDEOS[sec2VideoIdx].title}
-                          className="w-full h-full border-none"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                        />
-                        <button 
-                          onClick={() => setSec2PlayInline(false)}
-                          className="absolute top-2 right-2 px-2 py-1 bg-slate-900/90 hover:bg-slate-900 text-white rounded text-[8px] font-black tracking-wider transition-all border border-slate-700/50 z-20 cursor-pointer"
-                        >
-                          ✖ 안내 화면으로
-                        </button>
+
+                      <div className="z-10 flex gap-1 justify-end mt-auto">
+                        <span className="px-2 py-0.5 bg-indigo-600 text-white rounded text-[8px] font-black transition-all border border-indigo-500 shadow-md">
+                          고화질 학습 극장 보기 📺
+                        </span>
                       </div>
-                    )}
+                    </div>
                   </div>
 
                   <div>
@@ -1145,66 +1127,51 @@ export default function Home() {
                   </div>
 
                   {/* Video Player */}
-                  <div className="aspect-video w-full rounded-2xl overflow-hidden bg-slate-900 border border-slate-150 shadow-inner relative group/player">
-                    {!sec3PlayInline ? (
-                      <div className="relative w-full h-full flex flex-col justify-between p-4 bg-gradient-to-t from-slate-950 via-slate-900/60 to-slate-950/20">
-                        {/* Background Graphic Pattern instead of broken empty box */}
-                        <div className="absolute inset-0 z-0 bg-slate-950 flex items-center justify-center overflow-hidden">
-                          <div className="absolute inset-0 bg-gradient-to-br from-rose-950/40 via-slate-900 to-indigo-950/40" />
-                          <div className="w-24 h-24 bg-rose-500/10 rounded-full blur-2xl animate-pulse" />
-                          <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-4 space-y-2 opacity-90">
-                            <span className="text-[9px] font-black text-rose-400 bg-rose-950/70 border border-rose-800/40 px-2 py-0.5 rounded-sm">
-                              {SECTION_3_VIDEOS[sec3VideoIdx].source} • 추천 특강
-                            </span>
-                            <p className="text-white text-[11px] font-extrabold px-3 leading-snug line-clamp-2">
-                              {SECTION_3_VIDEOS[sec3VideoIdx].title}
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Pulsing glassy center Play button */}
-                        <button 
-                          onClick={() => setSec3PlayInline(true)}
-                          className="absolute inset-0 m-auto w-12 h-12 bg-red-650 hover:bg-red-600 active:scale-95 text-white rounded-full flex items-center justify-center shadow-lg shadow-red-600/30 transition-all z-10 border border-red-500 cursor-pointer hover:scale-110"
-                          title="화면에서 바로 재생하기"
-                        >
-                          <span className="ml-0.5 text-base text-white">▶</span>
-                        </button>
-
-                        <div className="z-10 flex justify-between items-center text-[8px] font-black text-slate-400">
-                          <span className="flex items-center gap-1">
-                            <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-ping" />
-                            공식 추천
+                  <div 
+                    onClick={() => setActiveVideoModal(SECTION_3_VIDEOS[sec3VideoIdx])}
+                    className="aspect-video w-full rounded-2xl overflow-hidden bg-slate-900 border border-slate-150 shadow-inner relative group/player cursor-pointer hover:border-rose-500/30 transition-all"
+                  >
+                    <div className="relative w-full h-full flex flex-col justify-between p-4 bg-gradient-to-t from-slate-950 via-slate-900/60 to-slate-950/20">
+                      {/* Background Graphic Pattern instead of broken empty box */}
+                      <div className="absolute inset-0 z-0 bg-slate-950 flex items-center justify-center overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-br from-rose-950/40 via-slate-900 to-indigo-950/40" />
+                        <div className="w-24 h-24 bg-rose-500/10 rounded-full blur-2xl animate-pulse" />
+                        <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-4 space-y-2 opacity-90">
+                          <span className="text-[9px] font-black text-rose-400 bg-rose-950/70 border border-rose-800/40 px-2 py-0.5 rounded-sm">
+                            {SECTION_3_VIDEOS[sec3VideoIdx].source} • 추천 특강
                           </span>
-                          <span>고화질 지원</span>
+                          <p className="text-white text-[11px] font-extrabold px-3 leading-snug line-clamp-2">
+                            {SECTION_3_VIDEOS[sec3VideoIdx].title}
+                          </p>
                         </div>
+                      </div>
 
-                        <div className="z-10 flex gap-1 justify-end mt-auto">
-                          <button
-                            onClick={() => setSec3PlayInline(true)}
-                            className="px-2 py-0.5 bg-white/10 hover:bg-white/20 text-white rounded text-[8px] font-black transition-all border border-white/15 backdrop-blur-xs cursor-pointer"
-                          >
-                            이 화면에서 감상 시도 📟
-                          </button>
-                        </div>
+                      {/* Pulsing glassy center Play button */}
+                      <button 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setActiveVideoModal(SECTION_3_VIDEOS[sec3VideoIdx]);
+                        }}
+                        className="absolute inset-0 m-auto w-12 h-12 bg-red-600 hover:bg-red-500 active:scale-95 text-white rounded-full flex items-center justify-center shadow-lg shadow-red-600/30 transition-all z-10 border border-red-400 cursor-pointer hover:scale-110"
+                        title="고화질로 시청하기"
+                      >
+                        <span className="ml-0.5 text-base text-white">▶</span>
+                      </button>
+
+                      <div className="z-10 flex justify-between items-center text-[8px] font-black text-slate-400">
+                        <span className="flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-ping" />
+                          공식 추천
+                        </span>
+                        <span>고화질 지원</span>
                       </div>
-                    ) : (
-                      <div className="relative w-full h-full">
-                        <iframe 
-                          src={SECTION_3_VIDEOS[sec3VideoIdx].embedUrl} 
-                          title={SECTION_3_VIDEOS[sec3VideoIdx].title}
-                          className="w-full h-full border-none"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                        />
-                        <button 
-                          onClick={() => setSec3PlayInline(false)}
-                          className="absolute top-2 right-2 px-2 py-1 bg-slate-900/90 hover:bg-slate-900 text-white rounded text-[8px] font-black tracking-wider transition-all border border-slate-700/50 z-20 cursor-pointer"
-                        >
-                          ✖ 안내 화면으로
-                        </button>
+
+                      <div className="z-10 flex gap-1 justify-end mt-auto">
+                        <span className="px-2 py-0.5 bg-rose-600 text-white rounded text-[8px] font-black transition-all border border-rose-500 shadow-md">
+                          고화질 학습 극장 보기 📺
+                        </span>
                       </div>
-                    )}
+                    </div>
                   </div>
 
                   <div>
@@ -1771,6 +1738,124 @@ export default function Home() {
                   className="px-6 py-3.5 bg-slate-900 text-white rounded-2xl text-[11px] font-black hover:bg-slate-800 transition-all"
                 >
                   창 닫기
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* 고화질 동영상 학습 전용 극장 모달 */}
+      <AnimatePresence>
+        {activeVideoModal && (
+          <div className="fixed inset-0 z-[120] flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setActiveVideoModal(null)}
+              className="absolute inset-0 bg-slate-950/80 backdrop-blur-md"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 30 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 30 }}
+              className="relative w-full max-w-4xl bg-slate-900 text-white rounded-[32px] shadow-2xl overflow-hidden max-h-[90vh] flex flex-col z-[130] border border-slate-800"
+            >
+              {/* Header */}
+              <div className="p-6 md:p-8 border-b border-slate-800 flex justify-between items-start md:items-center bg-slate-900/90 shrink-0 gap-4">
+                <div className="space-y-1">
+                  <span className="px-2.5 py-0.5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-md text-[10px] font-black uppercase tracking-wider inline-block">
+                    {activeVideoModal.type}
+                  </span>
+                  <h3 className="text-base md:text-lg font-black text-slate-100 leading-snug line-clamp-1">
+                    {activeVideoModal.title}
+                  </h3>
+                  <p className="text-xs text-slate-400 font-bold">
+                    제공처: {activeVideoModal.source}
+                  </p>
+                </div>
+                <button 
+                  onClick={() => setActiveVideoModal(null)}
+                  className="w-10 h-10 bg-slate-800 hover:bg-slate-700 transition-colors rounded-full flex items-center justify-center text-slate-400 hover:text-white cursor-pointer hover:scale-105 active:scale-95 shrink-0"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+
+              {/* Body */}
+              <div className="overflow-y-auto flex-grow p-6 md:p-8 space-y-6">
+                {/* 16:9 Aspect Video Player */}
+                <div className="aspect-video w-full rounded-2xl overflow-hidden bg-black border border-slate-800 shadow-2xl relative">
+                  <iframe 
+                    src={`${activeVideoModal.embedUrl}?autoplay=1&rel=0&enablejsapi=1`} 
+                    title={activeVideoModal.title}
+                    className="w-full h-full border-none absolute inset-0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+
+                {/* Video Info Panel */}
+                <div className="space-y-4">
+                  <p className="text-xs md:text-sm text-slate-300 font-bold leading-relaxed whitespace-pre-line bg-slate-950/40 p-4 rounded-xl border border-slate-800/60">
+                    {activeVideoModal.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-1.5 pt-2">
+                    {activeVideoModal.tags.map(tag => (
+                      <span key={tag} className="text-xs px-3 py-1 bg-slate-800 text-slate-300 rounded-lg font-black">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Crucial Guide & Multi-platform fallback buttons */}
+                <div className="p-5 bg-gradient-to-r from-red-950/20 via-slate-950/40 to-slate-950/40 border border-red-950/30 rounded-2xl space-y-4">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse" />
+                    <p className="text-xs font-black text-red-200">
+                      동영상 재생 도움 안내 (화면이 나오지 않거나 차단된 경우)
+                    </p>
+                  </div>
+                  
+                  <p className="text-[11px] font-bold text-slate-300 leading-relaxed">
+                    일부 스마트폰 기기 스마트뷰 보호 설정, 브라우저의 특수 보안 정책, 또는 광고 차단 확장 프로그램에 따라 유튜브 동영상이 본 화면 내에서 차단되거나 재생 오류가 발생할 수 있습니다. 
+                    <br />
+                    아래의 <strong className="text-red-400 font-extrabold">"공식 YouTube 앱에서 직접 보기"</strong> 버튼을 가볍게 연결 터치해주시면, 차단이나 호환성 방해 없이 항상 원본 고화질로 가장 편안하고 안전하게 시청하실 수 있습니다!
+                  </p>
+
+                  <div className="flex flex-col sm:flex-row gap-3 pt-1">
+                    <a 
+                      href={activeVideoModal.watchUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="flex-grow inline-flex items-center gap-2 justify-center px-5 py-3.5 bg-red-600 hover:bg-red-500 text-white rounded-xl text-xs font-black transition-all shadow-md shadow-red-900/20 hover:scale-[1.01] active:scale-95"
+                    >
+                      <svg className="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24">
+                        <path d="M23.498 6.163c-.272-1.022-1.074-1.826-2.097-2.098C19.558 3.5 12 3.5 12 3.5s-7.558 0-9.402.565C1.775 4.337.973 5.141.7 6.163 0 8.01 0 12 0 12s0 3.99.7 5.837c.272 1.022 1.074 1.826 2.097 2.098 1.844.566 9.402.566 9.402.566s7.558 0 9.402-.566c1.022-.272 1.826-1.076 2.097-2.098.7-1.847.7-5.837.7-5.837s0-3.99-.7-5.837zm-13.73 8.352V9.482L15.343 12l-5.575 2.515z"/>
+                      </svg>
+                      유튜브 공식 앱/사이트에서 직접 시청하기 ↗
+                    </a>
+                    
+                    <button 
+                      onClick={() => setActiveVideoModal(null)}
+                      className="px-5 py-3.5 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-xl text-xs font-black transition-all shrink-0 active:scale-95 cursor-pointer"
+                    >
+                      창 닫기
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Footer */}
+              <div className="p-6 border-t border-slate-850 bg-slate-950/30 flex justify-end shrink-0">
+                <button 
+                  onClick={() => setActiveVideoModal(null)}
+                  className="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-black transition-all cursor-pointer"
+                >
+                  학습 마침
                 </button>
               </div>
             </motion.div>
