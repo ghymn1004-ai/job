@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- 메인 홈 (Home) -->
+  <url>
+    <loc>https://iiumai.com/</loc>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- AI 매칭 (AI Matching) -->
+  <url>
+    <loc>https://iiumai.com/ai-matching</loc>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- 일자리 찾기 (Jobs) -->
+  <url>
+    <loc>https://iiumai.com/jobs</loc>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 인재 찾기 (Talents) -->
+  <url>
+    <loc>https://iiumai.com/talents</loc>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 플랫폼 소개 (About) -->
+  <url>
+    <loc>https://iiumai.com/about</loc>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- AI 교육 (Education) -->
+  <url>
+    <loc>https://iiumai.com/education</loc>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- 정밀 매칭 데이터 (Matching Data) -->
+  <url>
+    <loc>https://iiumai.com/data</loc>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- 이음 성공사례 (Success Stories) -->
+  <url>
+    <loc>https://iiumai.com/stories</loc>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- 수다공동체 스토리 (Story Community) -->
+  <url>
+    <loc>https://iiumai.com/stories-community</loc>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- 자유게시판 커뮤니티 (Community) -->
+  <url>
+    <loc>https://iiumai.com/community</loc>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 수익 모델 (Revenue Model) -->
+  <url>
+    <loc>https://iiumai.com/revenue</loc>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- 국가 AI 정책 및 제도 (AI Policy) -->
+  <url>
+    <loc>https://iiumai.com/ai-policy</loc>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+</urlset>

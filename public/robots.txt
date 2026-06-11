@@ -1,4 +1,49 @@
-User-agent: *
+# robots.txt for iiumai.com
+
+# 1. 최상단: 구글 검색 로봇 및 애드센스 광고 로봇 허용 (Allow Googlebot & Mediapartners-Google)
+User-agent: Googlebot
 Allow: /
 
+User-agent: Mediapartners-Google
+Allow: /
+
+# 2. 지식재산권 보호를 위한 AI 스크래핑 및 크롤링 로봇 차단 (Thoroughly block AI scrapers)
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Anthropic-AI
+Disallow: /
+
+User-agent: Omegabot
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+# 3. 그 외 기본 로봇의 수집 불허 (Restrict other random user-agents to protect IP)
+User-agent: *
+Disallow: /
+
+# 사이트맵 경로 (Sitemap location)
 Sitemap: https://iiumai.com/sitemap.xml
