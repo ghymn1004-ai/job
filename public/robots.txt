@@ -1,39 +1,4 @@
-# robots.txt for iiumai.com
-# 본 사이트의 지식재산권 보호를 위해 전체 크롤링 및 수집을 불허합니다.
-
 User-agent: *
-Disallow: /
+Allow: /
 
-# Block AI Scraping Crawlers Specifically
-User-agent: GPTBot
-Disallow: /
-
-User-agent: ChatGPT-User
-Disallow: /
-
-User-agent: ClaudeBot
-Disallow: /
-
-User-agent: Claude-Web
-Disallow: /
-
-User-agent: Google-Extended
-Disallow: /
-
-User-agent: CCBot
-Disallow: /
-
-User-agent: Anthropic-AI
-Disallow: /
-
-User-agent: Omegabot
-Disallow: /
-
-User-agent: FacebookBot
-Disallow: /
-
-User-agent: Bytespider
-Disallow: /
-
-User-agent: Diffbot
-Disallow: /
+Sitemap: https://iiumai.com/sitemap.xml

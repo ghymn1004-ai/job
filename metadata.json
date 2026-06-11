@@ -1,6 +1,6 @@
 {
-  "name": "이음 AI iium",
-  "description": "AI로 사람의 가능성과 기업의 필요를 연결해 시니어의 인생 2막을 함께 만드는 곳",
+  "name": "이음School AI",
+  "description": "AIEA 엔진을 통해 실제 시험지를 간편하게 분석 및 가중치 척도 진단하고, 미래지향적 고차원 서·논술형 평가로 혁신적 전환을 이루는 지능형 평가혁신 플랫폼",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
