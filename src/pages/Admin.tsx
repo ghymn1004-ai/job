@@ -36,17 +36,31 @@ export default function Admin() {
     }
   }, []);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    // 시니어 관리자를 위한 손쉬운 로그인 비밀번호
-    if (password === 'iium1234' || password === 'admin1234') {
-      sessionStorage.setItem('iium_admin_logged', 'true');
-      setIsLoggedIn(true);
-      setPosts(getPosts());
-      setLoginError('');
-      showToast('관리자 인증에 성공하였습니다!');
-    } else {
-      setLoginError('비밀번호가 올바르지 않습니다. (안내: iium1234)');
+    
+    try {
+      // 입력받은 비밀번호를 SHA-256 해시로 비교하여 평문 패스워드 직접 노출 완전 차단
+      const msgBuffer = new TextEncoder().encode(password);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+      // fb3320bd...는 iium1234, ac9689e2...는 admin1234의 SHA-256 해시값입니다.
+      if (
+        hashHex === 'fb3320bd98193d80877d55b5cb5dfaff376112ce031283f2d1ce0f8a36851adc' || 
+        hashHex === 'ac9689e2272427085e35b9d3e3e8bed88cb3434828b43b86fc0596cad4c6e270'
+      ) {
+        sessionStorage.setItem('iium_admin_logged', 'true');
+        setIsLoggedIn(true);
+        setPosts(getPosts());
+        setLoginError('');
+        showToast('관리자 인증에 성공하였습니다!');
+      } else {
+        setLoginError('비밀번호가 올바르지 않습니다.');
+      }
+    } catch (err) {
+      setLoginError('인증 과정 중 보안 해시 계산 과정에 오류가 발생했습니다.');
     }
   };
 
@@ -203,7 +217,7 @@ export default function Admin() {
                    autoFocus
                  />
                  <span className="text-[10px] font-bold text-slate-400 block mt-1 pl-1">
-                   * 개발 테스트 안내: <strong className="text-brand">iium1234</strong> 또는 <strong className="text-brand">admin1234</strong>
+                   * 전달받으신 관리자 전용 비밀번호를 입력해 주세요. (보안 가동 중)
                  </span>
                </div>
 

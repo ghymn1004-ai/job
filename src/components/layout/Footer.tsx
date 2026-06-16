@@ -30,9 +30,9 @@ export default function Footer() {
           <div className="col-span-1">
             <h4 className="text-[#343a40] font-bold mb-4 text-[13px]">이용약관</h4>
             <ul className="space-y-2 text-slate-500 font-medium">
-              <li><a href="#" className="hover:text-brand transition-colors">개인정보처리방침</a></li>
-              <li><a href="#" className="hover:text-brand transition-colors">이용약관</a></li>
-              <li><a href="#" className="hover:text-brand transition-colors">쿠키정책</a></li>
+              <li><Link to="/privacy" className="hover:text-brand transition-colors">개인정보처리방침</Link></li>
+              <li><Link to="/privacy" className="hover:text-brand transition-colors">이용약관 및 저작물보호</Link></li>
+              <li><Link to="/privacy" className="hover:text-brand transition-colors">지식재산권 보호 고지</Link></li>
             </ul>
           </div>
 

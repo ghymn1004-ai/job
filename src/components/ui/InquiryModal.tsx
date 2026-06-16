@@ -930,9 +930,20 @@ export default function InquiryModal({ isOpen, onClose, initialType = 'corporate
                     <input required type="email" placeholder="분석 리포트를 받을 이메일 주소" className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-brand/20 focus:border-brand outline-none transition-all font-bold text-sm" />
                   </div>
                   <div className="p-6 bg-brand/5 border border-dashed border-brand/20 rounded-3xl">
-                    <label className="flex items-center gap-3 cursor-pointer">
-                      <input type="checkbox" required className="w-5 h-5 accent-brand" />
-                      <span className="text-sm font-bold text-slate-700">AI 정밀 분석 활용 및 개인정보 제공에 동의합니다.</span>
+                    <label className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 cursor-pointer">
+                      <div className="flex items-center gap-3">
+                        <input type="checkbox" required className="w-5 h-5 accent-brand" />
+                        <span className="text-sm font-bold text-slate-700">AI 정밀 분석 활용 및 개인정보 제공에 동의합니다.</span>
+                      </div>
+                      <a 
+                        href="/privacy" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="text-xs text-brand hover:underline font-black whitespace-nowrap"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        [고지내역 보기]
+                      </a>
                     </label>
                   </div>
                   <div className="space-y-2">

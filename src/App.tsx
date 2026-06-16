@@ -20,6 +20,7 @@ import Login from './pages/Login';
 import RevenueModel from './pages/RevenueModel';
 import StoryCommunity from './pages/StoryCommunity';
 import AiPolicy from './pages/AiPolicy';
+import Privacy from './pages/Privacy';
 import Admin from './pages/Admin';
 
 import { InquiryProvider } from './components/ui/InquiryContext';
@@ -57,6 +58,7 @@ export default function App() {
             <Route path="community" element={<Community />} />
             <Route path="login" element={<Login />} />
             <Route path="mypage" element={<MyPage />} />
+            <Route path="privacy" element={<Privacy />} />
           </Route>
           <Route path="admin" element={<Admin />} />
         </Routes>
