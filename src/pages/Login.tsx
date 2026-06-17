@@ -580,7 +580,7 @@ export default function Login() {
                   onClick={() => setIsSignUp(false)}
                   className="w-full py-4 bg-slate-50 text-slate-500 hover:text-slate-950 hover:bg-slate-100 font-bold rounded-2xl text-sm transition-all text-center"
                 >
-                  취소하고 이전 로그인 화면으로 복귀
+                  이전 화면으로 돌아가기
                 </button>
               </div>
             </form>
