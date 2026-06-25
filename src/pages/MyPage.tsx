@@ -28,7 +28,7 @@ export default function MyPage() {
               "px-3 py-1 rounded-full text-xs font-bold border",
               userType === 'seeker' ? "bg-blue-50 text-blue-600 border-blue-100" : "bg-green-50 text-green-600 border-green-100"
             )}>
-              {userType === 'seeker' ? '시니어 파트너 (수급자)' : '기업 파트너 (공급자)'}
+              {userType === 'seeker' ? '50+ 파트너 (수급자)' : '기업 파트너 (공급자)'}
             </span>
           </div>
           <p className="text-gray-500 font-medium mb-6">금융 자산 관리 전문가 | 경력 25년 | 서울 강남구</p>
@@ -75,7 +75,7 @@ export default function MyPage() {
                    <div className="absolute top-0 right-0 w-24 h-24 bg-blue-50 -translate-y-1/2 translate-x-1/2 rounded-full" />
                    <div className="relative z-10">
                      <span className="inline-block px-2 py-1 bg-blue-50 text-blue-600 text-[10px] font-black rounded mb-4">매칭률 {98-i*2}%</span>
-                     <h3 className="text-xl font-bold mb-2 group-hover:text-blue-600 transition-colors tracking-tight">시니어 자산 관리 파트장</h3>
+                     <h3 className="text-xl font-bold mb-2 group-hover:text-blue-600 transition-colors tracking-tight">50+ 자산 관리 파트장</h3>
                      <p className="text-gray-400 text-sm font-bold mb-6">금융계 대기업 H사</p>
                      
                      <div className="p-4 bg-gray-50 rounded-2xl mb-8">

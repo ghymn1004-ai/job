@@ -9,8 +9,8 @@ import BrandLogo from '../components/BrandLogo';
 const SAMPLE_IMAGES = [
   { label: 'AI 테크', url: 'https://images.unsplash.com/photo-1531747118685-ca8fa6e08806?auto=format&fit=crop&w=800&q=80' },
   { label: '스마트 오피스', url: 'https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?auto=format&fit=crop&w=800&q=80' },
-  { label: '시니어 학습', url: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80' },
-  { label: '시니어 미소', url: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80' }
+  { label: '50+ 학습', url: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80' },
+  { label: '50+ 미소', url: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80' }
 ];
 
 export default function Admin() {
@@ -369,7 +369,7 @@ export default function Admin() {
                   <input 
                     type="text"
                     required
-                    placeholder="예: 시니어가 꼭 알아야 할 인공지능 윤리 가이드"
+                    placeholder="예: 50+가 꼭 알아야 할 인공지능 윤리 가이드"
                     value={currentPost.title || ''}
                     onChange={(e) => setCurrentPost({ ...currentPost, title: e.target.value })}
                     className="w-full bg-slate-50 rounded-xl p-4 border border-slate-100 text-slate-700 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-brand/20 transition-all"
@@ -386,7 +386,7 @@ export default function Admin() {
                   >
                     <option value="literacy">AI리터러시 (교육 하위메뉴)</option>
                     <option value="utilization">AI직무활용 (교육 하위메뉴)</option>
-                    <option value="senior">시니어교육 (교육 하위메뉴 / 시니어인턴)</option>
+                    <option value="senior">50+교육 (교육 하위메뉴 / 50+인턴)</option>
                   </select>
                 </div>
 
@@ -472,7 +472,7 @@ export default function Admin() {
                   rows={12}
                   placeholder={`## 여기에 소제목을 써보세요.
 
-본문을 여기에 작성하시면 됩니다. 시니어 분들을 위해 눈높이에 맞춘 친근하고 따뜻한 가이드를 제공해주세요.
+본문을 여기에 작성하시면 됩니다. 50+ 분들을 위해 눈높이에 맞춘 친근하고 따뜻한 가이드를 제공해주세요.
 
 * 첫 번째 핵심 포인트 리스트
 * 두 번째 핵심 포인트 리스트

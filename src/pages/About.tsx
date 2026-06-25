@@ -19,7 +19,7 @@ export default function About() {
       letter: 'I',
       title: 'Integrate',
       subtitle: '경험과 미래를 연결하다',
-      desc: '우리는 시니어의 풍부한 삶의 경험과 미래의 AI 기술을 연결합니다. 사람의 경험 위에 새로운 기술과 역할을 연결하여 성장을 돕습니다.',
+      desc: '우리는 50+의 풍부한 삶의 경험과 미래의 AI 기술을 연결합니다. 사람의 경험 위에 새로운 기술과 역할을 연결하여 성장을 돕습니다.',
       color: 'bg-blue-50 text-blue-600',
       brandColor: 'text-blue-600'
     },
@@ -59,12 +59,12 @@ export default function About() {
               About 이음(iium)
             </span>
             <h1 className="text-4xl md:text-6xl font-black text-white mb-8 tracking-tighter leading-tight">
-              시니어의 가능성을 깨우고 <br /> 경험을 세상과 연결하며 <br /> 의미 있는 역할을 만듭니다. <br />
-              <span className="text-brand text-2xl md:text-4xl block mt-4">전문직 시니어를 위한 인생 2막 매칭 플랫폼</span>
+              50+의 가능성을 깨우고 <br /> 경험을 세상과 연결하며 <br /> 의미 있는 역할을 만듭니다. <br />
+              <span className="text-brand text-2xl md:text-4xl block mt-4">전문직 50+를 위한 인생 2막 매칭 플랫폼</span>
             </h1>
             <p className="text-slate-400 text-lg md:text-xl max-w-3xl mx-auto font-medium leading-relaxed">
               이음(iium)은 단순한 실버 취업 플랫폼이 아닙니다. <br className="hidden md:block" />
-              시니어만이 가진 고유한 지혜와 AI 기술을 결합하여, <br className="hidden md:block" />
+              50+만이 가진 고유한 지혜와 AI 기술을 결합하여, <br className="hidden md:block" />
               세상이 당신을 다시 '필수 인재'로 부르게 만드는 곳입니다.
             </p>
           </motion.div>
@@ -83,7 +83,7 @@ export default function About() {
             </h2>
             <div className="space-y-6 text-slate-600 font-medium leading-relaxed">
               <p>
-                많은 시니어들이 인생 1막에서는 가족과 생존을 위해 희생하며 일해왔습니다. 
+                많은 50+ 세대가 인생 1막에서는 가족과 생존을 위해 희생하며 일해왔습니다. 
                 하지만 인생 2막은 달라야 합니다. 이제는 하고 싶은 일, 의미 있는 일, 경험이 인정받는 환경에서 일할 수 있어야 합니다.
               </p>
               <div className="grid grid-cols-2 gap-4 pt-4">

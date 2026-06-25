@@ -88,7 +88,7 @@ export default function RevenueModel() {
     {
       title: '인재찾기 (기업용 DB 매칭)',
       price: '월 290,000원 ~',
-      desc: '검증된 시니어 전문가 DB를 실시간으로 열람하고 제안할 수 있는 기업 전용 구독형 인재 탐색 솔루션입니다.',
+      desc: '검증된 50+ 전문가 DB를 실시간으로 열람하고 제안할 수 있는 기업 전용 구독형 인재 탐색 솔루션입니다.',
       features: ['AI 인재 DB 무제한 열람 및 직접 제안', '기업 맞춤형 AI 적합도 정밀 리포트', '채용 성공 시 수수료 30% 감면 혜택'],
       color: 'slate',
       details: [
@@ -101,7 +101,7 @@ export default function RevenueModel() {
     {
       title: '일자리찾기 (개인용 매칭 케어)',
       price: '기본 무료 (성공 시 수수료)',
-      desc: '단순 검색을 넘어 AI가 시니어님의 경력을 재해석하여 최적의 취업 파트너를 직접 연결해 드립니다.',
+      desc: '단순 검색을 넘어 AI가 50+님의 경력을 재해석하여 최적의 취업 파트너를 직접 연결해 드립니다.',
       features: ['AI 자소서 및 경력기술서 자동 튜닝', '일대일 헤드헌팅 전담 매니저 케어', '실시간 AI 매칭 합격 가능성 분석'],
       color: 'blue',
       details: [
@@ -130,8 +130,8 @@ export default function RevenueModel() {
     {
       title: 'AI직무교육 - 강사 양성 과정',
       price: '450,000원',
-      desc: '시니어 대상 디지털 교육을 전문으로 수행할 수 있는 AI 리터러시 전담 강사로 전환을 지원합니다.',
-      features: ['시니어 특화 AI 교수법 및 교안 설계', '실전 모의 강의 및 전문가 피드백', '디지털 배움터 및 평생교육기관 출강 연계'],
+      desc: '50+ 대상 디지털 교육을 전문으로 수행할 수 있는 AI 리터러시 전담 강사로 전환을 지원합니다.',
+      features: ['50+ 특화 AI 교수법 및 교안 설계', '실전 모의 강의 및 전문가 피드백', '디지털 배움터 및 평생교육기관 출강 연계'],
       color: 'indigo',
       details: [
         '내일배움카드 신청 가능 (정부 지원 시 최대 100% 무료)',
@@ -223,10 +223,10 @@ export default function RevenueModel() {
                   Easy Payment Policy
                 </span>
                 <h3 className="text-2xl font-black text-slate-900 tracking-tight mb-4">
-                  "시니어와 기업 모두를 배려하는 가장 손쉬운 지불 솔루션"
+                  "50+와 기업 모두를 배려하는 가장 손쉬운 지불 솔루션"
                 </h3>
                 <p className="text-slate-500 font-bold text-xs leading-relaxed mb-6">
-                  일자리 찾기 컨설팅을 받는 시니어님들부터 채용 전용 매칭 DB를 구독하는 기업 담당자까지, 번거로운 본인인증서나 설치 프로그램 없이 단 10초 만에 가장 직관적으로 결제를 완주할 수 있도록 이중 편익 시스템을 탑재했습니다.
+                  일자리 찾기 컨설팅을 받는 50+님들부터 채용 전용 매칭 DB를 구독하는 기업 담당자까지, 번거로운 본인인증서나 설치 프로그램 없이 단 10초 만에 가장 직관적으로 결제를 완주할 수 있도록 이중 편익 시스템을 탑재했습니다.
                 </p>
 
                 <div className="space-y-4">
@@ -385,8 +385,8 @@ export default function RevenueModel() {
                    <span className="text-brand">전용 에코시스템</span> 구축
                  </h2>
                  <p className="text-slate-500 font-bold leading-relaxed mb-8">
-                   연간 50명 이상의 시니어 전문가 채용이 필요하신 대기업이나, 
-                   사내 시니어 임직원 대상의 맞춤형 전직 지원 AI 교육 시스템 구축을 지원합니다.
+                   연간 50명 이상의 50+ 전문가 채용이 필요하신 대기업이나, 
+                   사내 50+ 임직원 대상의 맞춤형 전직 지원 AI 교육 시스템 구축을 지원합니다.
                  </p>
                  <ul className="space-y-4">
                     {[
@@ -435,7 +435,7 @@ export default function RevenueModel() {
             <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-6">
               <UserCircle2 size={24} />
             </div>
-            <h4 className="text-xl font-black mb-4 tracking-tight">개인 (시니어)</h4>
+            <h4 className="text-xl font-black mb-4 tracking-tight">개인 (50+)</h4>
             <p className="text-sm text-slate-500 font-bold leading-relaxed">
               기본 프로필 등록 및 매칭 서비스는 완전히 무료입니다. 
               커리어 전환을 위한 교육 비용 외에는 일체 비용이 발생하지 않습니다.
@@ -472,7 +472,7 @@ export default function RevenueModel() {
           </h2>
           <p className="text-slate-400 mb-12 max-w-xl mx-auto font-bold leading-relaxed relative z-10">
             신뢰할 수 있는 매칭 알고리즘과 투명한 수익 체계로 <br/>
-            대한민국 시니어 채용 시장의 새로운 표준을 만듭니다.
+            대한민국 50+ 채용 시장의 새로운 표준을 만듭니다.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
             <a href="/ai-matching" className="px-10 py-5 bg-brand text-white rounded-[20px] font-black text-lg hover:bg-brand-hover hover:scale-105 transition-all shadow-xl shadow-brand/20">

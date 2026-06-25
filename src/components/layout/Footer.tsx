@@ -12,7 +12,7 @@ export default function Footer() {
               <BrandLogo className="h-8 md:h-10 w-auto" to="/" />
             </div>
             <p className="text-slate-500 leading-relaxed font-medium">
-              시니어 전문가를 위한 <br />
+              50+ 전문가를 위한 <br />
               No.1 AI 커리어 매칭 플랫폼
             </p>
           </div>

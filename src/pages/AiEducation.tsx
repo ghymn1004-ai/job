@@ -126,7 +126,7 @@ const curriculumLevels = [
     method: 'VOD 전용',
     title: '직무 AI 리터러시 기초',
     subtitle: '“AI를 업무 도구로 이해하기”',
-    target: 'AI를 처음 접하는 시니어, 직무 복귀를 준비하는 분',
+    target: 'AI를 처음 접하는 50+, 직무 복귀를 준비하는 분',
     details: [
       'AI 기초 원리 및 직무 변화 이해',
       '직무용 ChatGPT 프롬프트 엔지니어링 입문',
@@ -280,11 +280,11 @@ const seniorInternSections = [
     ]
   },
   {
-    title: '시니어 강점 재발견',
+    title: '50+ 강점 재발견',
     subtitle: '“나이의 약점보다 경험의 가치 보기”',
     icon: Target,
     details: [
-      '시니어만의 무기: 책임감, 끈기, 풍부한 공감 능력',
+      '50+만의 무기: 책임감, 끈기, 풍부한 공감 능력',
       '위기 대응: 인생 경험을 통한 유연한 상황 대처',
       '안정감: 조직에 신뢰를 주는 묵직한 태도',
       '인간관계 노하우: 갈등 중재 및 관계 유지 경험'
@@ -339,7 +339,7 @@ export default function AiEducation() {
           </h1>
           <p className="text-slate-400 text-lg md:text-xl mb-12 font-bold leading-relaxed">
             {activeTab === 'intern'
-              ? "이음(iium)의 시니어 인턴 교육은 기술교육이 아닙니다. 기업이 진짜 원하는 조직 적응력과 소통 능력을 다시 정비하는 과정입니다."
+              ? "이음(iium)의 50+ 인턴 교육은 기술교육이 아닙니다. 기업이 진짜 원하는 조직 적응력과 소통 능력을 다시 정비하는 과정입니다."
               : "이음(iium)의 AI 교육은 단순한 지식 전달이 아닙니다. 사람의 가능성을 발견하고, 경험을 미래 기술과 연결하여 의미 있는 성장을 만듭니다."
             }
           </p>
@@ -348,7 +348,7 @@ export default function AiEducation() {
                onClick={() => openInquiry('education')}
                className="px-10 py-5 bg-brand text-white rounded-[24px] font-black text-lg hover:bg-brand-hover hover:scale-105 transition-all shadow-xl shadow-brand/20"
              >
-                {activeTab === 'intern' ? '시니어 인턴 교육 신청' : 'AI 교육 과정 신청'}
+                {activeTab === 'intern' ? '50+ 인턴 교육 신청' : 'AI 교육 과정 신청'}
              </button>
           </div>
         </div>
@@ -381,7 +381,7 @@ export default function AiEducation() {
             activeTab === 'intern' ? "bg-white text-brand shadow-md" : "text-slate-500 hover:text-slate-800"
           )}
         >
-          시니어인턴교육 (4주)
+          50+인턴교육 (4주)
         </button>
       </div>
 
@@ -451,7 +451,7 @@ export default function AiEducation() {
                     {[
                       { step: 'STEP 3', title: 'AI Match 추천', desc: '직무 적합도 90% 이상의 기업을 AI 스코어링을 통해 최우선 매칭합니다.', icon: Award },
                       { step: 'STEP 4', title: '인터뷰 및 검증', desc: '온라인 및 기업 인터뷰를 통해 실무 역량과 조직 적합성을 현장에서 검증합니다.', icon: Users },
-                      { step: 'STEP 5', title: '최종 연결 및 안착', desc: '채용 확정 후 시니어 인턴 과정을 통해 초기 조직 적응을 집중 지원합니다.', icon: Star }
+                      { step: 'STEP 5', title: '최종 연결 및 안착', desc: '채용 확정 후 50+ 인턴 과정을 통해 초기 조직 적응을 집중 지원합니다.', icon: Star }
                     ].map((s, i) => (
                       <div key={i} className="p-8 bg-white/5 border border-white/10 rounded-3xl backdrop-blur-sm">
                         <span className="text-xs font-black text-brand mb-2 block">{s.step}</span>
@@ -476,7 +476,7 @@ export default function AiEducation() {
           >
             {/* Intern Philosophy */}
             <section className="mb-32 text-center">
-               <h2 className="text-2xl md:text-4xl font-black text-slate-900 mb-6 tracking-tight">시니어 인턴 교육 핵심 목표</h2>
+               <h2 className="text-2xl md:text-4xl font-black text-slate-900 mb-6 tracking-tight">50+ 인턴 교육 핵심 목표</h2>
                <p className="text-brand font-black text-xl italic mb-10">“경험 많은 사람이 아니라, 함께 일하고 싶은 사람이 되는 것”</p>
                <div className="flex flex-wrap justify-center gap-6">
                   {['함께 일할 수 있는 태도', '소통 능력', '조직 적응력', '책임감', '배려와 협업'].map((item, i) => (
@@ -510,7 +510,7 @@ export default function AiEducation() {
                   <div className="absolute top-0 right-0 p-8 opacity-20">
                      <Target size={80} />
                   </div>
-                  <h3 className="text-2xl font-black mb-6 relative z-10">기업이 원하는 <br />시니어 인재상</h3>
+                  <h3 className="text-2xl font-black mb-6 relative z-10">기업이 원하는 <br />50+ 인재상</h3>
                   <ul className="space-y-3 relative z-10">
                      {['함께 일하기 편한 사람', '책임감 있는 사람', '감정 기복이 적은 사람', '배우려는 태도의 사람', '조직 분위기를 돕는 사람'].map((p, i) => (
                         <li key={i} className="flex items-center gap-2 text-sm font-bold text-slate-300">
@@ -719,7 +719,7 @@ export default function AiEducation() {
                  },
                  { 
                    title: '“기술”보다 “역할”', 
-                   desc: 'AI 시대에도 시니어만의 강점(공감, 책임감, 신뢰)은 더욱 중요합니다. 기술을 통해 그 강점을 더 빛나게 만듭니다.',
+                   desc: 'AI 시대에도 50+만의 강점(공감, 책임감, 신뢰)은 더욱 중요합니다. 기술을 통해 그 강점을 더 빛나게 만듭니다.',
                    points: ['공감 능력', '책임감', '신뢰 형성', '관계 유지']
                  },
                  { 
@@ -783,7 +783,7 @@ export default function AiEducation() {
                     '실습 포트폴리오 완본',
                     'AI 성향 분석 상용 데이터',
                     '기업 추천 우선순위 데이터',
-                    '시니어 전문가 네트워크 참여'
+                    '50+ 전문가 네트워크 참여'
                   ].map((res, i) => (
                     <div key={i} className="p-6 bg-white rounded-3xl border border-slate-100 shadow-sm flex items-center gap-4">
                        <div className="w-8 h-8 rounded-full bg-brand/10 flex items-center justify-center text-brand flex-shrink-0">
@@ -831,9 +831,9 @@ export default function AiEducation() {
 
       {/* Recommended Names Strategy */}
       <section className="mb-32 p-12 bg-white rounded-[48px] border border-slate-100 shadow-sm text-center">
-         <h2 className="text-2xl font-black mb-8 tracking-tight">시니어를 위한 새로운 가치 선언</h2>
+         <h2 className="text-2xl font-black mb-8 tracking-tight">50+를 위한 새로운 가치 선언</h2>
          <div className="flex flex-wrap justify-center gap-3">
-            {['시니어 리스타트 인턴', '인생2막 직무적응', '조직적응 아카데미', '시니어 협업 과정', '이음 시니어 인턴십', '리워크(Re:Work)'].map((name, i) => (
+            {['50+ 리스타트 인턴', '인생2막 직무적응', '조직적응 아카데미', '50+ 협업 과정', '이음 50+ 인턴십', '리워크(Re:Work)'].map((name, i) => (
                <span key={i} className="px-5 py-2 bg-slate-50 text-slate-600 rounded-full text-xs font-black border border-slate-200">
                   {name}
                </span>
@@ -849,7 +849,7 @@ export default function AiEducation() {
             <span className="text-brand">다시 세상의 주역</span>이 되세요.”
           </h2>
          <p className="text-xl font-bold text-slate-500 mb-12 max-w-2xl mx-auto italic leading-relaxed">
-           시니어의 경험은 기업의 가장 큰 자산입니다. <br />
+           50+의 경험은 기업의 가장 큰 자산입니다. <br />
            우리는 기술을 넘어, 당신의 가치가 다시 인정받도록 잇겠습니다.
          </p>
          <button 

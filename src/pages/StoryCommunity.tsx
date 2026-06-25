@@ -25,7 +25,7 @@ export default function StoryCommunity() {
     {
       name: 'H-테크 솔루션',
       former: '기술 고문 부재',
-      current: '시니어 기술 자문 3명 영입',
+      current: '50+ 기술 자문 3명 영입',
       content: '검증된 인재를 찾는 것이 가장 힘들었는데, AI 추천 인재 리스트의 정확도에 놀랐습니다. 추천된 분들 모두 실무 적응 속도가 매우 빠르고 사내 주니어들에게 훌륭한 멘토가 되어주고 계십니다.',
       tag: '채용 성공'
     }
@@ -157,7 +157,7 @@ export default function StoryCommunity() {
               <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16">
                 <div>
                   <h2 className="text-4xl font-bold mb-4 text-slate-900 tracking-tight">선배님들의 <span className="text-blue-600">활발한 소통</span></h2>
-                  <p className="text-slate-500 font-medium">시니어들만의 생생한 정보와 경력 관리 노하우를 나누세요.</p>
+                  <p className="text-slate-500 font-medium">50+들만의 생생한 정보와 경력 관리 노하우를 나누세요.</p>
                 </div>
                 <button className="flex items-center gap-2 px-10 py-5 bg-slate-900 text-white rounded-[24px] font-bold hover:bg-black transition-all shadow-2xl shadow-slate-200">
                   <Edit3 size={20} /> 자유롭게 글쓰기
@@ -228,7 +228,7 @@ export default function StoryCommunity() {
                           <div key={item} className="flex gap-4 group cursor-pointer items-start">
                             <span className="text-xl font-black text-slate-200 group-hover:text-blue-600 transition-colors italic">0{item}</span>
                             <p className="text-sm font-bold text-slate-600 group-hover:text-slate-900 leading-snug transition-colors">
-                              {item === 1 ? '시니어 IT 고문을 찾는 스타트업들의 공통점' : item === 2 ? '퇴직금 관리보다 중요한 디지털 역량' : 'AI 매칭 확률을 2배 높이는 키워드 설정'}
+                              {item === 1 ? '50+ IT 고문을 찾는 스타트업들의 공통점' : item === 2 ? '퇴직금 관리보다 중요한 디지털 역량' : 'AI 매칭 확률을 2배 높이는 키워드 설정'}
                             </p>
                           </div>
                         ))}

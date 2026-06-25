@@ -129,7 +129,7 @@ const SECTION_2_VIDEOS = [
     title: "세바시: 은퇴 후 인생 2막을 멋지게 채우는 소통과 진로 설계",
     source: "세상을 바꾸는 시간 11분",
     description: "왕년의 임원 자부심을 내려놓고 정중하며 소통이 잘 되는 동료로서 환영받고 신뢰받는 삶을 가꾸어 주는 인스퍼레이션.",
-    tags: ["#시니어성공학", "#세바시동기부여", "#인생2막"]
+    tags: ["#50+성공학", "#세바시동기부여", "#인생2막"]
   },
   {
     id: "v2-2",
@@ -146,8 +146,8 @@ const SECTION_2_VIDEOS = [
     type: '재취업 이직 매뉴얼',
     embedUrl: "https://www.youtube.com/embed/DndxbyyVMy8",
     watchUrl: "https://www.youtube.com/watch?v=DndxbyyVMy8",
-    title: "중장년 재취업 이직 백서: 면접관을 사로잡는 시니어 대화법",
-    source: "시니어 파트너쉽 아카데미",
+    title: "중장년 재취업 이직 백서: 면접관을 사로잡는 50+ 대화법",
+    source: "50+ 파트너쉽 아카데미",
     description: "현대 기술 소통 툴 협조 의지를 드러내어 어린 팀장들과 수평적으로 녹아드는 구체적 어필 화법과 지혜 마인드 멘토링.",
     tags: ["#면접소통", "#재취업성공", "#강점어필"]
   }
@@ -179,7 +179,7 @@ const SECTION_3_VIDEOS = [
     type: '저충격 실비 스트레칭',
     embedUrl: "https://www.youtube.com/embed/S_8nB0rWia4",
     watchUrl: "https://www.youtube.com/watch?v=S_8nB0rWia4",
-    title: "국민건강보험공단 추천: 관절 무리 없는 시니어 맞춤 유산소 체조",
+    title: "국민건강보험공단 추천: 관절 무리 없는 50+ 맞춤 유산소 체조",
     source: "국민건강보험공단 권장강좌",
     description: "어깨 연화 부위와 무릎 뼈 마찰 연화 통증 걱정 없이 안방에서 혈액을 힘차게 요동치게 가꿀 수 있는 정식 실외/실내 전신 홈트.",
     tags: ["#국보공단추천", "#실버체조", "#관절보호"]
@@ -320,7 +320,7 @@ export default function Home() {
       color: 'bg-green-50 text-brand font-bold',
       path: '/talents',
       details: [
-        '삶을 견뎌낸 지혜와 책임감을 갖춘 시니어 인재',
+        '삶을 견뎌낸 지혜와 책임감을 갖춘 50+ 인재',
         '기업 실무 환경에 맞게 다듬어진 준비된 전문가',
         '조직 융합력이 검증된 세대 통합형 인재',
         '단기 프로젝트부터 장기 자문까지 유연한 매칭',
@@ -336,7 +336,7 @@ export default function Home() {
       details: [
         'AI 리터러시 (8주): 직무용 AI 기초 및 소통 역량',
         'AI 직무활용 (4주): 실무 성과 중심의 AI 도구 마스터',
-        '시니어 인턴 과정: 기업 조직 적응 및 협업 태도 훈련',
+        '50+ 인턴 과정: 기업 조직 적응 및 협업 태도 훈련',
         '현직 전문가의 1:1 직무 피드백 및 코칭',
         '교육 수료 즉시 기업 프리미엄 매칭 연결'
       ]
@@ -364,7 +364,7 @@ export default function Home() {
                 Premium Senior Job Platform
               </div>
               <h1 className="text-5xl md:text-[68px] font-black leading-[1.1] mb-8 text-white tracking-tighter break-keep">
-                시니어의 무한한 경험, <br /> 이음(iium)이 <br /> 세상과 다시 연결합니다. <br/><span className="text-brand text-2xl md:text-3xl block mt-6 opacity-90">AI로 여는 새로운 인생 2막</span>
+                50+의 무한한 경험, <br /> 이음(iium)이 <br /> 세상과 다시 연결합니다. <br/><span className="text-brand text-2xl md:text-3xl block mt-6 opacity-90">AI로 여는 새로운 인생 2막</span>
               </h1>
               <p className="text-slate-400 text-lg md:text-xl mb-12 max-w-lg leading-relaxed font-medium">
                 이음(iium)은 단순한 구인 사이트가 아닙니다. <br className="hidden md:block" />
@@ -485,7 +485,7 @@ export default function Home() {
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
           <div className="relative">
             <span className="text-brand font-black text-sm uppercase tracking-[0.3em] mb-4 block">Our Services</span>
-            <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tighter leading-tight">시니어의 지혜를 <br /><span className="text-brand">새로운 가치</span>로 잇는 서비스</h2>
+            <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tighter leading-tight">50+의 지혜를 <br /><span className="text-brand">새로운 가치</span>로 잇는 서비스</h2>
           </div>
           <div className="flex gap-4">
              <Link to="/ai-matching" className="group flex items-center gap-3 px-8 py-4 bg-slate-50 border border-slate-200 rounded-2xl text-slate-700 font-bold hover:bg-white hover:border-brand/30 hover:shadow-xl transition-all">
@@ -752,7 +752,7 @@ export default function Home() {
                           <p>2. 이럴 땐 위의 <span className="text-emerald-600 font-extrabold">"YouTube 공식 앱에서 직접 보기 ↗"</span> 버튼을 터치하여 브라우저 새 탭에서 즉시 정식 시청하실 수 있습니다.</p>
                           <p className="font-black text-slate-700 mt-2 text-[9px] border-t border-slate-100 pt-1.5">🔗 여전히 안 나오시나요? 대체 추천 강의 주소:</p>
                           <ul className="list-disc list-inside space-y-1 text-slate-500 font-medium">
-                            <li><a href="https://www.youtube.com/results?search_query=스마트폰+기초+강의+5060" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline">유튜브 "시니어 스마트폰 기초" 영상 검색 ↗</a></li>
+                            <li><a href="https://www.youtube.com/results?search_query=스마트폰+기초+강의+5060" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline">유튜브 "50+ 스마트폰 기초" 영상 검색 ↗</a></li>
                             <li><a href="https://www.youtube.com/results?search_query=중장년+챗gpt+사용법" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline">유튜브 "중장년 챗GPT 교육" 영상 검색 ↗</a></li>
                           </ul>
                         </div>
@@ -771,7 +771,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Section 2: 시니어 성공학 & 인생 2막 칼럼 */}
+        {/* Section 2: 50+ 성공학 & 인생 2막 칼럼 */}
         <div className="mb-24" id="section-career">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-6 pb-6 border-b border-slate-100">
             <div className="flex-grow">
@@ -779,10 +779,10 @@ export default function Home() {
                 iium Senior Success & Life Transition
               </span>
               <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tighter leading-tight">
-                시니어 성공학 & 인생 2막 칼럼
+                50+ 성공학 & 인생 2막 칼럼
               </h2>
               <p className="text-slate-500 font-bold mt-2 text-xs md:text-sm">
-                풍부한 현업 지혜를 바탕으로 인생의 새로운 가치와 성공 로드맵을 이어가는 시니어들의 성공 스토리입니다.
+                풍부한 현업 지혜를 바탕으로 인생의 새로운 가치와 성공 로드맵을 이어가는 50+들의 성공 스토리입니다.
               </p>
             </div>
             
@@ -982,7 +982,7 @@ export default function Home() {
                           <p className="font-black text-slate-700 mt-2 text-[9px] border-t border-slate-100 pt-1.5">🔗 여전히 안 나오시나요? 대체 추천 강의 주소:</p>
                           <ul className="list-disc list-inside space-y-1 text-slate-500 font-medium">
                             <li><a href="https://www.youtube.com/results?search_query=은퇴+후+인생+2막+진로+설계" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline">유튜브 "인생 2막 은퇴 설계" 영상 검색 ↗</a></li>
-                            <li><a href="https://www.youtube.com/results?search_query=시니어+재취업+성공+노하우" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline">유튜브 "시니어 재취업 성공" 영상 검색 ↗</a></li>
+                            <li><a href="https://www.youtube.com/results?search_query=50++재취업+성공+노하우" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline">유튜브 "50+ 재취업 성공" 영상 검색 ↗</a></li>
                           </ul>
                         </div>
                       )}
@@ -1210,7 +1210,7 @@ export default function Home() {
                           <p>2. 이럴 땐 위의 <span className="text-rose-600 font-extrabold">"YouTube 공식 앱에서 직접 보기 ↗"</span> 버튼을 터치하여 브라우저 새 탭에서 즉시 정식 시청하실 수 있습니다.</p>
                           <p className="font-black text-slate-700 mt-2 text-[9px] border-t border-slate-100 pt-1.5">🔗 여전히 안 나오시나요? 대체 추천 강의 주소:</p>
                           <ul className="list-disc list-inside space-y-1 text-slate-500 font-medium">
-                            <li><a href="https://www.youtube.com/results?search_query=시니어+관절+건강+운동+홈트" target="_blank" rel="noopener noreferrer" className="text-rose-600 hover:underline">유튜브 "시니어 홈트 및 스트레칭" 영상 검색 ↗</a></li>
+                            <li><a href="https://www.youtube.com/results?search_query=50++관절+건강+운동+홈트" target="_blank" rel="noopener noreferrer" className="text-rose-600 hover:underline">유튜브 "50+ 홈트 및 스트레칭" 영상 검색 ↗</a></li>
                             <li><a href="https://www.youtube.com/results?search_query=50대+장수+건강+식재료+의사추천" target="_blank" rel="noopener noreferrer" className="text-rose-600 hover:underline">유튜브 "중장년 음식 영양 정보" 영상 검색 ↗</a></li>
                           </ul>
                         </div>
@@ -1251,12 +1251,12 @@ export default function Home() {
             </div>
             
             <h3 className="text-xl md:text-3xl font-black text-white tracking-tight leading-snug">
-              시니어 성공 매뉴얼 • 이음AI의 <br className="md:hidden" />
+              50+ 성공 매뉴얼 • 이음AI의 <br className="md:hidden" />
               공식 네이버 블로그 <span className="text-emerald-400 font-extrabold decoration-emerald-400/30 decoration-2 underline underline-offset-4">"펠트경험"</span>
             </h3>
             
             <p className="text-xs md:text-sm font-bold text-slate-300 leading-relaxed max-w-xl">
-              정밀 매칭 비법부터 인공지능(AI) 트렌드 실습 가이드까지, 백만 시니어의 든든한 등대인 '펠트경험'에서 이음AI만의 특화 칼럼과 깊이 있는 소식을 지금 만나보세요!
+              정밀 매칭 비법부터 인공지능(AI) 트렌드 실습 가이드까지, 백만 50+의 든든한 등대인 '펠트경험'에서 이음AI만의 특화 칼럼과 깊이 있는 소식을 지금 만나보세요!
             </p>
           </div>
           
@@ -1281,13 +1281,13 @@ export default function Home() {
             <div>
               <span className="text-brand font-black text-sm uppercase tracking-[0.4em] mb-6 block">iium Philosophy</span>
               <h2 className="text-4xl md:text-6xl font-black mb-8 tracking-tighter leading-[1.1] break-keep">
-                시니어의 가능성을 <br /> 
+                50+의 가능성을 <br /> 
                 다시 잇는 <br /> 
                 <span className="text-brand">이음(iium) AI 교육 철학</span>
               </h2>
               <p className="text-slate-400 text-lg font-medium leading-relaxed mb-10">
-                ‘iium’은 단순히 이름이 아닙니다. 대한민국 시니어의 지혜와 경험을 AI 기술과 이어주는 철학입니다. <br className="hidden md:block" />
-                우리는 당신의 평생 경력을 존중하며, 시니어 전문가로서 다시 세상의 중심에 서도록 돕습니다.
+                ‘iium’은 단순히 이름이 아닙니다. 대한민국 50+의 지혜와 경험을 AI 기술과 이어주는 철학입니다. <br className="hidden md:block" />
+                우리는 당신의 평생 경력을 존중하며, 50+ 전문가로서 다시 세상의 중심에 서도록 돕습니다.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-12">
                 <div className="space-y-4">
@@ -1305,7 +1305,7 @@ export default function Home() {
                   </div>
                   <h4 className="text-xl font-bold">Integrate</h4>
                   <p className="text-slate-500 text-sm leading-relaxed">
-                    경험과 미래를 연결하다. 시니어의 삶의 경험과 새로운 AI 기술을 연결하여 시니어의 무기를 실전에 맞게 다듬습니다.
+                    경험과 미래를 연결하다. 50+의 삶의 경험과 새로운 AI 기술을 연결하여 50+의 무기를 실전에 맞게 다듬습니다.
                   </p>
                 </div>
               </div>
@@ -1320,17 +1320,17 @@ export default function Home() {
                    <div>
                      <span className="text-[10px] font-black text-brand uppercase tracking-[0.2em] mb-2 block">Our Goal 01</span>
                      <h5 className="text-2xl font-bold text-white mb-2">지속 가능한 커리어</h5>
-                     <p className="text-slate-400 text-sm leading-relaxed">단발성 일자리가 아닌 프로젝트 단위 혹은 자문 위원 등 시니어에 최적화된 형태의 업무를 제안합니다.</p>
+                     <p className="text-slate-400 text-sm leading-relaxed">단발성 일자리가 아닌 프로젝트 단위 혹은 자문 위원 등 50+에 최적화된 형태의 업무를 제안합니다.</p>
                    </div>
                    <div>
                      <span className="text-[10px] font-black text-brand uppercase tracking-[0.2em] mb-2 block">Our Goal 02</span>
                      <h5 className="text-2xl font-bold text-white mb-2">AI 역량 민주화</h5>
-                     <p className="text-slate-400 text-sm leading-relaxed">디지털 격차를 해소하고 모든 시니어가 AI를 도구로서 자유롭게 사용할 수 있도록 실전 교육에 집중합니다.</p>
+                     <p className="text-slate-400 text-sm leading-relaxed">디지털 격차를 해소하고 모든 50+가 AI를 도구로서 자유롭게 사용할 수 있도록 실전 교육에 집중합니다.</p>
                    </div>
                    <div>
                      <span className="text-[10px] font-black text-brand uppercase tracking-[0.2em] mb-2 block">Our Goal 03</span>
                      <h5 className="text-2xl font-bold text-white mb-2">신뢰의 연결 고리</h5>
-                     <p className="text-slate-400 text-sm leading-relaxed">검증된 데이터와 투명한 매칭 알고리즘으로 기업과 시니어 사이의 신뢰할 수 있는 이음새가 됩니다.</p>
+                     <p className="text-slate-400 text-sm leading-relaxed">검증된 데이터와 투명한 매칭 알고리즘으로 기업과 50+ 사이의 신뢰할 수 있는 이음새가 됩니다.</p>
                    </div>
                  </div>
                </div>
@@ -1540,14 +1540,14 @@ export default function Home() {
                 <span className="text-indigo-600">생생한 성공 스토리</span>
               </h2>
               <p className="text-slate-500 font-bold leading-relaxed mb-10 max-w-md">
-                이음AI JOB을 통해 제2의 커리어를 시작한 시니어 전문가들과 
+                이음AI JOB을 통해 제2의 커리어를 시작한 50+ 전문가들과 
                 최고의 인재를 만난 기업들의 활발한 소통 공간입니다.
               </p>
               
               <div className="space-y-6">
                 {[
                   { title: '베스트 성공기', count: '124건', icon: <Star size={16} /> },
-                  { title: '시니어 라운지', count: '2,490명 활동', icon: <Users size={16} /> },
+                  { title: '50+ 라운지', count: '2,490명 활동', icon: <Users size={16} /> },
                   { title: '실시간 커리어 톡', count: '진행 중', icon: <MessageSquare size={16} /> },
                 ].map((item, i) => (
                   <div key={i} className="flex items-center justify-between p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all cursor-pointer">
@@ -1628,7 +1628,7 @@ export default function Home() {
               “AI와 함께, <br /> 다시 세상의 주역이 되세요.”
             </h2>
             <p className="text-slate-300 text-lg md:text-xl mb-12 font-medium max-w-2xl mx-auto leading-relaxed">
-              시니어의 경험은 기업의 가장 큰 자산입니다. <br className="hidden md:block" />
+              50+의 경험은 기업의 가장 큰 자산입니다. <br className="hidden md:block" />
               우리는 기술을 넘어, 당신의 가치가 다시 인정받도록 잇겠습니다.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">

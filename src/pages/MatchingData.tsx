@@ -10,7 +10,7 @@ export default function MatchingData() {
         {[
           { label: '누적 매칭 수', value: '128,492', icon: Target, color: 'text-blue-600', bg: 'bg-blue-50' },
           { label: '매칭 성공률', value: '94.2%', icon: TrendingUp, color: 'text-green-600', bg: 'bg-green-50' },
-          { label: '활성 시니어', value: '45,201', icon: Users, color: 'text-purple-600', bg: 'bg-purple-50' },
+          { label: '활성 50+', value: '45,201', icon: Users, color: 'text-purple-600', bg: 'bg-purple-50' },
           { label: '매칭 정확도', value: '99.1%', icon: ShieldCheck, color: 'text-indigo-600', bg: 'bg-indigo-50' },
         ].map((stat, i) => (
           <motion.div
@@ -110,7 +110,7 @@ export default function MatchingData() {
             <div className="space-y-6">
               {[
                 { title: '디지털 전환 전문가', desc: '현재 IT 고문 분야 수요가 24% 급증하고 있습니다.' },
-                { title: 'ESG 경영 시니어', desc: '대기업들의 ESG 위원회 시니어 전문가 영입 제안이 많습니다.' },
+                { title: 'ESG 경영 50+', desc: '대기업들의 ESG 위원회 50+ 전문가 영입 제안이 많습니다.' },
                 { title: '스타트업 멘토', desc: '시리즈 B 이상의 스타트업에서 C-Level 경력자를 선호합니다.' },
               ].map((tip, i) => (
                 <div key={i} className="p-6 bg-white/5 rounded-2xl border border-white/10">

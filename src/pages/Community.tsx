@@ -12,7 +12,7 @@ export default function Community() {
       <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-16">
         <div>
           <h1 className="text-4xl font-bold mb-2">커뮤니티</h1>
-          <p className="text-gray-500">시니어들만의 생생한 정보와 노하우가 가득합니다.</p>
+          <p className="text-gray-500">50+들만의 생생한 정보와 노하우가 가득합니다.</p>
         </div>
         <button className="flex items-center gap-2 px-8 py-4 bg-gray-950 text-white rounded-2xl font-bold hover:bg-gray-800 transition-all shadow-xl">
           <Edit3 size={18} /> 글쓰기
@@ -47,7 +47,7 @@ export default function Community() {
               <div className="flex items-center gap-2 mb-4 text-blue-200 font-bold text-sm tracking-tight">
                 <Brain size={18} /> 당신에게 맞는 추천 글
               </div>
-              <h3 className="text-2xl font-bold mb-4">{"'"}자산관리 시니어 직무{"'"}로 성공적으로 복귀한 3인의 인터뷰 요약본</h3>
+              <h3 className="text-2xl font-bold mb-4">{"'"}자산관리 50+ 직무{"'"}로 성공적으로 복귀한 3인의 인터뷰 요약본</h3>
               <p className="text-blue-100 text-sm mb-6 max-w-xl opacity-80">
                 사용자의 프로필을 분석했을 때, 이 글에 담긴 면접 팁과 노하우가 다음 주 예정된 면접에 큰 도움이 될 것입니다.
               </p>
@@ -104,7 +104,7 @@ export default function Community() {
                   <div key={item} className="flex gap-4 group cursor-pointer">
                     <span className="text-2xl font-black text-gray-100 group-hover:text-blue-100 transition-colors">0{item}</span>
                     <p className="text-sm font-bold text-gray-600 group-hover:text-gray-900 leading-snug">
-                      시니어 IT 고문을 찾는 스타트업 공통점은?
+                      50+ IT 고문을 찾는 스타트업 공통점은?
                     </p>
                   </div>
                 ))}

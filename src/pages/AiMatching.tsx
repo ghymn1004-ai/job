@@ -34,14 +34,14 @@ function InteractiveMatchingItem({ item, activeTab }: MatchingItemProps) {
     '직무 경력: 유관 분야 15년 이상의 숙련된 실무 역량 확인',
     '실무 수행: 최근 DX 전환 프로젝트 리딩 경험 보유',
     '조직적응: 수평적 커뮤니케이션 및 젊은 세대 협업 선호',
-    '장기근속: 시니어 전문가를 위한 조직 적응 인턴십 이수 가능'
+    '장기근속: 50+ 전문가를 위한 조직 적응 인턴십 이수 가능'
   ];
 
   const employerDetails = [
-    '기업 환경: 시니어의 전문성을 존중하는 조직 문화 보장',
+    '기업 환경: 50+의 전문성을 존중하는 조직 문화 보장',
     '직무 매칭: 과거 경력을 100% 활용 가능한 핵심 포지션',
     '협업 환경: AI 인프라 구축 완료로 효율적 업무 지원',
-    '장기근속: 시니어 전문가를 위한 전용 복리후생 운영'
+    '장기근속: 50+ 전문가를 위한 전용 복리후생 운영'
   ];
 
   const analysisTags = [
@@ -73,7 +73,7 @@ function InteractiveMatchingItem({ item, activeTab }: MatchingItemProps) {
                 {currentTrust.label} Grade
               </span>
               <h4 className="text-2xl font-black text-slate-900 group-hover:text-brand transition-all">
-                {activeTab === 'seeker' ? (item === 1 ? 'H 금융지주 시니어 PB' : (item === 2 ? 'Global S사 마케팅 자문' : 'K 건설 테크니컬 어드바이저')) : (item === 1 ? '홍길동 (금융 자문 전문가)' : (item === 2 ? '이영희 (전략 기획 전문가)' : '박상우 (기술 경영 고문)'))}
+                {activeTab === 'seeker' ? (item === 1 ? 'H 금융지주 50+ PB' : (item === 2 ? 'Global S사 마케팅 자문' : 'K 건설 테크니컬 어드바이저')) : (item === 1 ? '홍길동 (금융 자문 전문가)' : (item === 2 ? '이영희 (전략 기획 전문가)' : '박상우 (기술 경영 고문)'))}
               </h4>
             </div>
             <div className="flex items-center gap-3">
@@ -252,7 +252,7 @@ const MatchingReport = ({ activeTab, onClose }: { activeTab: 'seeker' | 'employe
                    { [
                      activeTab === 'seeker' ? '직무유관성: 귀하의 행정/조직관리 역량 100% 발휘 가능' : '직무숙련도: 요구하신 DX 전환 프로젝트 즉시 리딩 가능',
                      activeTab === 'seeker' ? '문화적합성: 수평적 조직문화로 유연한 소통 가능 환경' : '문화 수용도: 피드백 수용 및 젊은 세대와 협업 태도 검증',
-                     activeTab === 'seeker' ? '근무안정성: 시니어 전문가 우대 및 장기 근속 보장 제도' : '장기 근속: 인생2막을 향한 확고한 의지 및 안정적 근태',
+                     activeTab === 'seeker' ? '근무안정성: 50+ 전문가 우대 및 장기 근속 보장 제도' : '장기 근속: 인생2막을 향한 확고한 의지 및 안정적 근태',
                      activeTab === 'seeker' ? '추천사유: 신청서에 작성하신 협업 강점이 기업 문화와 95% 일치' : '추천사유: 기업 요구사항 중 "조직 적응력" 지표에서 탐색군 중 1위'
                    ].map((text, idx) => (
                      <li key={idx} className="flex items-start gap-2 text-sm font-bold text-slate-600 leading-relaxed">
@@ -274,7 +274,7 @@ const MatchingReport = ({ activeTab, onClose }: { activeTab: 'seeker' | 'employe
               { step: 'STEP 1', title: '매칭 결과 검토 및 매니저 조율', desc: '본 매칭 리포트를 확인하신 후 수락하시면 전담 매니저가 양측의 소통을 중개합니다.' },
               { step: 'STEP 2', title: '상호 인터뷰 및 채용 합의', desc: '기업 담당자와 지원자가 직접 연락하여 실무 역량과 조직 문화를 최종 확인합니다.' },
               { step: 'STEP 3', title: 'AI직무교육 (리터러시 & 직무)', desc: '채용 확정 전후, 직무에 필요한 AI 리터러시(8주) 및 실무 직무교육(4주)을 맞춤형으로 진행합니다.' },
-              { step: 'STEP 4', title: '최종 현장 배치 및 안착 지원', desc: '교육을 마친 시니어 전문가가 기업에 최종 투입되며, 현장 안착을 위해 밀착 지원합니다.' },
+              { step: 'STEP 4', title: '최종 현장 배치 및 안착 지원', desc: '교육을 마친 50+ 전문가가 기업에 최종 투입되며, 현장 안착을 위해 밀착 지원합니다.' },
               { step: 'Outcome', title: '지속 성장 및 사후 관리', desc: '정기적인 유선 체크 및 추가적인 디지털 역량 강화 바우처를 지속 제공합니다.' }
             ].map((s, i) => (
               <div key={i} className="flex gap-4 p-4 bg-white rounded-2xl border border-slate-100">
@@ -355,7 +355,7 @@ export default function AiMatching() {
   const matchingProcessingSteps = [
     '자연어 이력서 AI 형태소 정질 핵심 키워드 군계 임베딩 분석 중...',
     '5대 수명/경험 지표 다원 가중치 매칭 계수 연산 가동 중...',
-    '시니어-기업 페르소나 매칭 및 세대갈등 조직적응 리스크 예측 중...',
+    '50+ 인재-기업 페르소나 매칭 및 세대갈등 조직적응 리스크 예측 중...',
     '최적 적합성 매칭 정렬 완료! 정밀 개별 Match Score 리포트 생성 중...'
   ];
 
@@ -505,7 +505,7 @@ export default function AiMatching() {
                   <p className="text-xs font-bold text-slate-600 leading-relaxed">
                     {activeTab === 'seeker' 
                       ? "신청서에 작성하신 '5대 핵심 역량' 데이터를 기반으로 AI가 귀하의 실무 숙련도와 조직 적합성을 다각도로 분석합니다."
-                      : "기업이 등록한 직무 요구사항과 조직 문화를 바탕으로 최적의 시니어 전문가 후보군을 1차 필터링합니다."}
+                      : "기업이 등록한 직무 요구사항과 조직 문화를 바탕으로 최적의 50+ 전문가 후보군을 1차 필터링합니다."}
                   </p>
                 </div>
                 <button 

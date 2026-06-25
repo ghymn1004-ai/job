@@ -46,7 +46,7 @@ export default function AiPolicy() {
       step: 'STEP 5',
       title: '최종 연결',
       items: [
-        { type: '지원', content: '채용 확정, 시니어 인턴 과정 운영, 초기 조직 적응 지원' }
+        { type: '지원', content: '채용 확정, 50+ 인턴 과정 운영, 초기 조직 적응 지원' }
       ],
       icon: Star,
       color: 'bg-rose-50 border-rose-100 text-rose-600'

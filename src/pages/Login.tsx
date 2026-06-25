@@ -140,7 +140,7 @@ export default function Login() {
     localStorage.setItem('iium_registered_user', JSON.stringify(newUser));
     localStorage.setItem('iium_user_logged', 'true');
 
-    showToast('이음(iium)의 시니어 회원이 되신 것을 축하합니다!', 'success');
+    showToast('이음(iium)의 50+ 회원이 되신 것을 축하합니다!', 'success');
     navigate('/mypage');
   };
 
@@ -169,7 +169,7 @@ export default function Login() {
             <div className="text-center mb-10">
               <BrandLogo className="h-16 md:h-20 max-w-[180px] mx-auto mb-6 hover:scale-105 transition-transform" to="/" />
               <h1 className="text-2xl font-black text-slate-900 tracking-tighter">다시 일하는 설렘, 이음(iium)</h1>
-              <p className="text-slate-400 font-bold text-xs mt-2">시니어의 무궁한 가치를 검증된 안심 기술로 잇습니다.</p>
+              <p className="text-slate-400 font-bold text-xs mt-2">50+의 무궁한 가치를 검증된 안심 기술로 잇습니다.</p>
             </div>
 
             <form onSubmit={handleLoginSubmit} className="space-y-4">
@@ -283,10 +283,10 @@ export default function Login() {
                 <ArrowLeft size={16} /> 로그인창으로 복귀
               </button>
               <h1 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tighter">
-                이음(iium) <span className="text-brand">시니어 인재 회원가입</span>
+                이음(iium) <span className="text-brand">50+ 인재 회원가입</span>
               </h1>
               <p className="text-slate-400 font-bold text-xs mt-1.5 leading-relaxed">
-                시니어의 빛나는 경험을 AI 정밀 엔진으로 조율하여, 함께하고 싶은 기업들과 투명하게 연결합니다. <br />
+                50+의 빛나는 경험을 AI 정밀 엔진으로 조율하여, 함께하고 싶은 기업들과 투명하게 연결합니다. <br />
                 구직자를 위한 지식재산권(저작권) 보호 및 안심 개인정보 보안 규정을 준수합니다.
               </p>
             </div>
@@ -426,7 +426,7 @@ export default function Login() {
                         <p>① 이음 플랫폼이 자체 제작한 일체의 교육용 강의록, 직무분석 컬럼, 매칭 가이드라인 및 소스코드, 플랫폼 레이아웃의 판권 및 지식재산권은 전적으로 회사에 귀속됩니다.</p>
                         <p>② 회원이 등록한 프로필 자격증 내 기술기술서, 포트폴리오 에세이 작문 등의 저작권은 전적으로 '구직자 본인'에게 소유 및 귀속됩니다. 회사는 단지 해당 저작물에 대해 원활한 구직 매칭, 이력 통계 정 분석, 제안 연계를 위한 포맷 가공 및 기계 분석 활용 제한 조건 내에서만 무상 배포 및 전송할 수 있는 귀속 라이센스를 획득합니다.</p>
                         <p className="font-bold text-red-600">[위반 사항에 대한 경고]</p>
-                        <p>타 가입 시니어 회원의 경력 양식 항목이나 일자리 공고 내용을 회사의 명시적인 서면 허가 없이 부당 복사, 복제 및 변조하여 타 사이트에 상업적으로 변형하여 표절하거나 무단 도용하는 것을 금지합니다.</p>
+                        <p>타 가입 50+ 회원의 경력 양식 항목이나 일자리 공고 내용을 회사의 명시적인 서면 허가 없이 부당 복사, 복제 및 변조하여 타 사이트에 상업적으로 변형하여 표절하거나 무단 도용하는 것을 금지합니다.</p>
                       </motion.div>
                     )}
                   </div>
@@ -465,7 +465,7 @@ export default function Login() {
                         <p>회사는 서비스 신청, 가입 및 매칭 상담을 위해 회원 고유 성명, 가입 ID, 비밀번호, 이메일, 모바일 휴대전화 번호, 이력 사항(경력이력, 복무기간, 자격증 목록, 보훈 여부 등)을 수집합니다.</p>
                         <p className="font-bold text-slate-800">[이용 및 보관 목적]</p>
                         <p>① AI 분석 데이터 검출 기반의 맞춤식 직무 매칭 제안 및 연계 서비스 상담 실시</p>
-                        <p>② 시니어 직무 기초 소통 능력 및 인턴 단계 교육 평가, 결과 가이드라인 레벨 데이터 발송</p>
+                        <p>② 50+ 직무 기초 소통 능력 및 인턴 단계 교육 평가, 결과 가이드라인 레벨 데이터 발송</p>
                         <p>③ 긴급 공지 알림 전달 및 이용 관련 민원 신속 해결 처리</p>
                         <p className="font-bold text-slate-800">[개인 데이터의 파기 원칙]</p>
                         <p>이음(iium)은 사용자의 사생활과 보이스 프라이버시를 안전하게 보살피고 보호합니다. 수집된 제반 개인 정보 및 직업 능력 통계는 이용자가 회원 탈퇴 의사를 발송하여 처리하는 즉시 시스템 스토리지에서 디스크 복구 불능 상태로 완전 분쇄 파쇄 영구 소멸 조치 처리됩니다.</p>
@@ -505,7 +505,7 @@ export default function Login() {
                       >
                         <p className="font-bold text-slate-800">[제공 위탁 개요]</p>
                         <p>• 정보 제공을 받는 대상: 이음에 정식으로 인재 매칭 요청 공고를 접수한 검증된 제휴 파트너 기업 인사담당자</p>
-                        <p>• 수집 및 양도 리스트: 회원 자격이 승인된 시니어의 경력 대조 이력, 분야별 직무 교육 이수 평점 요약, 직업 가치관 진단 등 추천 매칭 평가서</p>
+                        <p>• 수집 및 양도 리스트: 회원 자격이 승인된 50+ 인재의 경력 대조 이력, 분야별 직무 교육 이수 평점 요약, 직업 가치관 진단 등 추천 매칭 평가서</p>
                         <p className="font-bold text-slate-800">[비식별 안전 마스킹 장치 장착]</p>
                         <p>이음(iium)은 구직자의 프라이버시 누출을 막기 위해 1단계 기업 자동 검색 matching 추천 보고서에는 이름, 정확한 사적 자택 위치 주소, 실전 상세 연락처를 숨김(*** 마스킹 및 마스킹 번호 대체) 처리하는 엄격한 보호 장치를 시행합니다. 기업의 매칭 채용 제안을 구직 고객님이 최종 수락(Accept)할 때 비로소 상호 연락 및 정밀 이력 인터뷰를 위한 실전 개인정보가 전달 조정됩니다.</p>
                       </motion.div>
@@ -545,7 +545,7 @@ export default function Login() {
                         <p className="font-bold flex items-center gap-1">
                           <ShieldAlert size={14} /> [AI 스크랩 방지 및 수집 거부 확약서]
                         </p>
-                        <p>① 본 정보 주체는 이음 가입 회원으로서, 플랫폼 내에서 탐색하여 조회되는 타인(다른 시니어)의 소중한 평생 이력서 문장, 경력 데이터 소스, 맞춤 추천 평가 내역 및 기업의 전략 채용 정보를 불법적인 AI 학습 및 기계식 텍스트 가공을 위해 추출하거나 도용하지 않을 것임을 서약합니다.</p>
+                        <p>① 본 정보 주체는 이음 가입 회원으로서, 플랫폼 내에서 탐색하여 조회되는 타인(다른 50+ 동료)의 소중한 평생 이력서 문장, 경력 데이터 소스, 맞춤 추천 평가 내역 및 기업의 전략 채용 정보를 불법적인 AI 학습 및 기계식 텍스트 가공을 위해 추출하거나 도용하지 않을 것임을 서약합니다.</p>
                         <p>② 회원의 로봇, 스파이더, 크롤러봇 또는 기타 자동 검색/수집 장치를 동원한 대규모 시각 스크린 캡쳐 및 DB 도집 행위 시 적발될 때는 지식재산권법 침해 및 정보통신망법 위반(비승인 해킹 행위 등)으로 영구 탈퇴 강제 처리와 일체의 손해에 대한 민형사 고발에 귀책사유가 있음을 엄연히 동의 확인합니다.</p>
                       </motion.div>
                     )}

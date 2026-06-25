@@ -35,7 +35,7 @@ export default function Privacy() {
             지식재산권 및 <span className="text-brand">개인정보 보호고지</span>
           </h1>
           <p className="text-slate-500 font-bold text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-            이음(iium)은 구직 시니어의 소중한 경험과 자산을 보호하고, <br />
+            이음(iium)은 구직 50+의 소중한 경험과 자산을 보호하고, <br />
             개인정보를 업계 최고 수준의 보안 원칙 아래에 안전하게 지켜나갑니다.
           </p>
         </div>
@@ -91,7 +91,7 @@ export default function Privacy() {
                     <AlertTriangle size={16} /> AI 크롤링 및 인공지능 학습 무단 수집 거부 (Anti-AI Scraping)
                   </h4>
                   <p className="text-xs text-rose-600/90 leading-relaxed font-bold">
-                    본 플랫폼 내 구인기업 프로젝트 정보, 시니어 인력의 고유 이력 프로필, 교육 콘텐츠, 매칭 상세 데이터 등 모든 디지털 저작물은 인공지능(AI) 기계 학습(LLM 대형 언어 모델 배포, 검색 확장 생성용 벡터 데이터베이스 구축 포함), 데이터 마이닝 및 어떠한 형태의 자동화 크롤러(GPTBot, ChatGPT-User, ClaudeBot, Claude-Web, Google-Extended, CCBot 등)에 의한 무단 스크래핑 및 다운로드를 전면 불허합니다.
+                    본 플랫폼 내 구인기업 프로젝트 정보, 50+ 인력의 고유 이력 프로필, 교육 콘텐츠, 매칭 상세 데이터 등 모든 디지털 저작물은 인공지능(AI) 기계 학습(LLM 대형 언어 모델 배포, 검색 확장 생성용 벡터 데이터베이스 구축 포함), 데이터 마이닝 및 어떠한 형태의 자동화 크롤러(GPTBot, ChatGPT-User, ClaudeBot, Claude-Web, Google-Extended, CCBot 등)에 의한 무단 스크래핑 및 다운로드를 전면 불허합니다.
                   </p>
                   <p className="text-[11px] text-rose-500/80 leading-relaxed">
                     robots.txt의 제어로 엄격한 수집 배제를 명시하고 있으며, 이를 위반하여 상업적 목적이나 학술 목적으로 자료를 비승인 수집하는 일체의 행위에 대해서는 기망 및 저작권법 위반 등으로 민형사상 강경 조치가 취해질 수 있습니다.
@@ -150,7 +150,7 @@ export default function Privacy() {
                     <ul className="space-y-1.5 text-xs text-slate-500 list-disc list-inside">
                       <li><span className="font-black text-slate-700">개인 회원:</span> 성명, 이메일 주소, 휴대전화 번호, 경력 사항, 학력, 보유 역량 자격 조건</li>
                       <li><span className="font-black text-slate-700">기업 파트너:</span> 기업명, 사업자 정보, 담당자 연락처(성명, 이메일, 전화번호), 채용 필요 직무 내용</li>
-                      <li><span className="font-black text-slate-700">수집 목적:</span> AI 기반 정밀 이력 매칭 분석, 커리어 추천, 시니어 인턴/기초 역량 교육 레벨 관리, 고객 문의 처리</li>
+                      <li><span className="font-black text-slate-700">수집 목적:</span> AI 기반 정밀 이력 매칭 분석, 커리어 추천, 50+ 인턴/기초 역량 교육 레벨 관리, 고객 문의 처리</li>
                     </ul>
                   </div>
 

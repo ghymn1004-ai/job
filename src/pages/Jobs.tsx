@@ -15,43 +15,43 @@ export default function Jobs() {
 
   const jobList = [
     {
-      title: 'AI 교육기관 전담 강사 및 멘토',
+      title: '[대표핵심] 디지털 배움터 AI 교육 튜터 (AI 리터러시 전담 강사)',
       company: '이음AI Lab 에듀케이션',
-      location: '서울 강남구 (재택병행)',
-      type: '교육/강사',
-      pay: '시급 5~8만원 협의',
-      desc: '시니어 대상 챗GPT 및 생성형 AI 활용 교육을 담당할 전문 강사를 모집합니다. 금융/공공 경력자 우대합니다.',
-      aiReason: '사용자의 "교육 경력"과 "AI 수료 데이터"가 교육기관의 커리큘럼 방향성과 98% 일치합니다.',
+      location: '서울 강남구 (재택/출강 병행)',
+      type: 'AI 교육/강사',
+      pay: '시급 5~8만원 협의 (최고 수준 대우)',
+      desc: '50+ 세대 및 정보 취약 계층을 대상으로 챗GPT, 생성형 AI 도구, 스마트 라이프 활용법을 눈높이에 맞추어 밀착 지도하는 전문 튜터를 영입합니다.',
+      aiReason: '귀하의 뛰어난 공감 중심 소통 역량과 "이음AI 튜터 아카데미" 교육 이수 이력이 디지털 배움터 교육 방향과 99% 완벽히 일치합니다.',
       tag: 'AI 추천'
     },
     {
-      title: '에듀테크 서비스 기획 및 사업개발',
-      company: 'Edu-Future 테크',
-      location: '서울 서초구',
-      type: 'IT 기획',
-      pay: '연봉 6,000만원 이상',
-      desc: '학원 운영 자동화 솔루션 및 시니어 특화 교육 플랫폼 기획을 담당할 실무 전문가를 찾습니다.',
-      aiReason: '과거 "솔루션 영업" 경력과 "디지털 전환 교육" 이수가 신사업 기획 역량으로 자동 매핑되었습니다.',
+      title: '평생교육원 AI 스마트폰·태블릿 활용 교육 전담 튜터',
+      company: '공공 평생학습 네트워크',
+      location: '서울/인천/경기 전역 (근거리 우선)',
+      type: 'AI 교육/강사',
+      pay: '시급 4~6만원 보장',
+      desc: '50+ 동료 세대의 디지털 격차를 해결하기 위해 키오스크 주문, 대중교통 예약 앱, 보이스피싱 예방 AI 비서 등 실전 디지털 생존기를 천천히 코칭하는 일자리입니다.',
+      aiReason: '차분하고 연륜이 깊은 50+ 전문가만의 따뜻한 교수법이 해당 튜터 채용 기준에 최적으로 부합합니다.',
       tag: 'AI 추천'
     },
     {
-      title: '대형 학원 운영 총괄 지점장',
-      company: 'K-에듀 그룹',
-      location: '서울 양천구',
-      type: '학원 운영',
-      pay: '월 600만원 + 인센티브',
-      desc: '입시 및 성인 교육 학원 운영 전반을 관리할 시니어 지점장을 모집합니다. 팀 관리 및 노무 경험 필수입니다.',
-      aiReason: '사용자의 "지점 관리 15년" 경력은 학원 운영 효율화에 즉시 투입 가능한 핵심 역량입니다.',
+      title: '50+ 맞춤 챗GPT 작문 & 디지털 비서 교육 인턴십 튜터',
+      company: '마포 스마트 시티넷',
+      location: '서울 마포구',
+      type: '교육 및 운영 지원',
+      pay: '월 320만원 (협의)',
+      desc: '50+/신중년 복지 센터에서 50+ 회원들을 위한 챗GPT 시 쓰기, 프롬프트 생성, 행정 지원 AI 툴 활용 교육 실무를 서포트하고 관리하는 직무입니다.',
+      aiReason: '보유하신 15년 이상의 행정 관리 경력과 이음의 50+ 맞춤 튜터 마인드 교육이 최상의 시너지를 발휘합니다.',
       tag: ''
     },
     {
-      title: '교육 콘텐츠 기획 및 R&D 연구원',
-      company: '미래인재연구소',
-      location: '경기 성남시',
-      type: '연구/기획',
-      pay: '연봉 7,000만원 협의',
-      desc: 'AI 기반 개인화 학습 알고리즘 설계 및 교육 콘텐츠 개발에 참여할 시니어 연구원을 모집합니다.',
-      aiReason: '보유하신 "통계학 전공"과 "연구소 데이터 분석" 경력이 AI 알고리즘 고도화에 적합합니다.',
+      title: '생성형 AI 비즈니스 문서 자동화 튜터 및 파트너 강사',
+      company: '비즈테크 HR 아카데미',
+      location: '경기 판교 (원격 근무 가능)',
+      type: '전문 컨설팅/교육',
+      pay: '연봉 5,000만원 이상 (파트타임 가용)',
+      desc: '퇴직 후 재취업 또는 창업을 희망하는 신중년 세대에게 챗GPT를 활용한 기획서 자동 요약 및 PPT 작성 꿀팁을 밀착 코칭해 주는 테크니컬 강사입니다.',
+      aiReason: '풍부한 오피스 실무 경력에 이음AI 튜터 실무 연수 과정이 결합되어 맞춤형 전문가로 자동 추천되었습니다.',
       tag: ''
     }
   ];
@@ -62,8 +62,8 @@ export default function Jobs() {
       <div className="bg-[#000a12] rounded-[40px] p-12 text-white mb-16 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-brand/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
         <div className="relative z-10 max-w-2xl">
-          <h1 className="text-4xl font-black mb-6 tracking-tighter">시니어 전용 <span className="text-brand">일자리찾기</span></h1>
-          <p className="text-slate-400 mb-8 font-medium leading-relaxed">이음AI JOB의 AI가 시니어분들의 축적된 경력을 정밀 분석하여 <br/>교육기관, 에듀테크, 공공기관 등 지혜가 필요한 최적의 커리어를 매칭합니다.</p>
+          <h1 className="text-4xl font-black mb-6 tracking-tighter">50+ 전용 <span className="text-brand">AI 교육 튜터 & 일자리</span></h1>
+          <p className="text-slate-400 mb-8 font-medium leading-relaxed">이음AI JOB의 정밀 엔진이 50+ 세대의 축적된 경험을 분석하여, <br/>시대가 가장 간절히 원하는 디지털 리더인 \'AI 교육 튜터\' 및 최적의 맞춤 커리어를 매칭해 드립니다.</p>
           
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-grow relative">
@@ -153,7 +153,7 @@ export default function Jobs() {
                 <div className="space-y-4 mb-10">
                    <p className="text-sm text-slate-500 font-bold leading-relaxed">{job.desc}</p>
                    <ul className="grid grid-cols-2 gap-2">
-                      {['성과 관리', '전략 수립', '실무 멘토링', '네트워크 활용'].map((item, i) => (
+                      {['AI 리터러시', '눈높이 교수법', '친화적 소통', '디지털 기기 코칭'].map((item, i) => (
                         <li key={i} className="flex items-center gap-2 text-[10px] font-bold text-slate-400 italic">
                           <CheckCircle size={12} className="text-brand/50" />
                           {item}

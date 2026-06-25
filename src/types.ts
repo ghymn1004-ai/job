@@ -16,6 +16,6 @@ export interface Post {
 export const CATEGORY_LABELS: Record<PostCategory, string> = {
   literacy: 'AI리터러시',
   utilization: 'AI직무활용',
-  senior: '시니어교육',
+  senior: '50+교육',
   health: '건강칼럼',
 };

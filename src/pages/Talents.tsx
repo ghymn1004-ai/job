@@ -8,39 +8,39 @@ import { useToast } from '../components/ui/Toast';
 const talents = [
   { 
     name: '이*훈', 
-    role: '교육기관 운영 및 전략 전문가', 
+    role: 'AI 교육 튜터 & 오퍼레이션 전문가', 
     exp: 28, 
     score: 98, 
-    desc: '대형 학원 체인 3곳 오퍼레이션 총괄 및 교재 기획 경력을 보유하고 있습니다. AI 에코시스템 구축 및 시니어 강사 멘토링에 특화되어 있습니다.', 
+    desc: '대형 교육기관 총괄 및 AI 디지털 튜터 교재 기획 경력을 보유하고 있습니다. AI 에코시스템 구축 및 50+ 강사 멘토링에 특화되어 있습니다.', 
     strength: ['학원 경영', '커리큘럼 설계'], 
     reason: '귀사의 "에듀테크 신사업 본부장" 공고 요건과 98% 일치' 
   },
   { 
     name: '박*자', 
-    role: 'AI 기반 디지털 컨설턴트', 
+    role: '금융 전문 AI 교육 튜터', 
     exp: 25, 
     score: 95, 
-    desc: '금융 지점장 출신으로 최근 AI 직무 교육을 수료하였습니다. 디지털 자산관리 교육 및 맞춤형 AI 비즈니스 컨설팅이 가능합니다.', 
+    desc: '금융권 지점장 출신으로 최근 이음 AI 튜터 심화 과정을 우수 수료하였습니다. 디지털 자산관리 교육 및 금융 생성형 AI 실무 교수법에 특화되어 있습니다.', 
     strength: ['금융 지식', 'AI 툴 활용'], 
     reason: '수료한 "AI 교육 데이터"가 인구통계학적 매칭 점수에 반영됨' 
   },
   { 
     name: '정*호', 
-    role: '에듀테크 Full-Stack 기획자', 
+    role: '에듀테크 AI 튜터 매칭 시스템 기획자', 
     exp: 22, 
     score: 92, 
-    desc: 'IT 대기업 출신으로 이러닝 플랫폼 구축 경력이 풍부합니다. 교육 플랫폼의 AI 엔진 도입을 위한 기획 및 개발 리딩이 가능합니다.', 
+    desc: 'IT 대기업 출신으로 이러닝 튜터링 플랫폼 구축 경력이 풍부합니다. 교육 플랫폼의 AI 엔진 도입 및 디지털 튜터 매칭 시스템 기획이 가능합니다.', 
     strength: ['플랫폼 기획', '개발 리딩'], 
     reason: '최근 교육 플랫폼 개발 프로젝트 성공 사례와 유사도가 높음' 
   },
   { 
     name: '최*희', 
-    role: '시니어 특화 전문 강사', 
+    role: '50+ 특화 AI 교육 전문 튜터 (디지털 강사)', 
     exp: 18, 
     score: 89, 
-    desc: '공공기관 및 기업 교육 전문 강사로 1,000회 이상의 강의 경력을 보유하고 있습니다. 시니어의 눈높이에 맞춘 AI 리터러시 교육에 강점이 있습니다.', 
+    desc: '공공기관 및 복지관 교육 전문 강사로 1,000회 이상의 풍부한 강의 경력을 보유하고 있습니다. 50+ 및 정보취약 계층 눈높이에 최적화된 AI 리터러시 교육에 강점이 있습니다.', 
     strength: ['강의 스킬', '콘텐츠 제작'], 
-    reason: '시니어 맞춤형 강의 진행 데이터 상위 1% 기록' 
+    reason: '50+ 맞춤형 튜터 강의 만족도 평가 상위 1% 기록' 
   }
 ];
 
@@ -53,7 +53,7 @@ export default function Talents() {
     
     setTimeout(() => {
       try {
-        const content = `[이음 AI JOB] 전문가 리서치 리포트\n\n대상: 시니어 전문가 8,590명\n생성일: ${new Date().toLocaleDateString()}\n\n본 리포트는 기업용 상세 인재 분석 데이터가 포함되어 있습니다.`;
+        const content = `[이음 AI JOB] 전문가 리서치 리포트\n\n대상: 50+ 전문가 8,590명\n생성일: ${new Date().toLocaleDateString()}\n\n본 리포트는 기업용 상세 인재 분석 데이터가 포함되어 있습니다.`;
         const blob = new Blob([content], { type: 'text/plain' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -83,10 +83,10 @@ export default function Talents() {
             <Sparkles size={14} />
             Enterprise Talent Network
           </motion.div>
-          <h1 className="text-4xl md:text-5xl font-black mb-6 text-slate-900 tracking-tighter leading-tight">검증된 <span className="text-brand">시니어 전문가</span> <br/>검색하세요</h1>
+          <h1 className="text-4xl md:text-5xl font-black mb-6 text-slate-900 tracking-tighter leading-tight">검증된 <span className="text-brand">50+ 전문가</span> <br/>검색하세요</h1>
           <p className="text-slate-500 font-bold leading-relaxed">
             이음AI JOB의 AI매칭 엔진이 기업의 인재상을 분석하여 <br className="hidden md:block" />
-            수십 년간 축적된 지혜와 실무력을 갖춘 '시니어 베테랑'을 실시간 추천합니다.
+            수십 년간 축적된 지혜와 실무력을 갖춘 '50+ 베테랑'을 실시간 추천합니다.
           </p>
         </div>
         <div className="flex flex-col sm:flex-row gap-4">
@@ -124,7 +124,7 @@ export default function Talents() {
               <div>
                 <label className="block text-[11px] font-black text-slate-400 uppercase tracking-widest mb-4">AI 키워드</label>
                 <div className="flex flex-wrap gap-2">
-                  {['시니어 강사', '학원 경영', 'ED-Tech', 'AI 기획'].map((tag) => (
+                  {['AI 교육 튜터', '학원 경영', 'ED-Tech', 'AI 기획'].map((tag) => (
                     <span key={tag} className="px-3 py-1.5 bg-slate-100 text-slate-500 text-[10px] font-black rounded-lg border border-slate-200 uppercase tracking-tight">#{tag}</span>
                   ))}
                 </div>

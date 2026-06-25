@@ -20,7 +20,7 @@ export default function SuccessStories() {
     {
       name: 'H-테크 솔루션',
       former: '기술 고문 부재',
-      current: '시니어 기술 자문 3명 영입',
+      current: '50+ 기술 자문 3명 영입',
       content: '검증된 인재를 찾는 것이 가장 힘들었는데, AI 추천 인재 리스트의 정확도에 놀랐습니다. 추천된 분들 모두 실무 적응 속도가 매우 빠르고 사내 주니어들에게 훌륭한 멘토가 되어주고 계십니다.',
       tag: '채용 성공'
     }

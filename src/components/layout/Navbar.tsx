@@ -26,7 +26,7 @@ export const navItems = [
     subItems: [
       { name: 'AI리터러시', query: 'literacy' },
       { name: 'AI직무활용', query: 'utilization' },
-      { name: '시니어교육', query: 'senior' }
+      { name: '50+교육', query: 'senior' }
     ]
   },
   { 
@@ -58,7 +58,7 @@ export default function Navbar() {
             <Link to="/" className="flex items-center gap-2 group" onClick={() => handleNavClick('/')}>
               <BrandLogo className="h-7 sm:h-8 md:h-10 w-auto" />
               <div className="hidden sm:block border-l border-slate-200 pl-3">
-                <p className="text-[10px] font-black text-brand leading-none mb-0.5 tracking-tighter">시니어 전용</p>
+                <p className="text-[10px] font-black text-brand leading-none mb-0.5 tracking-tighter">50+ 전용</p>
                 <p className="text-[8px] font-bold text-slate-400 leading-none">PREMIUM PLATFORM</p>
               </div>
             </Link>
