@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import Layout from './components/layout/Layout';
 import Home from './pages/Home';
@@ -22,6 +22,7 @@ import StoryCommunity from './pages/StoryCommunity';
 import AiPolicy from './pages/AiPolicy';
 import Privacy from './pages/Privacy';
 import Admin from './pages/Admin';
+import Proposal from './pages/Proposal';
 
 import { InquiryProvider } from './components/ui/InquiryContext';
 import { ToastProvider } from './components/ui/Toast';
@@ -59,6 +60,7 @@ export default function App() {
             <Route path="login" element={<Login />} />
             <Route path="mypage" element={<MyPage />} />
             <Route path="privacy" element={<Privacy />} />
+            <Route path="proposal" element={<Navigate to="/about?tab=proposal" replace />} />
           </Route>
           <Route path="admin" element={<Admin />} />
         </Routes>

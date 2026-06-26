@@ -9,6 +9,10 @@ import BrandLogo from '../BrandLogo';
 
 export const navItems = [
   { 
+    name: '회사소개', 
+    path: '/about'
+  },
+  { 
     name: '일자리찾기', 
     path: '/jobs'
   },
@@ -28,10 +32,6 @@ export const navItems = [
       { name: 'AI직무활용', query: 'utilization' },
       { name: '50+교육', query: 'senior' }
     ]
-  },
-  { 
-    name: '회사소개', 
-    path: '/about'
   },
 ];
 
